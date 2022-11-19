@@ -104,18 +104,19 @@
                 HeadersVisibility="Column"
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
-                ItemsSource="{Binding OrdersList}"
-                SelectedItem="{Binding SelectedOrder, Mode=TwoWay}">
+                ItemsSource="{Binding ProductsList}"
+                SelectedItem="{Binding SelectedProduct, Mode=TwoWay}">
 
 
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Path=OrderId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
-                    <DataGridTextColumn Binding="{Binding Path=CustomerId, UpdateSourceTrigger=PropertyChanged}" Header="MÜŞTERİ NO" />
-                    <DataGridTextColumn Binding="{Binding Path=OrderProductTitle, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADI" />
-
-                    <DataGridTextColumn Binding="{Binding Path=OrderQuantity, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADEDİ" />
-
+                    <DataGridTextColumn Binding="{Binding Path=ProductId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
+                    <DataGridTextColumn Binding="{Binding Path=CategoryId, UpdateSourceTrigger=PropertyChanged}" Header="KATEGORİ" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductTitle, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADI" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="ALIŞ FİYAT" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductRealPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ FİYAT" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN STOK" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductBrand, UpdateSourceTrigger=PropertyChanged}" Header="MARKA" />
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>
@@ -227,7 +228,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 BorderThickness="0"
-                Command="{Binding DataContext.NavigateAddOrderCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                Command="{Binding DataContext.NavigateAddProductCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                 Content="Ekle"
                 Cursor="Hand"
                 FontFamily="Montserrat"
@@ -259,44 +260,7 @@
                 </Button.Style>
             </Button>
 
-            <Button
-                x:Name="SwitchToConfirmedOrderPageViewCommand"
-                Grid.Column="0"
-                Width="Auto"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                BorderThickness="0"
-                Command="{Binding DataContext.NavigateAddOrderCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                Content="Onaylanmış Siparişler"
-                Cursor="Hand"
-                FontFamily="Montserrat"
-                FontSize="12"
-                Foreground="White">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#FF4D4DC7" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border
-                                        Height="30"
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="15">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#836EFB" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+         
 
         </Grid>
     </Grid>
