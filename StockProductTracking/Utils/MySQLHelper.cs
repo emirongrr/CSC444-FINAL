@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using System.Xml.Linq;
+using System.Runtime.InteropServices;
 
 namespace StockProductTracking.Utils
 {
@@ -86,6 +87,62 @@ namespace StockProductTracking.Utils
             return _CategoryList;
         }
 
+        public ObservableCollection<Order> GetAcceptedOrders()
+        {
+            ObservableCollection<Order> _OrderList = new ObservableCollection<Order>();
+
+            mySqlConnection.Open();
+            string query = "select * from a_orders";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Order order = new Order();
+
+                    order.OrderId = (int)reader["a_order_id"];
+                    order.OrderProductTitle = (string)reader["a_order_product_title"];
+                    order.CustomerId = (int)reader["a_order_customer_id"];
+                    order.OrderProductPrice = (int)reader["a_order_product_price"];
+                    order.OrderProductCount = (int)reader["a_order_product_count"];
+                    order.OrderStatus = (bool)reader["a_order_status"];
+                    _OrderList.Add(order);
+                }
+                mySqlConnection.Close();
+            }
+            return _OrderList;
+        }
+
+        public ObservableCollection<Order> GetOrders()
+        {
+            ObservableCollection<Order> _OrderList = new ObservableCollection<Order>();
+
+            mySqlConnection.Open();
+            string query = "select * from orders";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Order order = new Order();
+
+                    order.OrderId = (int)reader["order_id"];
+                    order.OrderProductTitle = (string)reader["order_product_title"];
+                    order.CustomerId = (int)reader["order_customer_id"];
+                    order.OrderProductPrice= (int)reader["order_product_price"];
+                    order.OrderProductCount = (int)reader["order_product_count"];
+                    order.OrderStatus = (bool)reader["order_status"];
+                    _OrderList.Add(order);
+                }
+                mySqlConnection.Close();
+            }
+            return _OrderList;
+        }
+ 
         public ObservableCollection<Product> GetProducts()
         {
             ObservableCollection<Product> _ProductList = new ObservableCollection<Product>();
@@ -153,6 +210,17 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
         }
 
+        public void DeleteOrder(string id)
+        {
+            mySqlConnection.Open();
+            string query = "delete from orders where order_id = " + id;
+            using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
+            {
+                command.ExecuteNonQuery();
+            }
+            mySqlConnection.Close();
+        }
+
         public void AddCustomer(string _customername, string _lastname , string _phone , string _address)
         {
             mySqlConnection.Open();
@@ -164,6 +232,23 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@lastname", _lastname);
             mySqlCommand.Parameters.AddWithValue("@phone", _phone);
             mySqlCommand.Parameters.AddWithValue("@address", _address);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
+
+        public void AddOrder(int _customer_id, string _order_product_title, int _price, int _order_product_count , bool _order_status)
+        {
+            mySqlConnection.Open();
+            string query = "INSERT INTO orders(order_customer_id,order_product_title,order_product_price,order_product_count,order_status) VALUES(@customer_id, @title,@price,@count,@status)";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.CommandText = query;
+            mySqlCommand.Parameters.AddWithValue("@customer_id", _customer_id);
+            mySqlCommand.Parameters.AddWithValue("@title", _order_product_title);
+            mySqlCommand.Parameters.AddWithValue("@price", _price);
+            mySqlCommand.Parameters.AddWithValue("@count", _order_product_count);
+            mySqlCommand.Parameters.AddWithValue("@status", _order_status);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -229,6 +314,25 @@ namespace StockProductTracking.Utils
             string query = $"UPDATE products SET category_id={_category_id}, product_title='{_product_title}' ,product_stock={_product_stock}, product_price={_product_price}, product_real_price={_product_real_price} ,product_brand='{_product_brand}'  WHERE Id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
             mySqlCommand.CommandText = query;
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
+
+        public void SetStatusToAccepted(int orderId)
+        {
+           
+            mySqlConnection.Open();
+            string query = $"UPDATE orders SET order_status = true WHERE order_id = {orderId}";
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.CommandText = query;
+            mySqlCommand.ExecuteNonQuery();
+         
+
+
+            string query2 = $"DELETE FROM orders WHERE order_id = {orderId}";
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.CommandText = query2;
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 

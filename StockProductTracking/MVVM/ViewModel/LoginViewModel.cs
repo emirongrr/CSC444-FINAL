@@ -27,7 +27,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public SecureString Password 
         {
             get { return _password; }
-
+           
             set 
             {
                 _password = value;
@@ -36,7 +36,7 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
         public bool IsVisibleTrue 
-        { 
+        {
             get { return _isVisibleTrue;}
             set 
             { 

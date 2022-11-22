@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Xml.Linq;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -25,6 +27,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+    
 
         public void UpdateCustomersList()
         {

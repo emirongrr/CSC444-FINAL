@@ -57,20 +57,26 @@
 
                     </TextBlock>
 
-                   
-                    <TextBox
-                        x:Name="txtCategoryID"
+
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         Background="Transparent"
-                        BorderBrush="DarkGray"
                         BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
                         FontSize="13"
                         FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.CategoryId, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        ItemsSource="{Binding Path=Categories}" 
+                        DisplayMemberPath="CategoryTitle"
+                        SelectedValuePath="CategoryId"                      
+                        SelectedValue="{Binding DataContext.CategoryID, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" >
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Background" Value="#2c386c"/>
+                            </Style>
 
+                        </ComboBox.ItemContainerStyle>
+
+                    </ComboBox>
 
                     <TextBlock
                         Margin="0,35,0,0"

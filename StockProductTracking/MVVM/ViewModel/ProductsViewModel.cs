@@ -16,6 +16,8 @@ namespace StockProductTracking.MVVM.ViewModel
         public ICommand NavigateUpdateProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
 
+   
+
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> ProductsList
         {
@@ -39,6 +41,7 @@ namespace StockProductTracking.MVVM.ViewModel
             ProductsList = new ObservableCollection<Product>();
             Connect db = new Connect();
             ProductsList = db.GetProducts();
+
 
             DeleteProductCommand = new DelegateCommand<Product>(o =>
             {

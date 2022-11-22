@@ -1,16 +1,12 @@
-﻿<UserControl x:Class="StockProductTracking.MVVM.View.AddProductPage"
+﻿<UserControl x:Class="StockProductTracking.MVVM.View.AddOrderPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
-             xmlns:local2="clr-namespace:StockProductTracking.Theme"
-             
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-   >
-  
+             d:DesignHeight="450" d:DesignWidth="800">
     <Border Background="#2c386c" CornerRadius="12">
 
         <Border
@@ -31,7 +27,7 @@
                         HorizontalAlignment="Left"
                         Background="#2c386c"
                         BorderThickness="0"
-                        Command="{Binding DataContext.ProductViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                        Command="{Binding DataContext.OrderViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
@@ -52,7 +48,7 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="DarkGray"
-                        Text="Kategori ID">
+                        Text="Müşteri Id">
 
                         <fa:IconBlock
                             Margin="5,0,0,0"
@@ -61,25 +57,19 @@
 
                     </TextBlock>
 
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}"
+
+                    <TextBox
+                        x:Name="txtOrderCustomerId"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         Background="Transparent"
+                        BorderBrush="DarkGray"
                         BorderThickness="0,0,0,1"
+                        CaretBrush="LightGray"
                         FontSize="13"
                         FontWeight="Medium"
-                        ItemsSource="{Binding Path=Categories}" 
-                        DisplayMemberPath="CategoryTitle"
-                        SelectedValuePath="CategoryId"                      
-                        SelectedValue="{Binding DataContext.CategoryID, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" >
-                        <ComboBox.ItemContainerStyle>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="Background" Value="#2c386c"/>
-                            </Style>
-                            
-                        </ComboBox.ItemContainerStyle>
-
-                    </ComboBox>
+                        Foreground="White"
+                        Text="{Binding DataContext.CustomerId, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
 
 
                     <TextBlock
@@ -99,7 +89,7 @@
                     </TextBlock>
 
                     <TextBox
-                        x:Name="txtProductTitle"
+                        x:Name="txtOrderProductTitle"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         Background="Transparent"
@@ -109,7 +99,7 @@
                         FontSize="13"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding DataContext.ProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding DataContext.OrderProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
 
 
                     <TextBlock
@@ -119,7 +109,7 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="DarkGray"
-                        Text="Ürün Stoğu">
+                        Text="Ürün Fiyatı">
 
                         <fa:IconBlock
                             Margin="5,0,0,0"
@@ -129,7 +119,7 @@
                     </TextBlock>
 
                     <TextBox
-                        x:Name="txtProductStock"
+                        x:Name="txtOrderProductPrice"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         Background="Transparent"
@@ -139,7 +129,7 @@
                         FontSize="13"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding DataContext.ProductStock, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding DataContext.OrderProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
 
 
                     <TextBlock
@@ -149,7 +139,7 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="DarkGray"
-                        Text="Ürün Satış Fiyatı">
+                        Text="Ürün Adedi">
 
                         <fa:IconBlock
                             Margin="5,0,0,0"
@@ -159,7 +149,7 @@
                     </TextBlock>
 
                     <TextBox
-                        x:Name="txtProductPrice"
+                        x:Name="txtOrderProductCount"
                         Margin="0,5,0,0"
                         VerticalContentAlignment="Center"
                         Background="Transparent"
@@ -169,78 +159,16 @@
                         FontSize="13"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding DataContext.ProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
-
-
-                    <TextBlock
-                        Margin="0,35,0,0"
-                        HorizontalAlignment="Left"
-                        FlowDirection="RightToLeft"
-                        FontSize="15"
-                        FontWeight="Medium"
-                        Foreground="DarkGray"
-                        Text="Ürün Alış Fiyatı">
-
-                        <fa:IconBlock
-                            Margin="5,0,0,0"
-                            FontSize="15"
-                            Icon="AddressCard" />
-
-                    </TextBlock>
-
-                    <TextBox
-                        x:Name="txtProductRealPrice"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductRealPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
-
-
-
-                    <TextBlock
-                        Margin="0,35,0,0"
-                        HorizontalAlignment="Left"
-                        FlowDirection="RightToLeft"
-                        FontSize="15"
-                        FontWeight="Medium"
-                        Foreground="DarkGray"
-                        Text="Ürün Markası">
-
-                        <fa:IconBlock
-                            Margin="5,0,0,0"
-                            FontSize="15"
-                            Icon="AddressCard" />
-
-                    </TextBlock>
-
-                    <TextBox
-                        x:Name="txtProductBrand"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductBrand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
-
+                        Text="{Binding DataContext.OrderProductCount, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
 
 
                     <Button
-                        x:Name="btnAddProduct"
+                        x:Name="btnAddOrder"
                         Grid.Column="2"
                         Margin="0,50,0,0"
                         Background="#FF28287D"
                         BorderThickness="0"
-                        Command="{Binding AddProductCommand}"
+                        Command="{Binding AddOrderCommand}"
                         Content="EKLE"
                         Cursor="Hand"
                         FontFamily="Montserrat"

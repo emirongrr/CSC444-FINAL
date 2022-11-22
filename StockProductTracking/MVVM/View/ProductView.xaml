@@ -115,7 +115,7 @@
                     <DataGridTextColumn Binding="{Binding Path=ProductTitle, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADI" />
                     <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="ALIŞ FİYAT" />
                     <DataGridTextColumn Binding="{Binding Path=ProductRealPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ FİYAT" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN STOK" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="STOK" />
                     <DataGridTextColumn Binding="{Binding Path=ProductBrand, UpdateSourceTrigger=PropertyChanged}" Header="MARKA" />
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
@@ -136,7 +136,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="75" Header=" ">
+                    <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button

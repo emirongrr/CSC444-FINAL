@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="Theme/TitleText.xaml"/>
                 <ResourceDictionary Source="Theme/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Theme/RepeatButton.xaml"/>
+                <ResourceDictionary Source="Theme/ComboBoxStyle.xaml"/>
 
 
             </ResourceDictionary.MergedDictionaries>
@@ -34,7 +35,7 @@
                 <view:CustomerView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:OrderViewModel}">
+            <DataTemplate DataType="{x:Type viewModel:OrdersViewModel}">
                 <view:OrderView/>
             </DataTemplate>
 
@@ -58,14 +59,22 @@
                 <view:UpdateCategoryPage/>
             </DataTemplate>
 
-
             <DataTemplate DataType="{x:Type viewModel:AddProductPageViewModel}">
                 <view:AddProductPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddOrderPageViewModel}">
+                <view:AddOrderPage/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:UpdateProductPageViewModel}">
                 <view:UpdateProductPage/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AcceptedOrderPageViewModel}">
+                <view:AcceptedOrderPage/>
+            </DataTemplate>
+
 
 
 

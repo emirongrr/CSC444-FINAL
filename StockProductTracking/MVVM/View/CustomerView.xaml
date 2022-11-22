@@ -139,7 +139,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Width="75" Header=" ">
+                    <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button

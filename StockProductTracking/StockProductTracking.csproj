@@ -89,6 +89,7 @@
     <Reference Include="NuGet.Frameworks, Version=6.3.1.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\NuGet.Frameworks.6.3.1\lib\net472\NuGet.Frameworks.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="Prism, Version=8.1.97.5141, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Core.8.1.97\lib\net47\Prism.dll</HintPath>
     </Reference>
@@ -146,24 +147,33 @@
     <Compile Include="MVVM\Model\Employee.cs" />
     <Compile Include="MVVM\Model\Order.cs" />
     <Compile Include="MVVM\Model\Product.cs" />
+    <Compile Include="MVVM\ViewModel\AcceptedOrderPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddCategoryPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddCustomerPageViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\AddOrderPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddProductPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\CustomersViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CustomerViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\OrderViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\OrdersViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\OrderViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\ProductViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\UpdateCategoryPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UpdateCustomerPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UpdateProductPageViewModel.cs" />
+    <Compile Include="MVVM\View\AcceptedOrderPage.xaml.cs">
+      <DependentUpon>AcceptedOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\AddCategoryPage.xaml.cs">
       <DependentUpon>AddCategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\AddOrderPage.xaml.cs">
+      <DependentUpon>AddOrderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\AddProductPage.xaml.cs">
       <DependentUpon>AddProductPage.xaml</DependentUpon>
@@ -207,11 +217,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\AcceptedOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\AddCategoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\AddCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\AddOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\ComboBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

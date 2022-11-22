@@ -1,12 +1,13 @@
-﻿using System;
+﻿using StockProductTracking.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockProductTracking.MVVM.Model
+namespace StockProductTracking.MVVM.ViewModel
 {
-    public class Order
+    internal abstract class OrderViewModelBase : ObservableObject
     {
         public int OrderId { get; set; }
         public int CustomerId { get; set; }
@@ -14,5 +15,6 @@ namespace StockProductTracking.MVVM.Model
         public int OrderProductPrice { get; set; }
         public int OrderProductCount { get; set; }
         public bool OrderStatus { get; set; }
+
     }
 }

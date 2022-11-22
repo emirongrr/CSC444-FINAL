@@ -39,8 +39,9 @@
             </Ellipse>
             <fa:IconImage Icon="{Binding Path=Icon,ElementName=InfoCardff}" 
                           Margin="0 0 25 25"
-                          Width="55"
-                          Height="55"
+                          Width="65"
+                          Height="65"
+                          Foreground="White"
                           HorizontalAlignment="Right"
                           VerticalAlignment="Center"/>
             <StackPanel Margin="35 0 0 20"

@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <if:InfoCards
                          Grid.Column="0" 
                          Title="Görüntülenme" 
@@ -57,10 +57,10 @@
 
         </Grid>
         <Grid Grid.Row="1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="360"/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
 
             <Border CornerRadius="20"
                     Padding="35 25"
@@ -87,14 +87,14 @@
                     </StackPanel>
 
 
-                   
+
 
                     <StackPanel Grid.Row="1">
-                       
+
 
 
                     </StackPanel>
-                                
+
                 </Grid>
 
             </Border>
@@ -206,7 +206,7 @@
                         <lc:CartesianChart.DataTooltip>
                             <lc:DefaultTooltip Background="#24336a"
                                                Foreground="#d5e2ff">
-                                
+
                             </lc:DefaultTooltip>
                         </lc:CartesianChart.DataTooltip>
 
@@ -243,7 +243,7 @@
                                         <GradientStop Color="#26376f" Offset="0.4"/>
                                         <GradientStop Color="#6a6ae4" Offset="1.2"/>
                                     </LinearGradientBrush>
-                                    
+
                                 </lc:LineSeries.Fill>
 
                             </lc:LineSeries>
