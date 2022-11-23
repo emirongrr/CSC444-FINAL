@@ -14,12 +14,12 @@
                 <ResourceDictionary Source="Theme/MenuButtonIcon.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButton.xaml"/>
                 <ResourceDictionary Source="Theme/menuButtonText.xaml"/>
-                <ResourceDictionary Source="Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/SearchTextboxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TitleText.xaml"/>
                 <ResourceDictionary Source="Theme/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="Theme/RepeatButton.xaml"/>
+                <ResourceDictionary Source="Theme/GetInputTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ComboBoxStyle.xaml"/>
-
 
             </ResourceDictionary.MergedDictionaries>
             

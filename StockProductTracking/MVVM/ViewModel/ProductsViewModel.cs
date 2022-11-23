@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class ProductsViewModel : ObservableObject
+    internal class ProductsViewModel : ObservableObject 
 
     {
         public Product SelectedProduct { get; set; }
@@ -16,7 +17,6 @@ namespace StockProductTracking.MVVM.ViewModel
         public ICommand NavigateUpdateProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
 
-   
 
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> ProductsList
@@ -32,7 +32,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public void UpdateProductList()
         {
             Connect db = new Connect();
-            ProductsList = db.GetProducts();
+            ProductsList = db.GetProducts();  
 
         }
 

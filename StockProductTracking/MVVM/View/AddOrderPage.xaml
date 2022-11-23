@@ -7,6 +7,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Border Background="#2c386c" CornerRadius="12">
 
         <Border
@@ -69,7 +70,8 @@
                         FontSize="13"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding DataContext.CustomerId, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding DataContext.CustomerId, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" >
+                    </TextBox>
 
 
                     <TextBlock
@@ -182,6 +184,9 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FF29298E" />
                                     </Trigger>
+                                    <DataTrigger Binding="{Binding ElementName=txtOrderCustomerId, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>

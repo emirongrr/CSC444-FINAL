@@ -4,13 +4,12 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
-using System.ComponentModel;
-using System.Xml.Linq;
 
-namespace StockProductTracking.MVVM.ViewModel
+
+namespace StockProductTracking.MVVM.ViewModel 
 {
-    internal class CustomersViewModel : ObservableObject
-    {
+    internal class CustomersViewModel : ObservableObject 
+    {       
         public Customer SelectedCustomer { get; set; }
 
         public ICommand NavigateAddCustomerCommand { get; }
@@ -28,7 +27,7 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-    
+
 
         public void UpdateCustomersList()
         {
@@ -71,7 +70,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 mainViewModel.CurrentView = updateCustomerPageViewModel;
             });
 
-            
+
         }
-    }
+      }   
 }

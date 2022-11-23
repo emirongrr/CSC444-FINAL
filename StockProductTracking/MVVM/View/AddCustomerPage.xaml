@@ -9,7 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
+    
     <Border Background="#2c386c" CornerRadius="12">
 
         <Border
@@ -61,17 +61,9 @@
                     </TextBlock>
 
                     <TextBox
-                        x:Name="txtName"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.CustomerName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        x:Name="txtAddName"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.CustomerName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                     <TextBlock
                         Margin="0,15,0,0"
@@ -89,16 +81,8 @@
 
                     <TextBox
                         x:Name="txtAddLastName"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.CustomerLastName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.CustomerLastName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                     <TextBlock
                         Margin="0,15,0,0"
@@ -116,15 +100,8 @@
 
                     <TextBox
                         x:Name="txtAddPhone"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.CustomerPhone, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.CustomerPhone, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                     <TextBlock
                         Margin="0,15,0,2"
@@ -143,15 +120,8 @@
 
                     <TextBox
                         x:Name="txtAddAddress"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.CustomerAddress, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.CustomerAddress, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                     <Button
                         x:Name="btnAddCustomer"
@@ -173,6 +143,23 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FF29298E" />
                                     </Trigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddName, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddLastName, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddPhone, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddAddress, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>

@@ -1,5 +1,6 @@
 using StockProductTracking.Core;
 using StockProductTracking.Utils;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -16,6 +17,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 Connect db = new Connect();
                 db.AddCustomer(CustomerName, CustomerLastName, CustomerPhone, CustomerAddress);
                 mainViewModel.CustomersVM.UpdateCustomersList();
+                mainViewModel.CurrentView = mainViewModel.CustomersVM;
+
             });
 
         }

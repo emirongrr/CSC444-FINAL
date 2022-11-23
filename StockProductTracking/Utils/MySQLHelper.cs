@@ -1,17 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
-using StockProductTracking.MVVM.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Data.Entity.Infrastructure.Design.Executor;
-using System.Xml.Linq;
-using System.Runtime.InteropServices;
 
 namespace StockProductTracking.Utils
 {
