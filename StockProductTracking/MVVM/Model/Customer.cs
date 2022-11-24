@@ -16,5 +16,6 @@ namespace StockProductTracking.MVVM.Model
         public string Address { get; set; }
         public string Phone { get; set; }
 
+
     }
 }

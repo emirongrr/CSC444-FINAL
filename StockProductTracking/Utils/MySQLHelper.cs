@@ -226,16 +226,16 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddOrder(int _customer_id, string _order_product_title, int _price, int _order_product_count , bool _order_status)
+        public void AddOrder(int _customer_id, string _order_product_title, int _order_product_count , bool _order_status)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO orders(order_customer_id,order_product_title,order_product_price,order_product_count,order_status) VALUES(@customer_id, @title,@price,@count,@status)";
+            string query = $"INSERT INTO orders(order_customer_id,order_product_title,order_product_price,order_product_count,order_status) VALUES(@customer_id, @title,(select product_price from products where product_title='{_order_product_title}'),@count,@status)";
+
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
             mySqlCommand.CommandText = query;
             mySqlCommand.Parameters.AddWithValue("@customer_id", _customer_id);
             mySqlCommand.Parameters.AddWithValue("@title", _order_product_title);
-            mySqlCommand.Parameters.AddWithValue("@price", _price);
             mySqlCommand.Parameters.AddWithValue("@count", _order_product_count);
             mySqlCommand.Parameters.AddWithValue("@status", _order_status);
             mySqlCommand.ExecuteNonQuery();
