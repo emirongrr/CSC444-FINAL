@@ -21,7 +21,7 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
- 
+
 
         public ICommand AddProductCommand { get; }
 
@@ -31,12 +31,12 @@ namespace StockProductTracking.MVVM.ViewModel
             Connect connect = new Connect();
             Categories = connect.GetCategory();
 
-           
+
 
             AddProductCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddProduct(CategoryID,ProductTitle, ProductStock, ProductPrice,ProductRealPrice,ProductBrand);
+                db.AddProduct(CategoryID, ProductTitle, ProductStock, ProductPrice, ProductRealPrice, ProductBrand);
                 mainViewModel.ProductsVM.UpdateProductList();
             });
 

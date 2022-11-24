@@ -59,7 +59,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 {
                     CategoryId = o.CategoryId,
                     CategoryTitle = o.CategoryTitle,
-                 
+
                 };
 
                 mainViewModel.CurrentView = updateCategoryPageViewModel;

@@ -13,7 +13,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public int CategoryID { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public int ProductPrice { get; set; }   
+        public int ProductPrice { get; set; }
         public int ProductRealPrice { get; set; }
         public int ProductStock { get; set; }
 

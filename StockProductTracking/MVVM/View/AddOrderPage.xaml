@@ -104,12 +104,11 @@
                         BorderThickness="0,0,0,1"
                         FontSize="13"
                         FontWeight="Medium"
-                        ItemsSource="{Binding Path=Products}" 
+                        ItemsSource="{Binding Path = Products}" 
                         DisplayMemberPath="ProductTitle"
-                        SelectedValuePath="ProductTitle"
-                        SelectedValue="{Binding DataContext.OrderProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedItem="{Binding Path=Products}"
-                              >
+                        SelectedValuePath="ProductId"
+                        SelectedValue="{Binding DataContext.OrderProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"      >
+                        
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Background" Value="#2c386c"/>

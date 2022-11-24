@@ -6,10 +6,10 @@ using Prism.Commands;
 using System.Windows.Input;
 
 
-namespace StockProductTracking.MVVM.ViewModel 
+namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class CustomersViewModel : ObservableObject 
-    {       
+    internal class CustomersViewModel : ObservableObject
+    {
         public Customer SelectedCustomer { get; set; }
 
         public ICommand NavigateAddCustomerCommand { get; }
@@ -72,5 +72,5 @@ namespace StockProductTracking.MVVM.ViewModel
 
 
         }
-      }   
+    }
 }

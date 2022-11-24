@@ -32,8 +32,8 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-        private ObservableCollection<Product> selectedproduct;
-        public ObservableCollection<Product> SelectedProduct
+        private Product selectedproduct;
+        public Product SelectedProduct
         {
             get => selectedproduct;
             set
@@ -54,7 +54,7 @@ namespace StockProductTracking.MVVM.ViewModel
             AddOrderCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddOrder(CustomerId,OrderProductTitle,OrderProductCount,OrderStatus);
+                db.AddOrder(CustomerId, OrderProductTitle, OrderProductCount, OrderStatus);
                 mainViewModel.OrderVM.UpdateOrderList();
             });
 

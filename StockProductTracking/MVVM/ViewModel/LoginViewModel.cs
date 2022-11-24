@@ -6,43 +6,43 @@ using StockProductTracking.Core;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-     class LoginViewModel : ObservableObject
+    class LoginViewModel : ObservableObject
     {
         private string _username;
         private SecureString _password;
         private bool _isVisibleTrue = true;
 
-        public string Username 
-        
-        { 
+        public string Username
+
+        {
             get { return _username; }
 
-            set 
-            { 
+            set
+            {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
-            } 
+            }
 
         }
-        public SecureString Password 
+        public SecureString Password
         {
             get { return _password; }
-           
-            set 
+
+            set
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
-                
+
             }
         }
-        public bool IsVisibleTrue 
+        public bool IsVisibleTrue
         {
-            get { return _isVisibleTrue;}
-            set 
-            { 
+            get { return _isVisibleTrue; }
+            set
+            {
                 _isVisibleTrue = value;
                 OnPropertyChanged(nameof(IsVisibleTrue));
-                
+
             }
         }
     }
