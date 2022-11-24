@@ -106,7 +106,7 @@
                         FontWeight="Medium"
                         ItemsSource="{Binding Path = Products}" 
                         DisplayMemberPath="ProductTitle"
-                        SelectedValuePath="ProductId"
+                        SelectedValuePath="ProductTitle"
                         SelectedValue="{Binding DataContext.OrderProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"      >
                         
                         <ComboBox.ItemContainerStyle>
@@ -135,20 +135,10 @@
                     </TextBlock>
 
                     <TextBox
-                        x:Name="txtOrderProductPrice"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
+                        x:Name="txtAddOrderProductPrice"
                         IsReadOnly="True"
-                        Text="{Binding ElementName=SelectedProduct,Path=SelectedItem.ProductPrice}">
-
-                    </TextBox>
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                         Text="{Binding ElementName=SelectedProduct,Path=SelectedItem.ProductPrice}"/>
 
 
                     <TextBlock
@@ -167,18 +157,12 @@
 
                     </TextBlock>
 
+
                     <TextBox
-                        x:Name="txtOrderProductCount"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.OrderProductCount, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        x:Name="txtAddOrderProductCount"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.OrderProductCount, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
 
 
                     <Button
@@ -201,7 +185,7 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FF29298E" />
                                     </Trigger>
-                                    <DataTrigger Binding="{Binding ElementName=txtOrderCustomerId, Path=(Validation.HasError)}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=txtAddOrderProductCount, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
                                 </Style.Triggers>

@@ -32,19 +32,6 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-        private Product selectedproduct;
-        public Product SelectedProduct
-        {
-            get => selectedproduct;
-            set
-            {
-                selectedproduct = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-
         public AddOrderPageViewModel(MainViewModel mainViewModel)
         {
             Connect connect = new Connect();
