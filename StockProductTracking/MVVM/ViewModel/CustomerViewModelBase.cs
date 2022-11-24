@@ -16,7 +16,7 @@ namespace StockProductTracking.MVVM.ViewModel
         {
             get { return null; }
         }
-        
+
         public string this[string columnName]
         {
             get

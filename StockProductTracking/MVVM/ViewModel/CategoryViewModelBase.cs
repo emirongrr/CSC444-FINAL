@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal abstract class CategoryViewModelBase : ObservableObject , IDataErrorInfo
+    internal abstract class CategoryViewModelBase : ObservableObject, IDataErrorInfo
     {
         public int CategoryId { get; set; }
         public string CategoryTitle { get; set; }

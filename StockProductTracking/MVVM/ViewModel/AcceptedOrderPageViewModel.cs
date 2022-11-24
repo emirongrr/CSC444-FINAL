@@ -35,7 +35,7 @@ namespace StockProductTracking.MVVM.ViewModel
         {
             Connect db = new Connect();
             AcceptedOrdersList = db.GetAcceptedOrders();
-            
+
         }
 
     }

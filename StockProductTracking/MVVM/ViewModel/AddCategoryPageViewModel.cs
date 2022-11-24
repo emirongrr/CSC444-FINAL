@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class AddCategoryPageViewModel : CategoryViewModelBase 
+    internal class AddCategoryPageViewModel : CategoryViewModelBase
     {
         public ICommand AddCategoryCommand { get; }
 
@@ -13,11 +13,11 @@ namespace StockProductTracking.MVVM.ViewModel
 
             AddCategoryCommand = new RelayCommand(o =>
             {
-        
+
                 Connect db = new Connect();
                 db.AddCategory(CategoryTitle);
                 mainViewModel.CategoryVM.UpdateCategoryList();
-   
+
             });
 
         }

@@ -53,7 +53,8 @@ namespace StockProductTracking.MVVM.ViewModel
 
             });
 
-            SetOrderToAccepted = new DelegateCommand<Order>(order => {
+            SetOrderToAccepted = new DelegateCommand<Order>(order =>
+            {
                 db.SetStatusToAccepted(order.OrderId);
                 _ = OrdersList.Remove(order);
                 //update accepted list

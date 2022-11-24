@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class ProductsViewModel : ObservableObject 
+    internal class ProductsViewModel : ObservableObject
 
     {
         public Product SelectedProduct { get; set; }
@@ -32,7 +32,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public void UpdateProductList()
         {
             Connect db = new Connect();
-            ProductsList = db.GetProducts();  
+            ProductsList = db.GetProducts();
 
         }
 

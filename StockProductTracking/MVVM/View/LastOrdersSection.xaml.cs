@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace StockProductTracking.MVVM.View
 {
-    
+
     public partial class LastOrdersSection : UserControl
     {
         public LastOrdersSection()
@@ -15,13 +15,13 @@ namespace StockProductTracking.MVVM.View
 
 
 
-        public string Title     
+        public string Title
         {
             get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); } 
+            set { SetValue(TitleProperty, value); }
         }
 
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string),typeof(LastOrdersSection));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register("Title", typeof(string), typeof(LastOrdersSection));
 
 
         public string Desc

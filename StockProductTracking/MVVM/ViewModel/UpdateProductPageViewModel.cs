@@ -29,7 +29,7 @@ namespace StockProductTracking.MVVM.ViewModel
             UpdateProductCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.UpdateProduct(ProductId,CategoryID,ProductTitle,ProductStock,ProductPrice,ProductRealPrice,ProductBrand);
+                db.UpdateProduct(ProductId, CategoryID, ProductTitle, ProductStock, ProductPrice, ProductRealPrice, ProductBrand);
                 mainViewModel.ProductsVM.UpdateProductList();
 
             });
