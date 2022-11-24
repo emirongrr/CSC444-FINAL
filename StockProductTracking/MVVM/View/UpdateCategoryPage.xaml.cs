@@ -24,5 +24,7 @@ namespace StockProductTracking.MVVM.View
         {
             InitializeComponent();
         }
+
+      
     }
 }
