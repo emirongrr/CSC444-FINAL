@@ -70,7 +70,8 @@ namespace StockProductTracking.MVVM.ViewModel
 
         public DashboardViewModel(MainViewModel mainViewModel)
         {
-            GraphAxis testAxis = new GraphAxis(0, 2500);
+            YAxis = new GraphAxis(0, 2500);
+
             UpdateDashboard();
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {
