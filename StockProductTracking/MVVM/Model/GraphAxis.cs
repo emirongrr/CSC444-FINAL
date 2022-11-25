@@ -13,7 +13,7 @@ namespace StockProductTracking.MVVM.Model
         public double MaxValue { get => _MaxValue; set { _MaxValue = value; } }
         public double MinValue { get => _MinValue; set { _MinValue = value; } }
 
-        public GraphAxis(double minValue, double maxValue)
+        public GraphAxis(double maxValue, double minValue = 0 )
         {
             MaxValue = maxValue;
             MinValue = minValue;

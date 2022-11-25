@@ -19,7 +19,9 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     internal class DashboardViewModel : ObservableObject
     {
+        private DashboardHandler dashboardHandler = new DashboardHandler();
         private readonly Connect connect = new Connect();
+
         private string _sumtotalprice;
         public string SumTotalPrice
         {
@@ -41,16 +43,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private SeriesCollection _chartSeries;
-        public SeriesCollection ChartSeries
-        {
-            get => _chartSeries;
-            set
-            {
-                _chartSeries = value;
-                OnPropertyChanged();
-            }
-        }
         private GraphAxis _YAxis;
         public GraphAxis YAxis
         {
@@ -61,18 +53,40 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private GraphAxis _XAxis;
+        public GraphAxis XAxis
+        {
+            get => _XAxis;
+            set
+            {
+                _XAxis = value;
+                OnPropertyChanged();
+            }
+        }
+        public ChartValues<Double> ChartValues
+        { 
+            get => dashboardHandler.ChartValues;
+            set 
+            {
+                dashboardHandler.ChartValues = value;
+                OnPropertyChanged();
+            } 
+        }
         public void UpdateDashboard()
         {
             SumTotalPrice = connect.GetTotalPriceOrders() + "₺";
             CountTotalOrder = connect.GetTotalOrderCount() + "Adet";
-            ChartSeries = new DashboardHandler().GetChartData();
+            dashboardHandler.SetChartDataToProfit();
         }
 
         public DashboardViewModel(MainViewModel mainViewModel)
         {
-            YAxis = new GraphAxis(0, 2500);
-
             UpdateDashboard();
+         
+            YAxis = new GraphAxis(1.2 * ChartValues.Max());
+            XAxis = new GraphAxis(Convert.ToDouble(connect.GetTotalOrderCount()));
+
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {
                 Interval = new TimeSpan(0, 1, 0) //h,m,s

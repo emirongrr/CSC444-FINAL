@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="StockProductTracking.MVVM.View.DashboardView"
+﻿ <UserControl x:Class="StockProductTracking.MVVM.View.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -195,7 +195,6 @@
                     <!--chart-->
                     <lc:CartesianChart Grid.Row="1"
                                        Margin="45 0  0 25"
-                                       Series="{Binding ChartSeries, UpdateSourceTrigger=PropertyChanged}"
                                        >
                         <lc:CartesianChart.Background>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -212,8 +211,8 @@
                         </lc:CartesianChart.DataTooltip>
 
                         <lc:CartesianChart.AxisX>
-                            <lc:Axis MinValue="0"
-                                     MaxValue="5"
+                            <lc:Axis MinValue="{Binding XAxis.MinValue,UpdateSourceTrigger=PropertyChanged}"
+                                     MaxValue="{Binding XAxis.MaxValue,UpdateSourceTrigger=PropertyChanged}"
                                      Foreground="#717eb2"
                                      ShowLabels="False">
                                 <lc:Axis.Separator>
@@ -233,6 +232,16 @@
                                 </lc:Axis.Separator>
                             </lc:Axis>
                         </lc:CartesianChart.AxisY>
+
+                        <lc:CartesianChart.Series>
+                            <lc:LineSeries 
+                                           Stroke="#ada4fd"
+                                           PointGeometrySize="0"
+                                           Values="{Binding ChartValues, UpdateSourceTrigger=PropertyChanged}">
+                         
+                            </lc:LineSeries>
+                        </lc:CartesianChart.Series>
+
                     </lc:CartesianChart>
 
                 </Grid>
