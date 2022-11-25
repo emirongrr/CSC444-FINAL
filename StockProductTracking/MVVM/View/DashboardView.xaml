@@ -224,8 +224,8 @@
 
 
                         <lc:CartesianChart.AxisY>
-                            <lc:Axis MinValue="0"
-                                     MaxValue="10000"
+                            <lc:Axis MaxValue="{Binding YAxis.MaxValue,UpdateSourceTrigger=PropertyChanged}"
+                                     MinValue="{Binding YAxis.MinValue, UpdateSourceTrigger=PropertyChanged}"
                                      Foreground="#717eb2"
                                      ShowLabels="False">
                                 <lc:Axis.Separator>

@@ -51,7 +51,16 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        private GraphAxis _YAxis;
+        public GraphAxis YAxis
+        {
+            get => _YAxis;
+            set
+            {
+                _YAxis = value;
+                OnPropertyChanged();
+            }
+        }
         public void UpdateDashboard()
         {
             SumTotalPrice = connect.GetTotalPriceOrders() + "₺";
@@ -61,6 +70,7 @@ namespace StockProductTracking.MVVM.ViewModel
 
         public DashboardViewModel(MainViewModel mainViewModel)
         {
+            GraphAxis testAxis = new GraphAxis(0, 2500);
             UpdateDashboard();
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {

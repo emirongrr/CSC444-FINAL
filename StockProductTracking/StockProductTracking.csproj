@@ -145,6 +145,7 @@
     <Compile Include="MVVM\Model\Category.cs" />
     <Compile Include="MVVM\Model\Customer.cs" />
     <Compile Include="MVVM\Model\Employee.cs" />
+    <Compile Include="MVVM\Model\GraphAxis.cs" />
     <Compile Include="MVVM\Model\Order.cs" />
     <Compile Include="MVVM\Model\Product.cs" />
     <Compile Include="MVVM\ViewModel\AcceptedOrderPageViewModel.cs" />
