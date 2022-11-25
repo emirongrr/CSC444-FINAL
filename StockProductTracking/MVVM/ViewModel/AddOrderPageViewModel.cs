@@ -50,6 +50,6 @@ namespace StockProductTracking.MVVM.ViewModel
 
         }
 
-       
+
     }
 }

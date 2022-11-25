@@ -195,6 +195,7 @@
                     <!--chart-->
                     <lc:CartesianChart Grid.Row="1"
                                        Margin="45 0  0 25"
+                                       Series="{Binding ChartSeries, UpdateSourceTrigger=PropertyChanged}"
                                        >
                         <lc:CartesianChart.Background>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -211,7 +212,7 @@
                         </lc:CartesianChart.DataTooltip>
 
                         <lc:CartesianChart.AxisX>
-                            <lc:Axis MinValue="1"
+                            <lc:Axis MinValue="0"
                                      MaxValue="5"
                                      Foreground="#717eb2"
                                      ShowLabels="False">
@@ -224,7 +225,7 @@
 
                         <lc:CartesianChart.AxisY>
                             <lc:Axis MinValue="0"
-                                     MaxValue="60000"
+                                     MaxValue="10000"
                                      Foreground="#717eb2"
                                      ShowLabels="False">
                                 <lc:Axis.Separator>
@@ -232,22 +233,6 @@
                                 </lc:Axis.Separator>
                             </lc:Axis>
                         </lc:CartesianChart.AxisY>
-
-                        <lc:CartesianChart.Series>
-                            <lc:LineSeries Stroke="#ada4fd"
-                                           StrokeThickness="0"
-                                           PointGeometrySize="0"
-                                           Values="12200,30200,12233,12233,50020,2346,12355">
-                                <lc:LineSeries.Fill>
-                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Color="#26376f" Offset="0.4"/>
-                                        <GradientStop Color="#6a6ae4" Offset="1.2"/>
-                                    </LinearGradientBrush>
-
-                                </lc:LineSeries.Fill>
-
-                            </lc:LineSeries>
-                        </lc:CartesianChart.Series>
                     </lc:CartesianChart>
 
                 </Grid>

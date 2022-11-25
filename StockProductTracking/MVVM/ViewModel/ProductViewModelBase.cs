@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal abstract class ProductViewModelBase : ObservableObject ,IDataErrorInfo
+    internal abstract class ProductViewModelBase : ObservableObject, IDataErrorInfo
     {
         public int ProductId { get; set; }
         public int CategoryID { get; set; }
@@ -54,10 +54,10 @@ namespace StockProductTracking.MVVM.ViewModel
                 if (columnName == "ProductRealPrice")
                 {
 
-                   
 
-                   if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";                     
+
+                    if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
+                        result = "Sadece rakam kabul edilir. [0-9]";
 
                 }
 

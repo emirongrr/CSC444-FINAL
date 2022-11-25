@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal abstract class OrderViewModelBase : ObservableObject ,  IDataErrorInfo
+    internal abstract class OrderViewModelBase : ObservableObject, IDataErrorInfo
     {
         private Product currentProduct = new Product();
         public int OrderId { get; set; }
@@ -25,7 +25,7 @@ namespace StockProductTracking.MVVM.ViewModel
             get { return currentProduct.ProductPrice; }
             set { currentProduct.ProductPrice = value; }
         }
-        public int OrderProductCount { get; set;}
+        public int OrderProductCount { get; set; }
         public bool OrderStatus { get; set; }
 
         public string Error
@@ -41,13 +41,13 @@ namespace StockProductTracking.MVVM.ViewModel
                 if (columnName == "OrderProductCount")
                 {
 
-                     if (!(this.OrderProductCount > 0))
+                    if (!(this.OrderProductCount > 0))
                         result = "En az 1 adet satın almalısınız.";
-                   
+
                 }
 
                 return result;
-            } 
+            }
         }
 
     }
