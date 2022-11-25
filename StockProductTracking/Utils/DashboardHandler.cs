@@ -25,7 +25,14 @@ namespace StockProductTracking.Utils
             chartSeries.Add(ls);
             foreach (Order order in new Connect().GetAcceptedOrders())
             {
-                values.Add(order.OrderProductCount * order.OrderProductPrice);
+                if (values.Any())
+                {
+                    values.Add(values.Last() + (order.OrderProductCount * order.OrderProductPrice));
+                }
+                else
+                {
+                    values.Add(order.OrderProductPrice * order.OrderProductCount);
+                } 
             }
             return chartSeries;
         } 
