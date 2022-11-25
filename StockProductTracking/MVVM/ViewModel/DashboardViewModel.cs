@@ -43,24 +43,21 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        private GraphAxis _YAxis;
         public GraphAxis YAxis
         {
-            get => _YAxis;
+            get => dashboardHandler._YAxis;
             set
             {
-                _YAxis = value;
+                dashboardHandler._YAxis = value;
                 OnPropertyChanged();
             }
         }
-
-        private GraphAxis _XAxis;
         public GraphAxis XAxis
         {
-            get => _XAxis;
+            get => dashboardHandler._XAxis;
             set
             {
-                _XAxis = value;
+                dashboardHandler._XAxis = value;
                 OnPropertyChanged();
             }
         }
@@ -83,9 +80,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public DashboardViewModel(MainViewModel mainViewModel)
         {
             UpdateDashboard();
-         
-            YAxis = new GraphAxis(1.2 * ChartValues.Max());
-            XAxis = new GraphAxis(Convert.ToDouble(connect.GetTotalOrderCount()));
+
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {

@@ -107,7 +107,7 @@
                     Margin="50 0 10 40">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -119,82 +119,9 @@
 
                     </StackPanel>
 
-                    <StackPanel HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                Margin="0 0 0 25"
-                                Grid.Row="1">
-                        <TextBlock Text="6 000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="5000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="4000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="3000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="2000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="1000"
-                                   Foreground="#717EB2"
-                                   Margin="0 0 0 25"/>
-                        <TextBlock Text="0"
-                                   Foreground="#717EB2"
-                                   HorizontalAlignment="Right"/>
-
-
-
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Bottom"
-                                Margin="50 0 0 0"
-                                Grid.Row="1">
-                        <TextBlock Text="1"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="2"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="3"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="4"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="5"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="6"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="7"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="8"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="9"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="10"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="11"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-                        <TextBlock Text="12"
-                                   Foreground="#717EB2"
-                                   Margin="41 0 0 0"/>
-
-                    </StackPanel>
-
                     <!--chart-->
                     <lc:CartesianChart Grid.Row="1"
-                                       Margin="45 0  0 25"
+                                       Margin="0 0  0 0"
                                        >
                         <lc:CartesianChart.Background>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -214,7 +141,7 @@
                             <lc:Axis MinValue="{Binding XAxis.MinValue,UpdateSourceTrigger=PropertyChanged}"
                                      MaxValue="{Binding XAxis.MaxValue,UpdateSourceTrigger=PropertyChanged}"
                                      Foreground="#717eb2"
-                                     ShowLabels="False">
+                                     ShowLabels="True">
                                 <lc:Axis.Separator>
                                     <lc:Separator StrokeThickness="0"/>
                                 </lc:Axis.Separator>
@@ -226,7 +153,7 @@
                             <lc:Axis MaxValue="{Binding YAxis.MaxValue,UpdateSourceTrigger=PropertyChanged}"
                                      MinValue="{Binding YAxis.MinValue, UpdateSourceTrigger=PropertyChanged}"
                                      Foreground="#717eb2"
-                                     ShowLabels="False">
+                                     ShowLabels="True">
                                 <lc:Axis.Separator>
                                     <lc:Separator StrokeThickness="0"/>
                                 </lc:Axis.Separator>
@@ -236,9 +163,10 @@
                         <lc:CartesianChart.Series>
                             <lc:LineSeries 
                                            Stroke="#ada4fd"
-                                           PointGeometrySize="0"
+                                           StrokeThickness="1"
                                            Values="{Binding ChartValues, UpdateSourceTrigger=PropertyChanged}">
                          
+                                
                             </lc:LineSeries>
                         </lc:CartesianChart.Series>
 

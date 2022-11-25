@@ -17,6 +17,9 @@ namespace StockProductTracking.Utils
     internal class DashboardHandler
     {
         public ChartValues<Double> ChartValues = new ChartValues<Double>();
+        public List<String> _YAxisIntervalList = new List<String>();
+        public GraphAxis _YAxis;
+        public GraphAxis _XAxis;
 
         public void SetChartDataToProfit()
         {
@@ -27,6 +30,24 @@ namespace StockProductTracking.Utils
             {
                 ChartValues.Add(ChartValues.Last() + (order.OrderProductCount * order.OrderProductPrice));
             }
-        } 
+
+            _YAxis = new GraphAxis(Math.Ceiling((ChartValues.Max() / 3000)) * 3000);
+            _XAxis = new GraphAxis(Convert.ToDouble(new Connect().GetTotalOrderCount()));
+            
+        }
+    }
+
+    internal class GraphAxis
+    {
+        private double _MaxValue;
+        private double _MinValue;
+        public double MaxValue { get => _MaxValue; set { _MaxValue = value; } }
+        public double MinValue { get => _MinValue; set { _MinValue = value; } }
+
+        public GraphAxis(double maxValue, double minValue = 0)
+        {
+            MaxValue = maxValue;
+            MinValue = minValue;
+        }
     }
 }
