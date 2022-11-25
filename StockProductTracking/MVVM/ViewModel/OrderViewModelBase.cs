@@ -28,7 +28,6 @@ namespace StockProductTracking.MVVM.ViewModel
         public int OrderProductCount { get; set;}
         public bool OrderStatus { get; set; }
 
-
         public string Error
         {
             get { return null; }

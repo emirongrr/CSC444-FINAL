@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace StockProductTracking.MVVM.Model
 {
@@ -12,8 +13,8 @@ namespace StockProductTracking.MVVM.Model
         public int CategoryId { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public int ProductPrice { get; set; } //buy
-        public int ProductRealPrice { get; set; } //sell
+        public int ProductPrice { get; set; } //satış
+        public int ProductRealPrice { get; set; } //alış
         public int ProductStock { get; set; }
 
 

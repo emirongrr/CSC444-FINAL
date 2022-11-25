@@ -98,18 +98,14 @@
 
                     </TextBlock>
 
+
                     <TextBox
                         x:Name="txtProductTitle"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductTitle, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+
+
 
 
                     <TextBlock
@@ -128,18 +124,12 @@
 
                     </TextBlock>
 
+
                     <TextBox
                         x:Name="txtProductStock"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductStock, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductStock, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
 
 
                     <TextBlock
@@ -158,18 +148,13 @@
 
                     </TextBlock>
 
+
                     <TextBox
                         x:Name="txtProductPrice"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+
 
 
                     <TextBlock
@@ -188,18 +173,13 @@
 
                     </TextBlock>
 
+
+
                     <TextBox
                         x:Name="txtProductRealPrice"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductRealPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductRealPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
 
 
 
@@ -219,18 +199,13 @@
 
                     </TextBlock>
 
-                    <TextBox
+                    
+                      
+                   <TextBox
                         x:Name="txtProductBrand"
-                        Margin="0,5,0,0"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderBrush="DarkGray"
-                        BorderThickness="0,0,0,1"
-                        CaretBrush="LightGray"
-                        FontSize="13"
-                        FontWeight="Medium"
-                        Foreground="White"
-                        Text="{Binding DataContext.ProductBrand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" />
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductBrand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
 
 
 
@@ -254,6 +229,27 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FF29298E" />
                                     </Trigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtProductTitle, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    
+                                    <DataTrigger Binding="{Binding ElementName=txtProductStock, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtProductPrice, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtProductRealPrice, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtProductBrand, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>

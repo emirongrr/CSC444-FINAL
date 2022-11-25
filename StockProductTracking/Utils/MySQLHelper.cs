@@ -1,6 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
+using System;
 using System.Collections.ObjectModel;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
+using System.Windows.Forms;
 
 namespace StockProductTracking.Utils
 {
@@ -102,6 +106,52 @@ namespace StockProductTracking.Utils
                 mySqlConnection.Close();
             }
             return _OrderList;
+        }
+
+        public string GetTotalPriceOrders()
+        {
+            string _TotalPriceOrders = "0";
+
+            mySqlConnection.Open();
+            string query = "SELECT SUM(a_orders.a_order_product_price * a_orders.a_order_product_count) AS 'sum' FROM a_orders";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+
+                    _TotalPriceOrders = Convert.ToString((decimal)reader["sum"]);
+
+
+                }
+                mySqlConnection.Close();
+            }
+            return _TotalPriceOrders;
+        }
+
+        public string GetTotalOrderCount()
+        {
+            string _TotalOrderCount = "0";
+
+            mySqlConnection.Open();
+            string query = "select count(a_order_product_price) as 'count' from a_orders";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+
+                    _TotalOrderCount = Convert.ToString((long)reader["count"]);
+
+
+                }
+                mySqlConnection.Close();
+            }
+            return _TotalOrderCount;
         }
 
         public ObservableCollection<Order> GetOrders()

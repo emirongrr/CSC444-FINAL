@@ -7,7 +7,7 @@
              xmlns:if="clr-namespace:StockProductTracking.Theme" 
              mc:Ignorable="d" 
              xmlns:ls="clr-namespace:StockProductTracking.MVVM.View"
-             xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:viewmodel="clr-namespace:StockProductTracking.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:DashboardViewModel}"
              d:DesignHeight="600" d:DesignWidth="1030">
     <Grid>
         <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
             <if:InfoCards
                          Grid.Column="1" 
                          Title="Toplam Sipariş" 
-                         Icon="ShoppingCart" Number="162,672" 
+                         Icon="ShoppingCart" Number="{Binding CountTotalOrder}" 
                          Background1="#FD8A87" 
                          Background2="#F3AB92"
                          EllipseBackground1="#FBD5A8"
@@ -46,8 +46,8 @@
 
             <if:InfoCards 
                          Grid.Column="2" 
-                         Title="Toplam Gelir" 
-                         Icon="Coins" Number="₺250,983" 
+                         Title="Toplam Gelir"
+                         Icon="Coins" Number="{Binding SumTotalPrice}" 
                          Background1="#FC84CB" 
                          Background2="#FC8FAE"
                          EllipseBackground1="#FC8FAE"
@@ -237,7 +237,7 @@
                             <lc:LineSeries Stroke="#ada4fd"
                                            StrokeThickness="0"
                                            PointGeometrySize="0"
-                                           Values="20000,17000,30000,15000,50000,30000,200000">
+                                           Values="12200,30200,12233,12233,50020,2346,12355">
                                 <lc:LineSeries.Fill>
                                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                                         <GradientStop Color="#26376f" Offset="0.4"/>

@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
+             xmlns:local="clr-namespace:StockProductTracking.MVVM.ViewModel"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
+
     <Border Background="#2c386c" CornerRadius="12">
 
         <Border
@@ -66,7 +67,7 @@
                         FontSize="13"
                         FontWeight="Medium"
                         ItemsSource="{Binding Path=Customers}" 
-                        DisplayMemberPath="Name"
+                        DisplayMemberPath="GetFullName"
                         SelectedValuePath="Id"                      
                         SelectedValue="{Binding DataContext.CustomerId, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}" >
                         <ComboBox.ItemContainerStyle>

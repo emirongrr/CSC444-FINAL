@@ -40,7 +40,7 @@ namespace StockProductTracking.MVVM.ViewModel
 
         public MainViewModel()
         {
-            DashboardVM = new DashboardViewModel();
+            DashboardVM = new DashboardViewModel(this);
             ProductsVM = new ProductsViewModel(this);
             OrderVM = new OrdersViewModel(this);
             CategoryVM = new CategoryViewModel(this);
@@ -59,6 +59,7 @@ namespace StockProductTracking.MVVM.ViewModel
             DashboardViewCommand = new RelayCommand(o =>
             {
                 CurrentView = DashboardVM;
+                DashboardVM.UpdateDashboard();
             });
 
             ProductViewCommand = new RelayCommand(o =>

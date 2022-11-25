@@ -1,7 +1,10 @@
 ﻿using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
 using StockProductTracking.Utils;
+using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -46,5 +49,7 @@ namespace StockProductTracking.MVVM.ViewModel
             });
 
         }
+
+       
     }
 }

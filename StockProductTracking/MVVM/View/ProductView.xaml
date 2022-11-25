@@ -113,8 +113,8 @@
                     <DataGridTextColumn Binding="{Binding Path=ProductId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
                     <DataGridTextColumn Binding="{Binding Path=CategoryId, UpdateSourceTrigger=PropertyChanged}" Header="KATEGORİ" />
                     <DataGridTextColumn Binding="{Binding Path=ProductTitle, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADI" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="ALIŞ" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductRealPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductRealPrice, UpdateSourceTrigger=PropertyChanged}" Header="ALIŞ" />
+                    <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ" />
                     <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="STOK" />
                     <DataGridTextColumn Binding="{Binding Path=ProductBrand, UpdateSourceTrigger=PropertyChanged}" Header="MARKA" />
 
