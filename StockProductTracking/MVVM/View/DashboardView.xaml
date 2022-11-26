@@ -91,12 +91,14 @@
 
 
                     <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                        <lc:PieChart Height="300"
+                        <lc:PieChart Height="270"
+                                     LegendLocation="Bottom"
                                      Series="{Binding PieChartSeries, UpdateSourceTrigger=PropertyChanged}" Width="238">
                             <lc:PieChart.DataTooltip>
                                 <lc:DefaultTooltip Background="#24336a" 
                                                    Foreground="#d5e2ff"/>
                             </lc:PieChart.DataTooltip>
+                          
                         </lc:PieChart>
 
                     </StackPanel>
