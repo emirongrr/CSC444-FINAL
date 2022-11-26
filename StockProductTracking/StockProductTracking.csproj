@@ -204,7 +204,6 @@
     </Compile>
     <Compile Include="Utils\DashboardGraphHandler.cs" />
     <Compile Include="Utils\MySQLHelper.cs" />
-    <Compile Include="Utils\PieChartItem.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

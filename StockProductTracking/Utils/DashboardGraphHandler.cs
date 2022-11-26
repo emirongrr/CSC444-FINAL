@@ -39,19 +39,7 @@ namespace StockProductTracking.Utils
         public void SetPieChartDataByCategories()
         {
             Dictionary<String, Double> TotalProfitByCategories = new Dictionary<String, Double>();
-            List<Order> orders = new Connect().GetAcceptedOrderListByCategories();
-
-            foreach (Order order in orders)
-            {
-                if (TotalProfitByCategories.ContainsKey(order.OrderCategoryTitle))
-                {
-                    TotalProfitByCategories[order.OrderCategoryTitle] += order.OrderProductPrice * order.OrderProductCount;
-                }
-                else
-                {
-                    TotalProfitByCategories.Add(order.OrderCategoryTitle, order.OrderProductPrice * order.OrderProductCount);
-                }
-            }
+            TotalProfitByCategories= new Connect().GetPieChartKeyValueFromDatabase();
             
             PieChartSeriesCollection = new SeriesCollection();
             foreach(KeyValuePair<string, double> pair in TotalProfitByCategories)
@@ -65,8 +53,7 @@ namespace StockProductTracking.Utils
                     Values = pieValue
                 };
                 PieChartSeriesCollection.Add(pieSeries);
-            }
-            
+            }  
         }
     }
     internal class GraphAxis

@@ -423,5 +423,33 @@ namespace StockProductTracking.Utils
 
         }
 
+        public Dictionary<string, double> GetPieChartKeyValueFromDatabase()
+        {
+
+            Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
+
+            string _UniqueCategoryNames = null;
+            double _TotalCount = 0;
+
+            mySqlConnection.Open();
+            string query = "SELECT DISTINCT(category.title) as 'unique_category_name', sum(a_orders.a_order_product_count) as 'sum_total_order_groupbycategory' FROM category INNER JOIN products ON products.category_id = category.category_id INNER JOIN a_orders ON a_orders.a_order_product_title = products.product_title GROUP BY category.title";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    _UniqueCategoryNames = (string)reader["unique_category_name"];
+                    _TotalCount = Convert.ToDouble((decimal)reader["sum_total_order_groupbycategory"]);
+                    _PieChartKeyValue.Add(_UniqueCategoryNames, _TotalCount);
+
+                }
+                mySqlConnection.Close();
+            }
+            return _PieChartKeyValue;
+        }
+
+
     }
 }
