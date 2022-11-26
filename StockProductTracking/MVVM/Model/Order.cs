@@ -14,6 +14,7 @@ namespace StockProductTracking.MVVM.Model
         public int OrderProductPrice { get; set; }
         public int OrderProductCount { get; set; }
         public bool OrderStatus { get; set; }
+        public string OrderCategoryTitle { get; set; }
 
     }
 }

@@ -59,6 +59,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 _ = OrdersList.Remove(order);
                 //update accepted list
                 mainViewModel.AcceptedOrderPageVM.UpdateOrderList();
+                mainViewModel.DashboardVM.UpdateDashboard();
             });
 
             NavigateAcceptedOrderCommand = new RelayCommand(o =>

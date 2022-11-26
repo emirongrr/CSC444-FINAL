@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -107,7 +108,32 @@ namespace StockProductTracking.Utils
             }
             return _OrderList;
         }
+        public List<Order> GetAcceptedOrderListByCategories()
+        {
+            List<Order> orders = new List<Order>();
+            mySqlConnection.Open();
+            string query = "Select a_orders.a_order_product_price, a_orders.a_order_product_count, products.category_id,category.title " +
+                "FROM (a_orders INNER JOIN products ON a_orders.a_order_product_title = products.product_title)" +
+                " INNER JOIN category ON products.category_id = category.category_id;";
 
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductCount = (int)reader["a_order_product_count"],
+                        OrderCategoryTitle = (string)reader["title"]
+                    };
+                    orders.Add(order);
+                }
+                mySqlConnection.Close();
+            }
+            return orders;
+        }
         public string GetTotalPriceOrders()
         {
             string _TotalPriceOrders = "0";
@@ -396,6 +422,34 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
 
         }
+
+        public Dictionary<string, double> GetPieChartKeyValueFromDatabase()
+        {
+
+            Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
+
+            string _UniqueCategoryNames = null;
+            double _TotalCount = 0;
+
+            mySqlConnection.Open();
+            string query = "SELECT DISTINCT(category.title) as 'unique_category_name', sum(a_orders.a_order_product_count) as 'sum_total_order_groupbycategory' FROM category INNER JOIN products ON products.category_id = category.category_id INNER JOIN a_orders ON a_orders.a_order_product_title = products.product_title GROUP BY category.title";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    _UniqueCategoryNames = (string)reader["unique_category_name"];
+                    _TotalCount = Convert.ToDouble((decimal)reader["sum_total_order_groupbycategory"]);
+                    _PieChartKeyValue.Add(_UniqueCategoryNames, _TotalCount);
+
+                }
+                mySqlConnection.Close();
+            }
+            return _PieChartKeyValue;
+        }
+
 
     }
 }
