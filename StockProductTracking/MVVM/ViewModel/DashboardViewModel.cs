@@ -19,7 +19,7 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     internal class DashboardViewModel : ObservableObject
     {
-        private DashboardHandler dashboardHandler = new DashboardHandler();
+        private DashboardGraphHandler dashboardGraphHandler = new DashboardGraphHandler();
         private readonly Connect connect = new Connect();
 
         private string _sumtotalprice;
@@ -45,36 +45,46 @@ namespace StockProductTracking.MVVM.ViewModel
         }
         public GraphAxis YAxis
         {
-            get => dashboardHandler._YAxis;
+            get => dashboardGraphHandler.YAxis;
             set
             {
-                dashboardHandler._YAxis = value;
+                dashboardGraphHandler.YAxis = value;
                 OnPropertyChanged();
             }
         }
         public GraphAxis XAxis
         {
-            get => dashboardHandler._XAxis;
+            get => dashboardGraphHandler.XAxis;
             set
             {
-                dashboardHandler._XAxis = value;
+                dashboardGraphHandler.XAxis = value;
                 OnPropertyChanged();
             }
         }
         public ChartValues<Double> ChartValues
         { 
-            get => dashboardHandler.ChartValues;
+            get => dashboardGraphHandler.ChartValues;
             set 
             {
-                dashboardHandler.ChartValues = value;
+                dashboardGraphHandler.ChartValues = value;
                 OnPropertyChanged();
             } 
+        }
+        public SeriesCollection PieChartSeries
+        {
+            get => dashboardGraphHandler.PieChartSeriesCollection;
+            set
+            {
+                dashboardGraphHandler.PieChartSeriesCollection = value;
+                OnPropertyChanged();
+            }
         }
         public void UpdateDashboard()
         {
             SumTotalPrice = connect.GetTotalPriceOrders() + "₺";
             CountTotalOrder = connect.GetTotalOrderCount() + "Adet";
-            dashboardHandler.SetChartDataToProfit();
+            dashboardGraphHandler.SetLineChartDataToProfit();
+            dashboardGraphHandler.SetPieChartDataByCategories();
         }
 
         public DashboardViewModel(MainViewModel mainViewModel)

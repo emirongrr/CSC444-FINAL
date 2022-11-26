@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -107,7 +108,32 @@ namespace StockProductTracking.Utils
             }
             return _OrderList;
         }
+        public List<Order> GetAcceptedOrderListByCategories()
+        {
+            List<Order> orders = new List<Order>();
+            mySqlConnection.Open();
+            string query = "Select a_orders.a_order_product_price, a_orders.a_order_product_count, products.category_id,category.title " +
+                "FROM (a_orders INNER JOIN products ON a_orders.a_order_product_title = products.product_title)" +
+                " INNER JOIN category ON products.category_id = category.category_id;";
 
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Order order = new Order
+                    {
+                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductCount = (int)reader["a_order_product_count"],
+                        OrderCategoryTitle = (string)reader["title"]
+                    };
+                    orders.Add(order);
+                }
+                mySqlConnection.Close();
+            }
+            return orders;
+        }
         public string GetTotalPriceOrders()
         {
             string _TotalPriceOrders = "0";
