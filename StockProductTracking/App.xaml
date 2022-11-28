@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:StockProductTracking.MVVM.ViewModel"
              xmlns:view="clr-namespace:StockProductTracking.MVVM.View"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             StartupUri="/MainWindow.xaml">
+             StartupUri="/MVVM/View/LoginView.xaml">
     <Application.Resources>
         
         <ResourceDictionary>
@@ -23,6 +23,10 @@
 
             </ResourceDictionary.MergedDictionaries>
             
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <view:LoginView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <view:DashboardView/>
             </DataTemplate>

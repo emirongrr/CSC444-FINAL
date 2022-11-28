@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:StockProductTracking.MVVM.ViewModel"
         xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
         mc:Ignorable="d"
         Title="LoginView" Height="550" Width="800"
@@ -12,6 +13,7 @@
         Background="Transparent"
         MouseDown="Window_MouseDown"
         AllowsTransparency="True"
+        d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel}"
         >
     <Border CornerRadius="12">
         <Border.Background>
@@ -159,12 +161,13 @@
                     <TextBox x:Name="txtUser"
                                FontSize="13"
                                FontWeight="Medium"
-                               Foreground="White"
+                               Foreground="Black"
                                CaretBrush="LightGray"
                                BorderBrush="DarkGray"
                                BorderThickness="0,0,0,1"
                                VerticalContentAlignment="Center"
                                Margin="0,5,0,0"
+                               Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}"
                                Padding="20,0,0,0">
                         <!--<TextBox.Background>
                         <ImageBrush ImageSource="/Images/user-icon.png"
@@ -183,7 +186,7 @@
                     <PasswordBox x:Name="txtPass"
                                FontSize="13"
                                FontWeight="Medium"
-                               Foreground="White"
+                               Foreground="Black"
                                CaretBrush="LightGray"
                                BorderBrush="DarkGray"
                                BorderThickness="0,0,0,1"
@@ -209,7 +212,9 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="0,50,0,0"
-                            Click="btnLogin_Click">
+                            Click="btnLogin_Click"
+                            CommandParameter="{Binding ElementName=txtPass}"
+                            Command="{Binding LogInCommand}">
                         <Button.Style>
 
                             <Style TargetType="Button">

@@ -3,6 +3,7 @@ using StockProductTracking.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Security;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Forms;
@@ -450,6 +451,38 @@ namespace StockProductTracking.Utils
             return _PieChartKeyValue;
         }
 
+        public Employee LogIn(string username, string password)
+        {
+            mySqlConnection.Open();
+            string query = $"select * from employee where employee_username = \'{username}\' and employee_password=\'{password}\'";
+            List<Employee> checkList = new List<Employee>();
 
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Employee employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                    checkList.Add(employee);
+                }
+                mySqlConnection.Close();
+            }
+            if(checkList.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return checkList[0];
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 using StockProductTracking.Core;
+using StockProductTracking.MVVM.Model;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -10,7 +11,6 @@ namespace StockProductTracking.MVVM.ViewModel
         public ICommand CustomerViewCommand { get; set; }
         public ICommand OrderViewCommand { get; set; }
         public ICommand CategoryViewCommand { get; set; }
-
 
         public AcceptedOrderPageViewModel AcceptedOrderPageVM { get; set; }
         public UpdateProductPageViewModel UpdateProductPageVM { get; set; }
@@ -25,6 +25,7 @@ namespace StockProductTracking.MVVM.ViewModel
         public OrdersViewModel OrderVM { get; set; }
         public CategoryViewModel CategoryVM { get; set; }
         public CustomersViewModel CustomersVM { get; set; }
+        public Employee CurrentUser { get; set; }
 
         private object currentView;
 

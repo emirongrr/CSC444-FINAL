@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockProductTracking.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,16 @@ namespace StockProductTracking.MVVM.View
         public LoginView()
         {
             InitializeComponent();
+            LoginViewModel dtx= new LoginViewModel()
+            {
+                CurrentWindow= this
+            };
+            this.DataContext = dtx;
+        }
+
+        public void ShowMessageBox(string message)
+        {
+            MessageBox.Show(message);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

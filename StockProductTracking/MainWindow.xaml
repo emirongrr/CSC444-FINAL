@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:StockProductTracking"
         xmlns:viewModel="clr-namespace:StockProductTracking.MVVM.ViewModel" 
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
-        d:DataContext="{d:DesignInstance Type=viewModel:MainViewModel}"
         mc:Ignorable="d"
         Height="700" Width="1280"
         WindowStyle="None"
