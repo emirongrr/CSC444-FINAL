@@ -14,6 +14,7 @@
         MouseDown="Window_MouseDown"
         AllowsTransparency="True"
         d:DataContext="{d:DesignInstance Type=viewModel:LoginViewModel}"
+        FocusManager.FocusedElement="{Binding ElementName=txtUser}"
         >
     <Border CornerRadius="12">
         <Border.Background>
@@ -168,7 +169,7 @@
                                VerticalContentAlignment="Center"
                                Margin="0,5,0,0"
                                Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}"
-                               Padding="20,0,0,0">
+                               Padding="5,0,0,0">
                         <!--<TextBox.Background>
                         <ImageBrush ImageSource="/Images/user-icon.png"
                                            Stretch="None"
@@ -192,7 +193,7 @@
                                BorderThickness="0,0,0,1"
                                VerticalContentAlignment="Center"
                                Margin="0,5,0,0"
-                               Padding="20,0,0,0">
+                               Padding="5,0,0,0">
                         <!--<PasswordBox.Background>
                             <ImageBrush ImageSource="/Images/key-icon.png"
                                            Stretch="None"
@@ -212,7 +213,7 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Margin="0,50,0,0"
-                            Click="btnLogin_Click"
+                            IsDefault="true"
                             CommandParameter="{Binding ElementName=txtPass}"
                             Command="{Binding LogInCommand}">
                         <Button.Style>
