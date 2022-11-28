@@ -455,14 +455,14 @@ namespace StockProductTracking.Utils
         {
             mySqlConnection.Open();
             string query = $"select * from employee where employee_username = \'{username}\' and employee_password=\'{password}\'";
-            List<Employee> checkList = new List<Employee>();
 
+            Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
             using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    Employee employee = new Employee
+                    employee = new Employee
                     {
                         Id = (int)reader["employee_id"],
                         FirstName = (string)reader["employee_name"],
@@ -471,18 +471,10 @@ namespace StockProductTracking.Utils
                         Email = (string)reader["employee_mail"],
                         IsAdmin = (bool)reader["is_admin"]
                     };
-                    checkList.Add(employee);
                 }
                 mySqlConnection.Close();
             }
-            if(checkList.Count == 0)
-            {
-                return null;
-            }
-            else
-            {
-                return checkList[0];
-            }
+            return employee;
         }
     }
 }
