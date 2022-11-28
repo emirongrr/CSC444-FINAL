@@ -73,8 +73,10 @@ namespace StockProductTracking.MVVM.ViewModel
                 {
                     CurrentUser = currentUser
                 };
-                MainWindow mw = new MainWindow();
-                mw.DataContext = mainDataContext;
+                MainWindow mw = new MainWindow
+                {
+                    DataContext = mainDataContext
+                };
                 mw.Show();
                 CurrentWindow.Close();
             }
