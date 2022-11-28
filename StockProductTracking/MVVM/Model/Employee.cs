@@ -14,7 +14,6 @@ namespace StockProductTracking.MVVM.Model
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        public SecureString Password { get; set; }
         public bool IsAdmin { get; set; }
     }
 }
