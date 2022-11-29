@@ -114,18 +114,21 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="200"/>
                         </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
                         
                             <Button Background="Transparent"
+                                    VerticalAlignment="Bottom"
                                     BorderThickness="0">
-                                <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                <fa:IconImage  Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
                             </Button>
 
                             <TextBlock Text="{Binding CurrentUser.Username}"
                                Style="{StaticResource menuButtonText}"
-                               FontSize="30"
+                               Foreground="#707db2"
+                               FontSize="18"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Bottom"/>
                         
