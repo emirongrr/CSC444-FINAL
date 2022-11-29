@@ -85,7 +85,7 @@ namespace StockProductTracking.MVVM.ViewModel
 
         public void ExecuteLoginComamnd(object o)
         {
-            Employee currentUser = new Connect().LogIn(new NetworkCredential(Username,Password)); 
+            Employee currentUser = new Connect().LogIn(new NetworkCredential(Username,SHA256Helper.ComputeSha256Hash(Password))); 
             
             if (currentUser == null)
             {
