@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -70,13 +72,35 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             } 
         }
+        private string CategoryTag { get; set; }
+        private SeriesCollection pieChartSeries;
         public SeriesCollection PieChartSeries
         {
-            get => dashboardGraphHandler.PieChartSeriesCollection;
+            get => pieChartSeries;
             set
             {
-                dashboardGraphHandler.PieChartSeriesCollection = value;
+                pieChartSeries = value;
                 OnPropertyChanged();
+            }
+        }
+        public ICommand DrillDownCommand
+        {
+            get
+            {
+                return new RelayCommand(OnDrillDownCommand);
+            }
+        }
+        private void OnDrillDownCommand(object chartPoint)
+        {
+            if(CategoryTag != null)
+            {
+                CategoryTag = null;
+                UpdateDashboard();
+            }
+            else
+            {
+                CategoryTag = (chartPoint as ChartPoint).SeriesView.Title;
+                PieChartSeries = dashboardGraphHandler.SetPieChartDataByProducts(CategoryTag);
             }
         }
         public void UpdateDashboard()
@@ -84,7 +108,15 @@ namespace StockProductTracking.MVVM.ViewModel
             SumTotalPrice = connect.GetTotalPriceOrders() + "₺";
             CountTotalOrder = connect.GetTotalOrderCount() + "Adet";
             dashboardGraphHandler.SetLineChartDataToProfit();
-            dashboardGraphHandler.SetPieChartDataByCategories();
+
+            if(CategoryTag == null)
+            {
+                PieChartSeries = dashboardGraphHandler.SetPieChartDataByCategories();
+            }
+            else
+            {
+                PieChartSeries = dashboardGraphHandler.SetPieChartDataByProducts(CategoryTag);
+            }
         }
 
         public DashboardViewModel(MainViewModel mainViewModel)

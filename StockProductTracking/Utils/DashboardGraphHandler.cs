@@ -17,7 +17,6 @@ namespace StockProductTracking.Utils
 {
     internal class DashboardGraphHandler
     {
-        public SeriesCollection PieChartSeriesCollection { get; set; }
         public ChartValues<Double> ChartValues = new ChartValues<Double>();
         public GraphAxis YAxis { get; set; }
         public GraphAxis XAxis { get; set; }
@@ -36,12 +35,12 @@ namespace StockProductTracking.Utils
             XAxis = new GraphAxis(Convert.ToDouble(new Connect().GetTotalOrderCount()));
 
         }
-        public void SetPieChartDataByCategories()
+        public SeriesCollection SetPieChartDataByCategories()
         {
             Dictionary<String, Double> TotalProfitByCategories = new Dictionary<String, Double>();
             TotalProfitByCategories= new Connect().GetPieChartKeyValueFromDatabase();
             
-            PieChartSeriesCollection = new SeriesCollection();
+            SeriesCollection PieChartSeriesCollection = new SeriesCollection();
             foreach(KeyValuePair<string, double> pair in TotalProfitByCategories)
             {
                 ChartValues<double> pieValue = new ChartValues<double>();
@@ -53,7 +52,24 @@ namespace StockProductTracking.Utils
                     Values = pieValue
                 };
                 PieChartSeriesCollection.Add(pieSeries);
-            }  
+            }
+            return PieChartSeriesCollection;
+        }
+        public SeriesCollection SetPieChartDataByProducts(string categoryTitle)
+        {
+            Dictionary<string, double> sellAmountByProduct = new Connect().GetPieChartKeyValueFromDatabaseWithCategory(categoryTitle);
+            SeriesCollection PieChartSeriesCollection = new SeriesCollection();
+            foreach(KeyValuePair<string,double> pair in sellAmountByProduct)
+            {
+                ChartValues<double> pieValue = new ChartValues<double>();
+                pieValue.Add(pair.Value);
+                PieChartSeriesCollection.Add(new PieSeries()
+                {
+                    Title = pair.Key,
+                    Values = pieValue
+                });
+            }
+            return PieChartSeriesCollection;
         }
     }
     internal class GraphAxis
