@@ -100,13 +100,14 @@
                     </StackPanel>
                 </RadioButton>
 
-                <RadioButton Command="{Binding EmployeeViewCommand}" Style="{StaticResource menuButton}">
+            
+                    <RadioButton Visibility="{Binding IsVisibleRadioButton}" Command="{Binding EmployeeViewCommand}" Style="{StaticResource menuButton}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="UserGear" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Personel" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
-
+    
 
                 <StackPanel>
                     <Grid>

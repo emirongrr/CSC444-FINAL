@@ -30,6 +30,18 @@ namespace StockProductTracking.MVVM.ViewModel
         public CustomersViewModel CustomersVM { get; set; }
 
 
+        private string _IsVisibleRadioButton = "Hidden";
+        public string IsVisibleRadioButton 
+        {
+            get => _IsVisibleRadioButton;
+            set
+            {
+                _IsVisibleRadioButton = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private Employee currentUser;
         public Employee CurrentUser
         {
@@ -114,6 +126,12 @@ namespace StockProductTracking.MVVM.ViewModel
             if (user != null)
             {
                 CurrentUser.Username = user.Username;
+                CurrentUser.IsAdmin = user.IsAdmin;
+                if(CurrentUser.IsAdmin !=  false)
+                {
+                    IsVisibleRadioButton = "Visible";
+                }
+                   
             }
             else
             {
