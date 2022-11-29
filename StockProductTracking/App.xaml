@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:StockProductTracking.MVVM.ViewModel"
              xmlns:view="clr-namespace:StockProductTracking.MVVM.View"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             StartupUri="/MVVM/View/LoginView.xaml">
+             Startup="ApplicationStart">
     <Application.Resources>
         
         <ResourceDictionary>
@@ -78,10 +78,6 @@
             <DataTemplate DataType="{x:Type viewModel:AcceptedOrderPageViewModel}">
                 <view:AcceptedOrderPage/>
             </DataTemplate>
-
-
-
-
 
         </ResourceDictionary>
         

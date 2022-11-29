@@ -1,5 +1,8 @@
 using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
+using StockProductTracking.Utils;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -25,10 +28,22 @@ namespace StockProductTracking.MVVM.ViewModel
         public OrdersViewModel OrderVM { get; set; }
         public CategoryViewModel CategoryVM { get; set; }
         public CustomersViewModel CustomersVM { get; set; }
-        public Employee CurrentUser { get; set; }
+
+
+        private Employee currentUser;
+        public Employee CurrentUser
+        {
+            get =>  currentUser;
+            set
+            {
+                currentUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+
 
         private object currentView;
-
         public object CurrentView
         {
             get => currentView;
@@ -55,6 +70,8 @@ namespace StockProductTracking.MVVM.ViewModel
             AddOrderPageVM = new AddOrderPageViewModel(this);
             AcceptedOrderPageVM = new AcceptedOrderPageViewModel(this);
 
+
+            LoadCurrentUserData();
             currentView = DashboardVM;
 
             DashboardViewCommand = new RelayCommand(o =>
@@ -86,6 +103,22 @@ namespace StockProductTracking.MVVM.ViewModel
                 CurrentView = CategoryVM;
                 CategoryVM.UpdateCategoryList();
             });
+        }
+
+        private void LoadCurrentUserData()
+        {
+            Connect connect = new Connect();
+            CurrentUser = new Employee();
+
+            var user = connect.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+            if (user != null)
+            {
+                CurrentUser.Username = user.Username;
+            }
+            else
+            {
+                CurrentUser.Username = "Invalid user, not logged in";
+            }
         }
     }
 }

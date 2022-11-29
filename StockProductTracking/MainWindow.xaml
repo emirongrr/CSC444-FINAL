@@ -95,13 +95,50 @@
 
                 <RadioButton Command="{Binding CustomerViewCommand}" Style="{StaticResource menuButton}">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconImage Icon="User" Style="{StaticResource menuButtonIcon}"/>
+                        <fa:IconImage Icon="Users" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Müşteriler" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </RadioButton>
 
+                <RadioButton Command="{Binding EmployeeViewCommand}" Style="{StaticResource menuButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="UserGear" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Personel" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+
+
+                <StackPanel>
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal">
+                        
+                            <Button Background="Transparent"
+                                    BorderThickness="0">
+                                <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                            </Button>
+
+                            <TextBlock Text="{Binding CurrentUser.Username}"
+                               Style="{StaticResource menuButtonText}"
+                               FontSize="30"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"/>
+                        
+                     </StackPanel>
+
+                    </Grid>
+                        
+                </StackPanel>
+
+
 
             </StackPanel>
+
+
         </Border>
 
 

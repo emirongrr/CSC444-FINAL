@@ -3,6 +3,7 @@ using StockProductTracking.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Security;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -451,10 +452,36 @@ namespace StockProductTracking.Utils
             return _PieChartKeyValue;
         }
 
-        public Employee LogIn(string username, string password)
+        public Employee LogIn(NetworkCredential credential)
         {
             mySqlConnection.Open();
-            string query = $"select * from employee where employee_username = \'{username}\' and employee_password=\'{password}\'";
+            string query = $"select * from employee where employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
+
+            Employee employee = null;
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                }
+                mySqlConnection.Close();
+            }
+            return employee;
+        }
+
+        public Employee GetByUsername(string username)
+        {
+            mySqlConnection.Open();
+            string query = $"select * from employee where employee_username = \'{username}\' ";
 
             Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
