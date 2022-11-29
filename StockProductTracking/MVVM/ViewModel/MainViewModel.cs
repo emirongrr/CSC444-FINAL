@@ -1,4 +1,8 @@
 using StockProductTracking.Core;
+using StockProductTracking.MVVM.Model;
+using StockProductTracking.Utils;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -10,7 +14,6 @@ namespace StockProductTracking.MVVM.ViewModel
         public ICommand CustomerViewCommand { get; set; }
         public ICommand OrderViewCommand { get; set; }
         public ICommand CategoryViewCommand { get; set; }
-
 
         public AcceptedOrderPageViewModel AcceptedOrderPageVM { get; set; }
         public UpdateProductPageViewModel UpdateProductPageVM { get; set; }
@@ -26,8 +29,33 @@ namespace StockProductTracking.MVVM.ViewModel
         public CategoryViewModel CategoryVM { get; set; }
         public CustomersViewModel CustomersVM { get; set; }
 
-        private object currentView;
 
+        private string _IsVisibleRadioButton = "Hidden";
+        public string IsVisibleRadioButton 
+        {
+            get => _IsVisibleRadioButton;
+            set
+            {
+                _IsVisibleRadioButton = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private Employee currentUser;
+        public Employee CurrentUser
+        {
+            get =>  currentUser;
+            set
+            {
+                currentUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        private object currentView;
         public object CurrentView
         {
             get => currentView;
@@ -54,6 +82,8 @@ namespace StockProductTracking.MVVM.ViewModel
             AddOrderPageVM = new AddOrderPageViewModel(this);
             AcceptedOrderPageVM = new AcceptedOrderPageViewModel(this);
 
+
+            LoadCurrentUserData();
             currentView = DashboardVM;
 
             DashboardViewCommand = new RelayCommand(o =>
@@ -85,6 +115,28 @@ namespace StockProductTracking.MVVM.ViewModel
                 CurrentView = CategoryVM;
                 CategoryVM.UpdateCategoryList();
             });
+        }
+
+        private void LoadCurrentUserData()
+        {
+            Connect connect = new Connect();
+            CurrentUser = new Employee();
+
+            var user = connect.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
+            if (user != null)
+            {
+                CurrentUser.Username = user.Username;
+                CurrentUser.IsAdmin = user.IsAdmin;
+                if(CurrentUser.IsAdmin !=  false)
+                {
+                    IsVisibleRadioButton = "Visible";
+                }
+                   
+            }
+            else
+            {
+                CurrentUser.Username = "Invalid user, not logged in";
+            }
         }
     }
 }

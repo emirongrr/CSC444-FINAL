@@ -3,6 +3,8 @@ using StockProductTracking.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net;
+using System.Security;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Forms;
@@ -428,8 +430,8 @@ namespace StockProductTracking.Utils
 
             Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
 
-            string _UniqueCategoryNames = null;
-            double _TotalCount = 0;
+            string _UniqueCategoryNames;
+            double _TotalCount;
 
             mySqlConnection.Open();
             string query = "SELECT DISTINCT(category.title) as 'unique_category_name', sum(a_orders.a_order_product_count) as 'sum_total_order_groupbycategory' FROM category INNER JOIN products ON products.category_id = category.category_id INNER JOIN a_orders ON a_orders.a_order_product_title = products.product_title GROUP BY category.title";
@@ -450,6 +452,56 @@ namespace StockProductTracking.Utils
             return _PieChartKeyValue;
         }
 
+        public Employee LogIn(NetworkCredential credential)
+        {
+            mySqlConnection.Open();
+            string query = $"select * from employee where employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
 
+            Employee employee = null;
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                }
+                mySqlConnection.Close();
+            }
+            return employee;
+        }
+
+        public Employee GetByUsername(string username)
+        {
+            mySqlConnection.Open();
+            string query = $"select * from employee where employee_username = \'{username}\' ";
+
+            Employee employee = null;
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                }
+                mySqlConnection.Close();
+            }
+            return employee;
+        }
     }
 }
