@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="StockProductTracking.MVVM.View.AddEmployeePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d"
+             xmlns:CustomControls="clr-namespace:StockProductTracking.MVVM.CustomControls"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Background="#2c386c" CornerRadius="12">
+
+        <Border
+            BorderThickness="1"
+            CornerRadius="10"
+            Opacity="0.95">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid>
+
+                    <Button
+                        Width="Auto"
+                        HorizontalAlignment="Left"
+                        Background="#2c386c"
+                        BorderThickness="0"
+                        Command="{Binding DataContext.EmployeeViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuButtonIcon}" />
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Width="250"
+                    Margin="0,35,0,0"
+                    Orientation="Vertical">
+
+                    <TextBlock
+                        Margin="0,35,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="AD">
+
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddName"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeeFirstName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="SOYAD">
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddLastName"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeeLastName, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Kullanıcı Ado">
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddUsername"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeeUsername, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Mail">
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddEmployeeEmail"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeeEmail, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Şifre">
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+                    </TextBlock>
+                    <TextBox
+                        x:Name="txtAddEmployeePassword"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeePassword, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Şifre">
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddEmployeePasswordAgain"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        ></TextBox>
+
+                    <TextBlock
+                        Margin="0,15,0,2"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Admin">
+
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="Person" />
+                    </TextBlock>
+
+                    <TextBox
+                        x:Name="txtAddAddress"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.EmployeeIsAdmin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+
+                    <Button
+                        x:Name="btnAddEmployee"
+                        Grid.Column="2"
+                        Margin="0,50,0,0"
+                        Background="#FF28287D"
+                        BorderThickness="0"
+                        Command="{Binding AddEmployeeCommand}"
+                        Content="EKLE"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        Foreground="White">
+                        <Button.Style>
+
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#FF28287D" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF29298E" />
+                                    </Trigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddName, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddLastName, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddPhone, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding ElementName=txtAddAddress, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="150"
+                                    Height="30"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                </Border>
+
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
+        </Border>
+    </Border>
+</UserControl>
