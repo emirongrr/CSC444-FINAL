@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
+             xmlns:CustomControls="clr-namespace:StockProductTracking.MVVM.CustomControls"
              mc:Ignorable="d" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -89,7 +90,7 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="DarkGray"
-                        Text="Kullanıcı Ado">
+                        Text="Kullanıcı Adı">
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
@@ -132,13 +133,15 @@
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
-                            Icon="AddressCard" />
+                            Icon="Key" />
                     </TextBlock>
-                    <TextBox
-                        x:Name="txtAddEmployeePassword"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.EmployeePassword, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
+
+                    <CustomControls:BindablePasswordBox x:Name="txtAddEmployeePassword"
+                                                        Password="{Binding DataContext.EmployeePassword, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"
+                                                        Height="28"                            
+                                                        Margin="0,5,0,0">
+                    </CustomControls:BindablePasswordBox>
 
 
                     <TextBlock
@@ -152,13 +155,13 @@
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
-                            Icon="AddressCard" />
+                            Icon="Key" />
                     </TextBlock>
 
-                    <TextBox
-                        x:Name="txtAddEmployeePasswordAgain"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        ></TextBox>
+                    <CustomControls:BindablePasswordBox x:Name="txtAddEmployeePasswordAgain"
+                                                        Height="28"                            
+                                                        Margin="0,5,0,0">
+                    </CustomControls:BindablePasswordBox>
 
                     <TextBlock
                         Margin="0,15,0,2"
@@ -175,10 +178,9 @@
                             Icon="Person" />
                     </TextBlock>
 
-                    <TextBox
-                        x:Name="txtAddAddress"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.EmployeeIsAdmin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                    <CheckBox
+                        x:Name="txtCheckAdmin"
+                        IsChecked="{Binding DataContext.EmployeeIsAdmin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
 
                     <Button

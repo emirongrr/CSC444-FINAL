@@ -132,13 +132,15 @@
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
-                            Icon="AddressCard" />
+                            Icon="Key" />
                     </TextBlock>
-                    <TextBox
-                        x:Name="txtAddEmployeePassword"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.EmployeePassword, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                
 
+                    <CustomControls:BindablePasswordBox x:Name="txtAddEmployeePassword"
+                                                        Password="{Binding DataContext.EmployeePassword, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged}"
+                                                        Height="28"                            
+                                                        Margin="0,5,0,0">
+                    </CustomControls:BindablePasswordBox>
 
 
                     <TextBlock
@@ -152,14 +154,14 @@
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
-                            Icon="AddressCard" />
+                            Icon="Key" />
                     </TextBlock>
 
-                    <TextBox
-                        x:Name="txtAddEmployeePasswordAgain"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        ></TextBox>
-
+                    <CustomControls:BindablePasswordBox x:Name="txtAddEmployeePasswordAgain"
+                                                        Height="28"                            
+                                                        Margin="0,5,0,0">
+                    </CustomControls:BindablePasswordBox>
+                    
                     <TextBlock
                         Margin="0,15,0,2"
                         HorizontalAlignment="Left"
@@ -175,10 +177,9 @@
                             Icon="Person" />
                     </TextBlock>
 
-                    <TextBox
-                        x:Name="txtAddAddress"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.EmployeeIsAdmin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                    <CheckBox
+                        x:Name="CheckAdmin"
+                        IsChecked="{Binding DataContext.EmployeeIsAdmin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                     <Button
                         x:Name="btnAddEmployee"
