@@ -1,4 +1,5 @@
 ﻿using StockProductTracking.MVVM.View;
+using StockProductTracking.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,20 +16,37 @@ namespace StockProductTracking
     /// </summary>
     public partial class App : Application
     {
-        protected void ApplicationStart(object sender, StartupEventArgs e)
+        LoginView loginView;
+        MainWindow mainWindow;
+        private void LogOff(object o, DependencyPropertyChangedEventArgs args)
         {
-            var loginView = new LoginView();
+            if(mainWindow.IsVisible == false && mainWindow.IsLoaded)
+            {
+                InitLogIn();
+                mainWindow.Close();
+            }
+
+        }
+
+        private void InitLogIn()
+        {
+            loginView = new LoginView();
             loginView.Show();
-            loginView.IsVisibleChanged += (s, ev) =>
+            loginView.IsVisibleChanged += (o, args) =>
             {
                 if (loginView.IsVisible == false && loginView.IsLoaded)
                 {
-                    var mainView = new MainWindow();
-                    mainView.Show();
+                    mainWindow = new MainWindow();
+                    mainWindow.IsVisibleChanged += new DependencyPropertyChangedEventHandler(LogOff);
+                    mainWindow.Show();
                     loginView.Close();
 
                 }
             };
+        }
+        protected void ApplicationStart(object sender, StartupEventArgs e)
+        {
+            InitLogIn();
         }
     }
 }
