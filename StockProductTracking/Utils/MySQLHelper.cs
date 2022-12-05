@@ -131,7 +131,7 @@ namespace StockProductTracking.Utils
                         OrderId = (int)reader["a_order_id"],
                         OrderProductTitle = (string)reader["a_order_product_title"],
                         CustomerId = (int)reader["a_order_customer_id"],
-                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderStatus = (bool)reader["a_order_status"]
                     };
@@ -157,7 +157,7 @@ namespace StockProductTracking.Utils
                 {
                     Order order = new Order
                     {
-                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderCategoryTitle = (string)reader["title"]
                     };
@@ -182,7 +182,6 @@ namespace StockProductTracking.Utils
                 {
 
                     _TotalPriceOrders = Convert.ToString((decimal)reader["sum"]);
-
 
                 }
                 mySqlConnection.Close();
@@ -231,7 +230,7 @@ namespace StockProductTracking.Utils
                         OrderId = (int)reader["order_id"],
                         OrderProductTitle = (string)reader["order_product_title"],
                         CustomerId = (int)reader["order_customer_id"],
-                        OrderProductPrice = (int)reader["order_product_price"],
+                        OrderProductPrice = (decimal)reader["order_product_price"],
                         OrderProductCount = (int)reader["order_product_count"],
                         OrderStatus = (bool)reader["order_status"]
                     };
@@ -260,8 +259,8 @@ namespace StockProductTracking.Utils
                         ProductId = (int)(long)reader["id"],
                         CategoryId = (int)(long)reader["category_id"],
                         ProductTitle = (string)reader["product_title"],
-                        ProductPrice = (int)reader["product_price"],
-                        ProductRealPrice = (int)reader["product_real_price"],
+                        ProductPrice = (decimal)reader["product_price"],
+                        ProductRealPrice = (decimal)reader["product_real_price"],
                         ProductStock = (int)reader["product_stock"],
                         ProductBrand = (string)reader["product_brand"]
                     };
@@ -390,7 +389,7 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddProduct(int _category_id, string _product_title, int _product_stock, int _product_price, int _product_real_price, string _product_brand)
+        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
         {
             mySqlConnection.Open();
             string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand)";
@@ -456,7 +455,7 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, int _product_price, int _product_real_price, string _product_brand)
+        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
         {
             mySqlConnection.Open();
             string query = $"UPDATE products SET category_id={_category_id}, product_title='{_product_title}' ,product_stock={_product_stock}, product_price={_product_price}, product_real_price={_product_real_price} ,product_brand='{_product_brand}'  WHERE Id ={id}";
@@ -504,9 +503,9 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
 
         }
-        public Dictionary<string,double> GetPieChartKeyValueFromDatabaseWithCategory(string categoryTitle)
+        public Dictionary<string,decimal> GetPieChartKeyValueFromDatabaseWithCategory(string categoryTitle)
         {
-            Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
+            Dictionary<string, decimal> _PieChartKeyValue = new Dictionary<string, decimal>();
             string query = "SELECT a_orders.a_order_product_title as productTitle, Sum(a_orders.a_order_product_count) as productSum " +
                 "FROM ((products CROSS join category ON products.category_id = category.category_id) " +
                 "CROSS JOIN a_orders ON product_title = a_orders.a_order_product_title) " +
@@ -521,7 +520,7 @@ namespace StockProductTracking.Utils
 
                 while (reader.Read())
                 {
-                    _PieChartKeyValue.Add((string)reader["productTitle"], Convert.ToDouble(reader["productSum"]));
+                    _PieChartKeyValue.Add((string)reader["productTitle"], Convert.ToDecimal(reader["productSum"]));
 
                 }
                 mySqlConnection.Close();
@@ -529,13 +528,13 @@ namespace StockProductTracking.Utils
             return _PieChartKeyValue;
         }
 
-        public Dictionary<string, double> GetPieChartKeyValueFromDatabase()
+        public Dictionary<string, decimal> GetPieChartKeyValueFromDatabase()
         {
 
-            Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
+            Dictionary<string, decimal> _PieChartKeyValue = new Dictionary<string, decimal>();
 
             string _UniqueCategoryNames;
-            double _TotalCount;
+            decimal _TotalCount;
 
             mySqlConnection.Open();
             string query = "SELECT DISTINCT(category.title) as 'unique_category_name', sum(a_orders.a_order_product_count) as 'sum_total_order_groupbycategory' FROM category INNER JOIN products ON products.category_id = category.category_id INNER JOIN a_orders ON a_orders.a_order_product_title = products.product_title GROUP BY category.title";
@@ -547,7 +546,7 @@ namespace StockProductTracking.Utils
                 while (reader.Read())
                 {
                     _UniqueCategoryNames = (string)reader["unique_category_name"];
-                    _TotalCount = Convert.ToDouble((decimal)reader["sum_total_order_groupbycategory"]);
+                    _TotalCount = (decimal)reader["sum_total_order_groupbycategory"];
                     _PieChartKeyValue.Add(_UniqueCategoryNames, _TotalCount);
 
                 }

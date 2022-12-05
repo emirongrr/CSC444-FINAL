@@ -15,8 +15,8 @@ namespace StockProductTracking.MVVM.ViewModel
         public int CategoryID { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public int ProductPrice { get; set; }
-        public int ProductRealPrice { get; set; }
+        public decimal ProductPrice { get; set; }
+        public decimal ProductRealPrice { get; set; }
         public int ProductStock { get; set; }
 
         public string Error
@@ -65,7 +65,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 if (columnName == "ProductStock")
                 {
 
-                    if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
+                    if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^\-?\(?\$?\s*\-?\s*\(?(((\d{1,3}((\,\d{3})*|\d*))?(\.\d{1,4})?)|((\d{1,3}((\,\d{3})*|\d*))(\.\d{0,4})?))\)?$"))
                         result = "Sadece rakam kabul edilir. [0-9]";
 
                 }
