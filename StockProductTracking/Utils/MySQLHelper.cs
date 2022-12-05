@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -80,6 +81,36 @@ namespace StockProductTracking.Utils
                 mySqlConnection.Close();
             }
             return _CategoryList;
+        }
+
+        public ObservableCollection<Employee> GetEmployee()
+        {
+            ObservableCollection<Employee> _EmployeeList = new ObservableCollection<Employee>();
+
+            mySqlConnection.Open();
+            string query = "select * from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Employee employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName  = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        Password = (reader["employee_password"]).ToString(),
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                    _EmployeeList.Add(employee);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeList;
         }
 
         public ObservableCollection<Order> GetAcceptedOrders()
@@ -243,6 +274,7 @@ namespace StockProductTracking.Utils
 
         public void DeleteCustomer(string id)
         {
+            
             mySqlConnection.Open();
             string query = "delete from customers where Id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
@@ -251,6 +283,8 @@ namespace StockProductTracking.Utils
             }
 
             mySqlConnection.Close();
+            
+           
         }
 
 
@@ -258,6 +292,19 @@ namespace StockProductTracking.Utils
         {
             mySqlConnection.Open();
             string query = "delete from category where category_id = " + id;
+            using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
+            {
+                command.ExecuteNonQuery();
+            }
+
+            mySqlConnection.Close();
+
+        }
+
+        public void DeleteEmployee(string id)
+        {
+            mySqlConnection.Open();
+            string query = "delete from employee where employee_id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
             {
                 command.ExecuteNonQuery();
@@ -363,6 +410,26 @@ namespace StockProductTracking.Utils
 
         }
 
+        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin)
+        {
+            mySqlConnection.Open();
+            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin)";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection)
+            {
+                CommandText = query
+            };
+            mySqlCommand.Parameters.AddWithValue("@employee_name", EmployeeFirstName);
+            mySqlCommand.Parameters.AddWithValue("@employee_lastname", EmployeeLastName);
+            mySqlCommand.Parameters.AddWithValue("@employee_username", EmployeeUsername);
+            mySqlCommand.Parameters.AddWithValue("@employee_mail", EmployeeEmail);
+            mySqlCommand.Parameters.AddWithValue("@employee_password", EmployeePassword);
+            mySqlCommand.Parameters.AddWithValue("@is_admin", EmployeeIsAdmin);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
+
         public void UpdateCustomer(int id, string _customername, string _lastname, string _phone, string _address)
         {
             mySqlConnection.Open();
@@ -393,6 +460,19 @@ namespace StockProductTracking.Utils
         {
             mySqlConnection.Open();
             string query = $"UPDATE products SET category_id={_category_id}, product_title='{_product_title}' ,product_stock={_product_stock}, product_price={_product_price}, product_real_price={_product_real_price} ,product_brand='{_product_brand}'  WHERE Id ={id}";
+            mySqlCommand = new MySqlCommand(query, mySqlConnection)
+            {
+                CommandText = query
+            };
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
+
+        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)
+        {
+            mySqlConnection.Open();
+            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin}  WHERE employee_id ={EmployeeId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
