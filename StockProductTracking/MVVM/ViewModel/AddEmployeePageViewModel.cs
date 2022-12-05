@@ -14,7 +14,7 @@ namespace StockProductTracking.MVVM.ViewModel
             AddEmployeeCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddEmployee(EmployeeFirstName, EmployeeLastName,EmployeeUsername,EmployeePassword, EmployeeEmail, EmployeeIsAdmin);
+                db.AddEmployee(EmployeeFirstName, EmployeeLastName, EmployeeUsername, EmployeePassword, EmployeeEmail, EmployeeIsAdmin);
                 mainViewModel.EmployeeVM.UpdateEmployeeList();
                 mainViewModel.CurrentView = mainViewModel.EmployeeVM;
 

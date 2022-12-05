@@ -87,14 +87,13 @@
             </Button>
         </Grid>
 
+
+
         <Border
             Grid.Row="1"
             Padding="10"
             Background="#2c386c"
             CornerRadius="10">
-
-
-
             <DataGrid
                 x:Name="CustomersDataGrid"
                 AutoGenerateColumns="False"
@@ -156,7 +155,7 @@
 
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-
+                    
                 </DataGrid.Columns>
 
 
@@ -167,9 +166,7 @@
                         <Setter Property="Padding" Value="10,0,0,10" />
                         <Setter Property="FontFamily" Value="Montserrat" />
                         <Setter Property="FontSize" Value="15" />
-
                     </Style>
-
 
                 </DataGrid.ColumnHeaderStyle>
 
@@ -224,6 +221,15 @@
             </Grid.ColumnDefinitions>
 
 
+            
+            <Popup 
+                Visibility="Visible"
+                Placement="Center" 
+                   StaysOpen="True">
+                <TextBox Text="sa">
+
+                </TextBox>
+            </Popup>
             <Button
                 x:Name="SwitchToAddCustomerPageViewCommand"
                 Grid.Column="0"

@@ -25,8 +25,6 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-
-
         public void UpdateEmployeeList()
         {
             Connect db = new Connect();

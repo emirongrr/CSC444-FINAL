@@ -147,6 +147,9 @@
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\BindablePasswordBoxString.xaml.cs">
+      <DependentUpon>BindablePasswordBoxString.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Model\Category.cs" />
     <Compile Include="MVVM\Model\Customer.cs" />
     <Compile Include="MVVM\Model\Employee.cs" />
@@ -223,6 +226,10 @@
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\BindablePasswordBoxString.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -274,6 +274,7 @@ namespace StockProductTracking.Utils
 
         public void DeleteCustomer(string id)
         {
+            
             mySqlConnection.Open();
             string query = "delete from customers where Id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
@@ -282,6 +283,8 @@ namespace StockProductTracking.Utils
             }
 
             mySqlConnection.Close();
+            
+           
         }
 
 
@@ -469,7 +472,7 @@ namespace StockProductTracking.Utils
         public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin='{EmployeeIsAdmin}'  WHERE employee_id ={EmployeeId}";
+            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin}  WHERE employee_id ={EmployeeId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
