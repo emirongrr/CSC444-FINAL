@@ -63,7 +63,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public ChartValues<Double> ChartValues
+        public ChartValues<Decimal> ChartValues
         { 
             get => dashboardGraphHandler.ChartValues;
             set 

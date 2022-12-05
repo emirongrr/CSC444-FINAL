@@ -17,7 +17,7 @@ namespace StockProductTracking.Utils
 {
     internal class DashboardGraphHandler
     {
-        public ChartValues<Double> ChartValues = new ChartValues<Double>();
+        public ChartValues<Decimal> ChartValues = new ChartValues<decimal>();
         public GraphAxis YAxis { get; set; }
         public GraphAxis XAxis { get; set; }
 
@@ -32,18 +32,18 @@ namespace StockProductTracking.Utils
             }
 
             YAxis = new GraphAxis(Math.Ceiling((ChartValues.Max() / 3000)) * 3000);
-            XAxis = new GraphAxis(Convert.ToDouble(new Connect().GetTotalOrderCount()));
+            XAxis = new GraphAxis(Convert.ToDecimal(new Connect().GetTotalOrderCount()));
 
         }
         public SeriesCollection SetPieChartDataByCategories()
         {
-            Dictionary<String, Double> TotalProfitByCategories = new Dictionary<String, Double>();
+            Dictionary<String, decimal> TotalProfitByCategories = new Dictionary<String, decimal>();
             TotalProfitByCategories= new Connect().GetPieChartKeyValueFromDatabase();
             
             SeriesCollection PieChartSeriesCollection = new SeriesCollection();
-            foreach(KeyValuePair<string, double> pair in TotalProfitByCategories)
+            foreach(KeyValuePair<string, decimal> pair in TotalProfitByCategories)
             {
-                ChartValues<double> pieValue = new ChartValues<double>();
+                ChartValues<decimal> pieValue = new ChartValues<decimal>();
                 pieValue.Add(pair.Value);
 
                 PieSeries pieSeries = new PieSeries()
@@ -57,11 +57,11 @@ namespace StockProductTracking.Utils
         }
         public SeriesCollection SetPieChartDataByProducts(string categoryTitle)
         {
-            Dictionary<string, double> sellAmountByProduct = new Connect().GetPieChartKeyValueFromDatabaseWithCategory(categoryTitle);
+            Dictionary<string, decimal> sellAmountByProduct = new Connect().GetPieChartKeyValueFromDatabaseWithCategory(categoryTitle);
             SeriesCollection PieChartSeriesCollection = new SeriesCollection();
-            foreach(KeyValuePair<string,double> pair in sellAmountByProduct)
+            foreach(KeyValuePair<string,decimal> pair in sellAmountByProduct)
             {
-                ChartValues<double> pieValue = new ChartValues<double>();
+                ChartValues<decimal> pieValue = new ChartValues<decimal>();
                 pieValue.Add(pair.Value);
                 PieChartSeriesCollection.Add(new PieSeries()
                 {
@@ -74,12 +74,12 @@ namespace StockProductTracking.Utils
     }
     internal class GraphAxis
     {
-        private double _MaxValue;
-        private double _MinValue;
-        public double MaxValue { get => _MaxValue; set { _MaxValue = value; } }
-        public double MinValue { get => _MinValue; set { _MinValue = value; } }
+        private decimal _MaxValue;
+        private decimal _MinValue;
+        public decimal MaxValue { get => _MaxValue; set { _MaxValue = value; } }
+        public decimal MinValue { get => _MinValue; set { _MinValue = value; } }
 
-        public GraphAxis(double maxValue, double minValue = 0)
+        public GraphAxis(decimal maxValue, decimal minValue = 0)
         {
             MaxValue = maxValue;
             MinValue = minValue;

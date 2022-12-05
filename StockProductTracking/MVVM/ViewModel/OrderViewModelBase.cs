@@ -20,7 +20,7 @@ namespace StockProductTracking.MVVM.ViewModel
             get { return currentProduct.ProductTitle; }
             set { currentProduct.ProductTitle = value; }
         }
-        public int OrderProductPrice
+        public decimal OrderProductPrice
         {
             get { return currentProduct.ProductPrice; }
             set { currentProduct.ProductPrice = value; }
