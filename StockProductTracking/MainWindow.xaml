@@ -19,6 +19,14 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -121,7 +129,8 @@
                         
                             <Button Background="Transparent"
                                     VerticalAlignment="Bottom"
-                                    BorderThickness="0">
+                                    BorderThickness="0"
+                                    Command="{Binding LogOffCommand}">
                                 <fa:IconImage  Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
                             </Button>
 

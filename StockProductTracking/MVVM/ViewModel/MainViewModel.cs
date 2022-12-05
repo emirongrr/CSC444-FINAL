@@ -9,12 +9,28 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
+        private bool _isViewVisible = true;
+        public bool IsViewVisible
+        {
+            get
+            {
+                return _isViewVisible;
+            }
+
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
+            }
+        }
+
         public ICommand DashboardViewCommand { get; set; }
         public ICommand ProductViewCommand { get; set; }
         public ICommand CustomerViewCommand { get; set; }
         public ICommand OrderViewCommand { get; set; }
         public ICommand CategoryViewCommand { get; set; }
         public ICommand EmployeeViewCommand { get; set; }
+        public ICommand LogOffCommand { get; set; }
 
         public AcceptedOrderPageViewModel AcceptedOrderPageVM { get; set; }
         public UpdateProductPageViewModel UpdateProductPageVM { get; set; }
@@ -132,6 +148,10 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 CurrentView = EmployeeVM;
                 EmployeeVM.UpdateEmployeeList();
+            });
+            LogOffCommand = new RelayCommand(o =>
+            {
+                IsViewVisible = false;
             });
         }
 
