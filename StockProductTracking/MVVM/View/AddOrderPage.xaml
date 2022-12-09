@@ -33,6 +33,20 @@
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" 
+                                        Height="30"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+
+                                </Border>
+
+                            </ControlTemplate>
+                        </Button.Template>
                     </Button>
 
                 </Grid>

@@ -399,19 +399,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="Images\check-lists.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\update.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\add-to-cart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\browser.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\out-of-stock.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup Condition="$(VisualStudioVersion) == '17.0'">
