@@ -118,6 +118,7 @@
                     <DataGridTextColumn Binding="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Header="Kullanıcı" />
                     <DataGridTextColumn Binding="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" />
                     <DataGridTextColumn Binding="{Binding Path=IsAdmin, UpdateSourceTrigger=PropertyChanged}" Header="IsAdmin" />
+                    <DataGridTextColumn Binding="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}" Header="Şifre" />
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>

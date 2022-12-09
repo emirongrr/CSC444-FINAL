@@ -458,14 +458,20 @@ namespace StockProductTracking.Utils
         public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE products SET category_id={_category_id}, product_title='{_product_title}' ,product_stock={_product_stock}, product_price={_product_price}, product_real_price={_product_real_price} ,product_brand='{_product_brand}'  WHERE Id ={id}";
+            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand  WHERE Id ={id}";
+
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
             };
+            mySqlCommand.Parameters.AddWithValue("@category_id", _category_id);
+            mySqlCommand.Parameters.AddWithValue("@product_title", _product_title);
+            mySqlCommand.Parameters.AddWithValue("@product_stock", _product_stock);
+            mySqlCommand.Parameters.AddWithValue("@product_brand", _product_brand);
+            mySqlCommand.Parameters.AddWithValue("@product_price", _product_price);
+            mySqlCommand.Parameters.AddWithValue("@product_real_price", _product_real_price);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
-
         }
 
         public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)

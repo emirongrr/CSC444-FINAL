@@ -131,6 +131,28 @@
                         Text="{Binding DataContext.ProductStock, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
 
+                    <TextBlock
+                        Margin="0,35,0,0"
+                        HorizontalAlignment="Left"
+                        FlowDirection="RightToLeft"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="DarkGray"
+                        Text="Ürün Alış Fiyatı">
+
+                        <fa:IconBlock
+                            Margin="5,0,0,0"
+                            FontSize="15"
+                            Icon="AddressCard" />
+
+                    </TextBlock>
+
+
+                    <TextBox
+                        x:Name="txtProductRealPrice"
+                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
+                        Text="{Binding DataContext.ProductRealPrice,StringFormat={}{0:T}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
 
                     <TextBlock
                         Margin="0,35,0,0"
@@ -152,34 +174,7 @@
                     <TextBox
                         x:Name="txtProductPrice"
                         Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.ProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
-
-
-
-
-                    <TextBlock
-                        Margin="0,35,0,0"
-                        HorizontalAlignment="Left"
-                        FlowDirection="RightToLeft"
-                        FontSize="15"
-                        FontWeight="Medium"
-                        Foreground="DarkGray"
-                        Text="Ürün Alış Fiyatı">
-
-                        <fa:IconBlock
-                            Margin="5,0,0,0"
-                            FontSize="15"
-                            Icon="AddressCard" />
-
-                    </TextBlock>
-
-
-
-                    <TextBox
-                        x:Name="txtProductRealPrice"
-                        Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.ProductRealPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
-
+                        Text="{Binding DataContext.ProductPrice,StringFormat={}{0:T}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
 
 

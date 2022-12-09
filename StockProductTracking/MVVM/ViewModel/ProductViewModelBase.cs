@@ -46,26 +46,27 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (!(this.ProductPrice > this.ProductRealPrice))
                         result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
 
-                    else if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
+                    else if (Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[1-9]\d{0,7}(\.\d{1-2})$"))
                         result = "Sadece rakam kabul edilir. [0-9]";
 
-                }
 
+                }
                 if (columnName == "ProductRealPrice")
                 {
 
-                    if (!(this.ProductPrice > this.ProductRealPrice))
+                    if ((this.ProductPrice < this.ProductRealPrice))
                         result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
 
-                    else if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
+                    else if (Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[1-9]\d{0,7}(\.\d{1-2})$"))
                         result = "Sadece rakam kabul edilir. [0-9]";
 
                 }
+
 
                 if (columnName == "ProductStock")
                 {
 
-                    if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^\-?\(?\$?\s*\-?\s*\(?(((\d{1,3}((\,\d{3})*|\d*))?(\.\d{1,4})?)|((\d{1,3}((\,\d{3})*|\d*))(\.\d{0,4})?))\)?$"))
+                    if (!Regex.IsMatch((Convert.ToString(this.ProductStock)), @"^[0-9]+$"))
                         result = "Sadece rakam kabul edilir. [0-9]";
 
                 }

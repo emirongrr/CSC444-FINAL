@@ -9,21 +9,7 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        private bool _isViewVisible = true;
-        public bool IsViewVisible
-        {
-            get
-            {
-                return _isViewVisible;
-            }
-
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-
+       
         public ICommand DashboardViewCommand { get; set; }
         public ICommand ProductViewCommand { get; set; }
         public ICommand CustomerViewCommand { get; set; }
@@ -58,6 +44,21 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 _IsVisibleRadioButton = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private bool _isViewVisible = true;
+        public bool IsViewVisible
+        {
+            get
+            {
+                return _isViewVisible;
+            }
+
+            set
+            {
+                _isViewVisible = value;
+                OnPropertyChanged(nameof(IsViewVisible));
             }
         }
 
