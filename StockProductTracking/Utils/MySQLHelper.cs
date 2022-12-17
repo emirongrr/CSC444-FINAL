@@ -314,31 +314,29 @@ namespace StockProductTracking.Utils
 
         public void DeleteCustomer(string id)
         {
-            
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from customers where Id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
             {
                 command.ExecuteNonQuery();
             }
-
             mySqlConnection.Close();
-            
-           
+  
         }
 
 
         public void DeleteCategory(string id)
         {
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from category where category_id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
             {
-                command.ExecuteNonQuery();
+                 command.ExecuteNonQuery();
             }
-
             mySqlConnection.Close();
-
+           
         }
 
         public void DeleteEmployee(string id)
@@ -368,6 +366,7 @@ namespace StockProductTracking.Utils
 
         public void DeleteOrder(string id)
         {
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from orders where order_id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
@@ -486,7 +485,7 @@ namespace StockProductTracking.Utils
         public void UpdateCategory(int id, string _categorytitle)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE category SET name='{_categorytitle}' WHERE Id ={id}";
+            string query = $"UPDATE category SET title='{_categorytitle}' WHERE category_id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -531,25 +530,25 @@ namespace StockProductTracking.Utils
         public void SetStatusToAccepted(int orderId)
         {
 
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = $"UPDATE orders SET order_status = true WHERE order_id = {orderId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
-                CommandText = query
+              CommandText = query
             };
             mySqlCommand.ExecuteNonQuery();
 
-
-
-            string query2 = $"DELETE FROM orders WHERE order_id = {orderId}";
-            mySqlCommand = new MySqlCommand(query, mySqlConnection)
-            {
-                CommandText = query2
-            };
-            mySqlCommand.ExecuteNonQuery();
-            mySqlConnection.Close();
-
+           string query2 = $"DELETE FROM orders WHERE order_id = {orderId}";
+           mySqlCommand = new MySqlCommand(query, mySqlConnection)
+           {
+              CommandText = query2
+           };
+           mySqlCommand.ExecuteNonQuery();
+           mySqlConnection.Close();
+                
         }
+
         public Dictionary<string,decimal> GetPieChartKeyValueFromDatabaseWithCategory(string categoryTitle)
         {
             Dictionary<string, decimal> _PieChartKeyValue = new Dictionary<string, decimal>();

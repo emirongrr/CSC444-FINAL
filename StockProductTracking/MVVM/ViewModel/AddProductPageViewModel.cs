@@ -38,6 +38,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 Connect db = new Connect();
                 db.AddProduct(CategoryID, ProductTitle, ProductStock, ProductPrice, ProductRealPrice, ProductBrand);
                 mainViewModel.ProductsVM.UpdateProductList();
+                mainViewModel.CurrentView = mainViewModel.ProductsVM;
+
             });
 
         }

@@ -46,6 +46,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 Connect db = new Connect();
                 db.AddOrder(CustomerId, OrderProductTitle, OrderProductCount, OrderStatus);
                 mainViewModel.OrderVM.UpdateOrderList();
+                mainViewModel.CurrentView = mainViewModel.OrderVM;
+
             });
 
         }

@@ -16,6 +16,8 @@ namespace StockProductTracking.MVVM.ViewModel
 
                 db.UpdateEmployee(EmployeeId, EmployeeFirstName, EmployeeLastName,EmployeeUsername,EmployeePassword, EmployeeEmail, EmployeeIsAdmin);
                 mainViewModel.EmployeeVM.UpdateEmployeeList();
+                mainViewModel.CurrentView = mainViewModel.EmployeeVM;
+
 
             });
         }

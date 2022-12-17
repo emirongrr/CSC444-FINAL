@@ -49,6 +49,11 @@
                     GotFocus="search_GotFocus"
                     Text="Search.." />
 
+                <TextBlock Text="{Binding DataContext.Message ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                               FontSize="18" 
+                                               FontStyle="Italic" 
+                                               Foreground="#D7596D"
+                                               />
             </StackPanel>
 
             <Button
