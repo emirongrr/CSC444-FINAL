@@ -605,7 +605,7 @@ namespace StockProductTracking.Utils
         public Employee LogIn(NetworkCredential credential)
         {
             mySqlConnection.Open();
-            string query = $"select * from employee where employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
+            string query = $"select * from employee where binary employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
 
             Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
