@@ -113,6 +113,47 @@ namespace StockProductTracking.Utils
             return _EmployeeList;
         }
 
+        public List<string> GetEmployeeUsername()
+        {
+            List<string> _EmployeeUsername = new List<string>();
+
+            mySqlConnection.Open();
+            string query = "select employee_username from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    string Username = (string)reader["employee_username"];
+                    _EmployeeUsername.Add(Username);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeUsername;
+        }
+        public List<string> GetEmployeeEmail()
+        {
+            List<string> _EmployeeEmail = new List<string>();
+
+            mySqlConnection.Open();
+            string query = "select employee_mail from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    string mail = (string)reader["employee_mail"];
+                    _EmployeeEmail.Add(mail);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeEmail;
+        }
+
         public ObservableCollection<Order> GetAcceptedOrders()
         {
             ObservableCollection<Order> _OrderList = new ObservableCollection<Order>();

@@ -1,6 +1,8 @@
 ﻿using StockProductTracking.Core;
+using StockProductTracking.Utils;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Windows.Documents;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -15,6 +17,38 @@ namespace StockProductTracking.MVVM.ViewModel
         public string EmployeeEmail { get; set; }
         public bool EmployeeIsAdmin { get; set; }
 
+        Connect db = new Connect();
+
+        private string _PassworderrorMessage;
+        public string PasswordErrorMessage
+        {
+            get
+            {
+                return _PassworderrorMessage;
+            }
+
+            set
+            {
+                _PassworderrorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsEnable;
+        public bool IsEnable
+        {
+            get
+            {
+                return _IsEnable;
+            }
+
+            set
+            {
+                _IsEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public string Error
         {
@@ -26,6 +60,7 @@ namespace StockProductTracking.MVVM.ViewModel
             get
             {
                 string result = string.Empty;
+                
                 if (columnName == "EmployeeFirstName")
                 {
                     if (string.IsNullOrEmpty(this.EmployeeFirstName))
@@ -52,8 +87,12 @@ namespace StockProductTracking.MVVM.ViewModel
                 }
                 if (columnName == "EmployeeUsername")
                 {
+
                     if (string.IsNullOrEmpty(this.EmployeeUsername))
                         result = "Kullanıcı Adı boş olamaz";
+
+                    else if (db.GetEmployeeUsername().Contains(this.EmployeeUsername))
+                        result = "Bu kullanıcı adı zaten var.";
 
                     else if (this.EmployeeUsername.Length < 3)
                         result = "Minimum 3 karakter boyutunda olmalıdır.";
@@ -63,31 +102,44 @@ namespace StockProductTracking.MVVM.ViewModel
                 {
                     if (string.IsNullOrEmpty(this.EmployeeEmail))
                         result = "Email boş olamaz";
+                    else if (db.GetEmployeeEmail().Contains(this.EmployeeEmail))
+                        result = "Bu mail zaten var.";
                     else if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                         result = "Uygun mail giriniz. (example@mail.com)";
-                   
+
                 }
                 if (columnName == "EmployeePassword")
                 {
-                    if (string.IsNullOrEmpty(this.EmployeePassword))
-                        result = "Şifre boş olamaz";
-                    else if (!(EmployeePassword == EmployeePasswordAgain))
-                        result = "BOŞBOŞBOŞBOŞBOŞB";
+                    if (!(EmployeePassword == EmployeePasswordAgain))
+                    {
+                        PasswordErrorMessage = "Şifreler Eşleşmiyor";
+                        IsEnable = false;
+                    }
+                    else
+                    {
+                        PasswordErrorMessage = " ";
+                        IsEnable = true;
+                    }
 
                 }
                 if (columnName == "EmployeePasswordAgain")
                 {
-                    if (string.IsNullOrEmpty(this.EmployeePasswordAgain))
-                        result = "Şifre boş olamaz";
-                    else if (!(EmployeePassword == EmployeePasswordAgain))
-                        result = "BOŞBOŞBOŞBOŞBOŞB";
+                    if (!(EmployeePassword == EmployeePasswordAgain))
+                    {
+                        PasswordErrorMessage = "Şifreler Eşleşmiyor";
+                        IsEnable = false;
+                    }
+                    else
+                    {
+                        PasswordErrorMessage = " ";
+                        IsEnable = true;
+                    }
 
                 }
-
 
                 return result;
             }
         }
 
-    } 
+    }
 }

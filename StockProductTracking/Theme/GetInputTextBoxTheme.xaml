@@ -18,15 +18,18 @@
             <Setter.Value>
                 <ControlTemplate>
                     <StackPanel>
-                        <AdornedElementPlaceholder x:Name="placeholder" />
-                        <TextBlock FontSize="11" FontStyle="Italic" Foreground="#D7596D"
-                                       Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" >
-                            <fa:IconBlock
-                            Margin="5,0,0,0"
-                            FontSize="10"
-                            Icon="Warning" 
-                            />
-                        </TextBlock>
+                        <AdornedElementPlaceholder x:Name="textBox" />
+                        <ItemsControl ItemsSource="{Binding}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ErrorContent}" 
+                                               FontSize="11" 
+                                               FontStyle="Italic" 
+                                               Foreground="#D7596D"
+                                               />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

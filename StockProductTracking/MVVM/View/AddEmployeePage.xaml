@@ -103,7 +103,7 @@
                         FontSize="15"
                         FontWeight="Medium"
                         Foreground="DarkGray"
-                        Text="Kullanıcı Ado">
+                        Text="Kullanıcı Adı">
                         <fa:IconBlock
                             Margin="5,0,0,0"
                             FontSize="15"
@@ -173,9 +173,15 @@
 
                     <CustomControl:BindablePasswordBoxString x:Name="passwordBoxAgain"
                                                         Height="28" 
-                                                        Password="{Binding DataContext.EmployeePasswordAgain,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                        Password="{Binding DataContext.EmployeePasswordAgain,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                                         Margin="0,5,0,0">
                     </CustomControl:BindablePasswordBoxString>
+
+                    <TextBlock Text="{Binding DataContext.PasswordErrorMessage ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                               FontSize="11" 
+                                               FontStyle="Italic" 
+                                               Foreground="#D7596D"
+                                               />
 
                     <TextBlock
                         Margin="0,15,0,2"
