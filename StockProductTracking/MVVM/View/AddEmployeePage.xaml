@@ -231,11 +231,11 @@
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 
-                                    <DataTrigger Binding="{Binding ElementName=txtAddPhone, Path=(Validation.HasError)}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=txtAddUsername, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 
-                                    <DataTrigger Binding="{Binding ElementName=txtAddAddress, Path=(Validation.HasError)}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=txtAddEmployeeEmail, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 

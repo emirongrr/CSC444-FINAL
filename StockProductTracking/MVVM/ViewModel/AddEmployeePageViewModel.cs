@@ -24,7 +24,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 mainViewModel.EmployeeVM.UpdateEmployeeList();
                 mainViewModel.CurrentView = mainViewModel.EmployeeVM;
             },
-            b =>IsEnable);
+            canExecute=>IsEnable);
         }
     }
 }

@@ -43,12 +43,13 @@ namespace StockProductTracking.MVVM.ViewModel
 
             AddOrderCommand = new RelayCommand(o =>
             {
-                Connect db = new Connect();
-                db.AddOrder(CustomerId, OrderProductTitle, OrderProductCount, OrderStatus);
-                mainViewModel.OrderVM.UpdateOrderList();
-                mainViewModel.CurrentView = mainViewModel.OrderVM;
-
-            });
+                  IsEnable = true;
+                  Connect db = new Connect();
+                  db.AddOrder(CustomerId, OrderProductTitle, OrderProductCount, OrderStatus);
+                  mainViewModel.OrderVM.UpdateOrderList();
+                  mainViewModel.CurrentView = mainViewModel.OrderVM;
+            },
+            canExecute => (CustomerId != 0 && IsEnable));
 
         }
 

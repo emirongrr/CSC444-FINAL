@@ -34,8 +34,8 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-        private bool _IsEnable;
-        public bool IsEnable
+        private bool _IsEnable = false;
+        public bool IsEnable 
         {
             get
             {
@@ -109,7 +109,7 @@ namespace StockProductTracking.MVVM.ViewModel
 
                 }
                 if (columnName == "EmployeePassword")
-                {
+                {                   
                     if (!(EmployeePassword == EmployeePasswordAgain))
                     {
                         PasswordErrorMessage = "Şifreler Eşleşmiyor";
@@ -117,8 +117,12 @@ namespace StockProductTracking.MVVM.ViewModel
                     }
                     else
                     {
-                        PasswordErrorMessage = " ";
-                        IsEnable = true;
+                        if (!(string.IsNullOrEmpty(this.EmployeePassword)))
+                        {
+                            PasswordErrorMessage = " ";
+                            IsEnable = true;
+                        }
+                        else IsEnable = false;
                     }
 
                 }
@@ -131,8 +135,12 @@ namespace StockProductTracking.MVVM.ViewModel
                     }
                     else
                     {
-                        PasswordErrorMessage = " ";
-                        IsEnable = true;
+                        if (!(string.IsNullOrEmpty(this.EmployeePassword)))
+                        {
+                            PasswordErrorMessage = " ";
+                            IsEnable = true;
+                        }
+                        else IsEnable = false;
                     }
 
                 }

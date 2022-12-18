@@ -1,12 +1,7 @@
 ﻿using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -18,7 +13,11 @@ namespace StockProductTracking.MVVM.ViewModel
         public string OrderProductTitle
         {
             get { return currentProduct.ProductTitle; }
-            set { currentProduct.ProductTitle = value; }
+            set 
+            { 
+                currentProduct.ProductTitle = value; 
+                IsEnable = !string.IsNullOrEmpty(value);
+            }
         }
         public decimal OrderProductPrice
         {
@@ -27,6 +26,21 @@ namespace StockProductTracking.MVVM.ViewModel
         }
         public int OrderProductCount { get; set; }
         public bool OrderStatus { get; set; }
+
+        private bool _IsEnable = false;
+        public bool IsEnable
+        {
+            get
+            {
+                return _IsEnable;
+            }
+
+            set
+            {
+                _IsEnable = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Error
         {
@@ -40,12 +54,13 @@ namespace StockProductTracking.MVVM.ViewModel
                 string result = string.Empty;
                 if (columnName == "OrderProductCount")
                 {
-
-                    if (!(this.OrderProductCount > 0))
+                   if (!(this.OrderProductCount > 0))
                         result = "En az 1 adet satın almalısınız.";
-
                 }
-
+                if (columnName == "CustomerId")
+                {
+                    IsEnable = CustomerId != 0;
+                }
                 return result;
             }
         }
