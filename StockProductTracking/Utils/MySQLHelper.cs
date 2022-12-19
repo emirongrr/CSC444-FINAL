@@ -300,8 +300,8 @@ namespace StockProductTracking.Utils
                         ProductId = (int)(long)reader["id"],
                         CategoryId = (int)(long)reader["category_id"],
                         ProductTitle = (string)reader["product_title"],
-                        ProductPrice = (decimal)reader["product_price"],
-                        ProductRealPrice = (decimal)reader["product_real_price"],
+                        ProductPrice = Convert.ToString(reader["product_price"]),
+                        ProductRealPrice = Convert.ToString(reader["product_real_price"]),
                         ProductStock = (int)reader["product_stock"],
                         ProductBrand = (string)reader["product_brand"]
                     };

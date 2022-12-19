@@ -15,8 +15,8 @@ namespace StockProductTracking.MVVM.ViewModel
         public int CategoryID { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public decimal ProductPrice { get; set; }
-        public decimal ProductRealPrice { get; set; }
+        public string ProductPrice { get; set; }
+        public string ProductRealPrice { get; set; }
         public int ProductStock { get; set; }
 
         public string Error
@@ -42,23 +42,22 @@ namespace StockProductTracking.MVVM.ViewModel
                 if (columnName == "ProductPrice")
                 {
 
-
-                    if (!(this.ProductPrice > this.ProductRealPrice))
+                    if (this.ProductPrice == null || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d+(\.\d{2})?$"))
+                        result = "Sadece rakam kabul edilir. [0-9]";
+                    else if (!(Convert.ToDecimal(this.ProductPrice) > Convert.ToDecimal(this.ProductRealPrice)))
                         result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
 
-                    else if (Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^\d+(\.\d{2})?$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
 
 
                 }
                 if (columnName == "ProductRealPrice")
                 {
 
-                    if ((this.ProductPrice < this.ProductRealPrice))
+                    if (this.ProductRealPrice == null || !Decimal.TryParse(this.ProductRealPrice, out _) || Regex.IsMatch((Convert.ToString(this.ProductRealPrice)), @"^\d+(\.\d+)?$"))
+                        result = "Sadece rakam kabul edilir. [0-9]";
+                    else if (Convert.ToDecimal(this.ProductPrice) < Convert.ToDecimal(this.ProductRealPrice))
                         result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
 
-                    else if (Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^\d+(\.\d+)?$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
 
                 }
 

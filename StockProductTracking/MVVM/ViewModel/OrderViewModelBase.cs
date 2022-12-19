@@ -19,7 +19,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 IsEnable = !string.IsNullOrEmpty(value);
             }
         }
-        public decimal OrderProductPrice
+        public string OrderProductPrice
         {
             get { return currentProduct.ProductPrice; }
             set { currentProduct.ProductPrice = value; }
