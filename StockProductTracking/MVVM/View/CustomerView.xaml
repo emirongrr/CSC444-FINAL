@@ -64,7 +64,8 @@
                 Cursor="Hand"
                 FontFamily="Montserrat"
                 FontSize="12"
-                Foreground="White">
+                Foreground="White"
+                IsDefault="True">
 
                 <Button.Style>
                     <Style TargetType="Button">

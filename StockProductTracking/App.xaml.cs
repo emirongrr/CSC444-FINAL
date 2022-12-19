@@ -23,7 +23,11 @@ namespace StockProductTracking
             if(mainWindow.IsVisible == false && mainWindow.IsLoaded)
             {
                 InitLogIn();
+                try
+                {
                 mainWindow.Close();
+                }
+                catch { /*oof*/}
             }
 
         }
