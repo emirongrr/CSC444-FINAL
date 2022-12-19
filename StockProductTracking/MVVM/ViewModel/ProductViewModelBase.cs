@@ -90,7 +90,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 }
                 if (columnName == "ProductRealPrice")
                 {
-                    if (string.IsNullOrEmpty(this.ProductPrice) || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d + (,?)(\d{ 1,2})?$"))
+                    if (string.IsNullOrEmpty(this.ProductRealPrice) || !Decimal.TryParse(this.ProductRealPrice, out _) || Regex.IsMatch(this.ProductRealPrice, @"^\d + (,?)(\d{ 1,2})?$"))
                     {
                         PriceErrorMessage = "Hatalı fiyat girişi";
                         IsEnable = false;
