@@ -153,10 +153,11 @@
 
 
                     <CustomControl:BindablePasswordBoxString x:Name="passwordBox"
-                                                        Password="{Binding DataContext.EmployeePassword, Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        Height="28"                            
+                                                        Password="{Binding DataContext.EmployeePassword,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                        Height="28"
                                                         Margin="0,5,0,0">
                     </CustomControl:BindablePasswordBoxString>
+
 
                     <TextBlock
                         Margin="0,15,0,0"
@@ -172,11 +173,17 @@
                             Icon="Key" />
                     </TextBlock>
 
-                    <CustomControl:BindablePasswordBoxString x:Name="txtAddEmployeePasswordAgain"
-                                                        Height="28"                            
+                    <CustomControl:BindablePasswordBoxString x:Name="passwordBoxAgain"
+                                                        Height="28" 
+                                                        Password="{Binding DataContext.EmployeePasswordAgain,ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                                         Margin="0,5,0,0">
                     </CustomControl:BindablePasswordBoxString>
 
+                    <TextBlock Text="{Binding DataContext.PasswordErrorMessage ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                               FontSize="11" 
+                                               FontStyle="Italic" 
+                                               Foreground="#D7596D"
+                                               />
                     <TextBlock
                         Margin="0,15,0,2"
                         HorizontalAlignment="Left"
@@ -218,7 +225,6 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FF29298E" />
                                     </Trigger>
-
                                     <DataTrigger Binding="{Binding ElementName=txtAddName, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
@@ -227,11 +233,11 @@
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 
-                                    <DataTrigger Binding="{Binding ElementName=txtEmployeeAddPassword, Path=(Validation.HasError)}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=txtAddUsername, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 
-                                    <DataTrigger Binding="{Binding ElementName=txtAddAddress, Path=(Validation.HasError)}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=txtAddEmployeeEmail, Path=(Validation.HasError)}" Value="True">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </DataTrigger>
 

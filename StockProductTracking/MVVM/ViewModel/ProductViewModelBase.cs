@@ -19,6 +19,36 @@ namespace StockProductTracking.MVVM.ViewModel
         public string ProductRealPrice { get; set; }
         public int ProductStock { get; set; }
 
+        private string _PriceErrorMessage;
+        public string PriceErrorMessage
+        {
+            get
+            {
+                return _PriceErrorMessage;
+            }
+
+            set
+            {
+                _PriceErrorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsEnable = false;
+        public bool IsEnable
+        {
+            get
+            {
+                return _IsEnable;
+            }
+
+            set
+            {
+                _IsEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Error
         {
             get { return null; }
@@ -41,24 +71,41 @@ namespace StockProductTracking.MVVM.ViewModel
 
                 if (columnName == "ProductPrice")
                 {
-
-                    if (this.ProductPrice == null || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d+(\.\d{2})?$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
-                    else if (!(Convert.ToDecimal(this.ProductPrice) > Convert.ToDecimal(this.ProductRealPrice)))
-                        result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
-
-
-
+                    if (string.IsNullOrEmpty(this.ProductPrice) || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d + (,?)(\d{ 1,2})?$"))
+                    {
+                        PriceErrorMessage = "Hatalı fiyat girişi";
+                        IsEnable = false;
+                    }
+                    else
+                    {
+                        if (Convert.ToDecimal(ProductPrice) < Convert.ToDecimal(ProductRealPrice))
+                        {
+                            PriceErrorMessage = "Satış fiyatı alış fiyatından düşük olamaz";
+                            IsEnable = false;
+                        }
+                        else
+                            PriceErrorMessage = " ";
+                        IsEnable = true;
+                    }
                 }
                 if (columnName == "ProductRealPrice")
                 {
-
-                    if (this.ProductRealPrice == null || !Decimal.TryParse(this.ProductRealPrice, out _) || Regex.IsMatch((Convert.ToString(this.ProductRealPrice)), @"^\d+(\.\d+)?$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
-                    else if (Convert.ToDecimal(this.ProductPrice) < Convert.ToDecimal(this.ProductRealPrice))
-                        result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
-
-
+                    if (string.IsNullOrEmpty(this.ProductPrice) || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d + (,?)(\d{ 1,2})?$"))
+                    {
+                        PriceErrorMessage = "Hatalı fiyat girişi";
+                        IsEnable = false;
+                    }
+                    else 
+                    {
+                        if (Convert.ToDecimal(ProductPrice) < Convert.ToDecimal(ProductRealPrice))
+                        {
+                            PriceErrorMessage = "Satış fiyatı alış fiyatından düşük olamaz";
+                            IsEnable = false;
+                        }
+                        else
+                            PriceErrorMessage = " ";
+                            IsEnable=true;
+                    }
                 }
 
 

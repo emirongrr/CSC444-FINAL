@@ -35,7 +35,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 mainViewModel.CurrentView = mainViewModel.ProductsVM;
 
 
-            });
+            },
+            canExecute => CategoryID != 0 && IsEnable);
         }
     }
 }

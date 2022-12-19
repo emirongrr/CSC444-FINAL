@@ -41,7 +41,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 mainViewModel.ProductsVM.UpdateProductList();
                 mainViewModel.CurrentView = mainViewModel.ProductsVM;
 
-            });
+            },
+            canExecute => IsEnable);
 
         }
     }
