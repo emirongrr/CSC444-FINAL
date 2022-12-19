@@ -165,7 +165,7 @@
                     <TextBox
                         x:Name="txtProductRealPrice"
                         Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.ProductRealPrice,StringFormat={}{0:T}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding DataContext.ProductRealPrice,RelativeSource={RelativeSource AncestorType={x:Type UserControl}},UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
 
                     <TextBlock
@@ -188,7 +188,7 @@
                     <TextBox
                         x:Name="txtProductPrice"
                         Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.ProductPrice,StringFormat={}{0:T}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                        Text="{Binding DataContext.ProductPrice,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
 
 
