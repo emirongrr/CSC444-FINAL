@@ -41,11 +41,5 @@ namespace StockProductTracking.MVVM.View
         {
 
         }
-        private void search_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Search.Text = "";
-
-        }
-
     }
 }

@@ -9,10 +9,12 @@ using System.Linq.Expressions;
 using System;
 using System.Windows.Markup;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class CustomersViewModel : ObservableObject
+    internal class CustomersViewModel : ObservableViewDataObject
     {
         public Customer SelectedCustomer { get; set; }
 
@@ -42,19 +44,27 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-
         public void UpdateCustomersList()
         {
+            CustomersList = new ObservableCollection<Customer>();
             Connect db = new Connect();
             CustomersList = db.GetCustomers();
+            CollectionView = CollectionViewSource.GetDefaultView(CustomersList);
 
         }
-
+        public override bool SearchFilter(object o)
+        {
+            Customer customer = o as Customer;
+            if (customer == null || SearchKey == null)
+                return false;
+            return SearchKey.Trim() == String.Empty || customer.GetFullName.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Address.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Address.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Phone.ToLower().Contains(SearchKey.Trim().ToLower());
+        }
         public CustomersViewModel(MainViewModel mainViewModel)
         {
             CustomersList = new ObservableCollection<Customer>();
             Connect db = new Connect();
             CustomersList = db.GetCustomers();
+            CollectionView = CollectionViewSource.GetDefaultView(CustomersList);
 
             DeleteCustomerCommand = new DelegateCommand<Customer>(o =>
             {

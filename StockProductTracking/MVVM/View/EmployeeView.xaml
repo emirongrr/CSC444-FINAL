@@ -44,7 +44,7 @@
                     FontSize="13"
                     FontWeight="Medium"
                     Foreground="White"
-                    Text="Search.." />
+                    Text="{Binding Path=SearchKey,UpdateSourceTrigger=PropertyChanged}" />
 
             </StackPanel>
 
@@ -107,7 +107,7 @@
                 HeadersVisibility="Column"
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
-                ItemsSource="{Binding EmployeeList}"
+                ItemsSource="{Binding CollectionView}"
                 SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}">
 
 
