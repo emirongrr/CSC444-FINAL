@@ -15,6 +15,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 Connect db = new Connect();
                 db.UpdateCategory(CategoryId, CategoryTitle);
                 mainViewModel.CategoryVM.UpdateCategoryList();
+                mainViewModel.CurrentView = mainViewModel.CategoryVM;
+
 
             });
         }

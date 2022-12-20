@@ -1,13 +1,15 @@
-﻿<UserControl x:Class="StockProductTracking.MVVM.View.AddStockView"
+﻿<UserControl x:Class="StockProductTracking.MVVM.View.EmployeeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StockProductTracking.MVVM.View"
              mc:Ignorable="d" 
              x:Name="_window"
-             d:DesignHeight="600" d:DesignWidth="900">
-
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             d:DesignHeight="600"
+             d:DesignWidth="900">
+    
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -92,7 +94,7 @@
 
 
             <DataGrid
-                x:Name="ProductsDataGrid"
+                x:Name="EmployeesDataGrid"
                 AutoGenerateColumns="False"
                 Background="#2c386c"
                 BorderThickness="0"
@@ -105,19 +107,19 @@
                 HeadersVisibility="Column"
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
-                ItemsSource="{Binding ProductsList}"
-                SelectedItem="{Binding SelectedProduct, Mode=TwoWay}">
+                ItemsSource="{Binding EmployeeList}"
+                SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}">
 
 
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Binding="{Binding Path=ProductId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
-                    <DataGridTextColumn Binding="{Binding Path=CategoryId, UpdateSourceTrigger=PropertyChanged}" Header="KATEGORİ" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductTitle, UpdateSourceTrigger=PropertyChanged}" Header="ÜRÜN ADI" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductRealPrice, UpdateSourceTrigger=PropertyChanged}" Header="ALIŞ" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="STOK" />
-                    <DataGridTextColumn Binding="{Binding Path=ProductBrand, UpdateSourceTrigger=PropertyChanged}" Header="MARKA" />
+                    <DataGridTextColumn Binding="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
+                    <DataGridTextColumn Binding="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" Header="AD" />
+                    <DataGridTextColumn Binding="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Header="SOYAD" />
+                    <DataGridTextColumn Binding="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged}" Header="Kullanıcı" />
+                    <DataGridTextColumn Binding="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged}" Header="Email" />
+                    <DataGridTextColumn Binding="{Binding Path=IsAdmin, UpdateSourceTrigger=PropertyChanged}" Header="IsAdmin" />
+                    <DataGridTextColumn Binding="{Binding Path=Password, UpdateSourceTrigger=PropertyChanged}" Header="Şifre" />
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>
@@ -126,7 +128,7 @@
                                     Background="#2c386c"
                                     Width="Auto"
                                     BorderThickness="0"
-                                    Command="{Binding DataContext.DeleteProductCommand, ElementName=_window}"
+                                    Command="{Binding DataContext.DeleteEmployeeCommand, ElementName=_window}"
                                     CommandParameter="{Binding}">
                                     <StackPanel Orientation="Horizontal">
                                         <fa:IconImage Icon="DeleteLeft" Style="{StaticResource menuButtonIcon}" />
@@ -144,7 +146,7 @@
                                     Background="#2c386c"
                                     BorderThickness="0"
                                     Width="Auto"
-                                    Command="{Binding DataContext.NavigateUpdateProductCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    Command="{Binding DataContext.NavigateUpdateEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                     CommandParameter="{Binding}">
                                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                                         <fa:IconImage Icon="Edit" Style="{StaticResource menuButtonIcon}" />
@@ -223,13 +225,13 @@
 
 
             <Button
-                x:Name="SwitchToAddProductPageViewCommand"
+                x:Name="SwitchToAddEmployeePageViewCommand"
                 Grid.Column="0"
                 Width="120"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 BorderThickness="0"
-                Command="{Binding DataContext.NavigateAddProductCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                Command="{Binding DataContext.NavigateAddEmployeeCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                 Content="Ekle"
                 Cursor="Hand"
                 FontFamily="Montserrat"
@@ -260,9 +262,6 @@
                     </Style>
                 </Button.Style>
             </Button>
-
-         
-
         </Grid>
     </Grid>
 </UserControl>

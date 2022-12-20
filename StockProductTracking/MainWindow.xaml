@@ -19,6 +19,14 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    
+    <Window.Visibility>
+        <Binding Path="IsViewVisible" Mode="TwoWay" Converter="{StaticResource BooleanToVisibility}"/>
+    </Window.Visibility>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -114,18 +122,22 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="200"/>
                         </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
                         
                             <Button Background="Transparent"
-                                    BorderThickness="0">
-                                <fa:IconImage Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                    VerticalAlignment="Bottom"
+                                    BorderThickness="0"
+                                    Command="{Binding LogOffCommand}">
+                                <fa:IconImage  Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
                             </Button>
 
                             <TextBlock Text="{Binding CurrentUser.Username}"
                                Style="{StaticResource menuButtonText}"
-                               FontSize="30"
+                               Foreground="#707db2"
+                               FontSize="18"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Bottom"/>
                         

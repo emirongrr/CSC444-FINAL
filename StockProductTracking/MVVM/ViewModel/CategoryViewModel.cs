@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
+using System.Windows.Forms;
+using System;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -26,6 +28,17 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
+        private string _message;
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
+
         public void UpdateCategoryList()
         {
             Connect db = new Connect();
@@ -41,8 +54,16 @@ namespace StockProductTracking.MVVM.ViewModel
 
             DeleteCategoryCommand = new DelegateCommand<Category>(o =>
             {
-                db.DeleteCategory(o.CategoryId.ToString());
-                _ = CategoryList.Remove(o);
+                try
+                {
+                    db.DeleteCategory(o.CategoryId.ToString());
+                    _ = CategoryList.Remove(o);
+                    Message = " ";
+                }
+                catch (Exception e)
+                {
+                    Message = "Ürünlerde ekli olan kategori silinemez";
+                }
             });
 
 

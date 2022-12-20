@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="Theme/RepeatButton.xaml"/>
                 <ResourceDictionary Source="Theme/GetInputTextBoxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/ComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Theme/PasswordBoxStyle.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             
@@ -47,6 +48,10 @@
                 <view:CategoryView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:EmployeeViewModel}">
+                <view:EmployeeView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:AddCustomerPageViewModel}">
                 <view:AddCustomerPage/>
             </DataTemplate>
@@ -63,12 +68,20 @@
                 <view:UpdateCategoryPage/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:UpdateEmployeePageViewModel}">
+                <view:UpdateEmployeePage/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:AddProductPageViewModel}">
                 <view:AddProductPage/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:AddOrderPageViewModel}">
                 <view:AddOrderPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddEmployeePageViewModel}">
+                <view:AddEmployeePage/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:UpdateProductPageViewModel}">

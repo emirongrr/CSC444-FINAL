@@ -31,6 +31,20 @@
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="ArrowLeft" Style="{StaticResource menuButtonIcon}" />
                         </StackPanel>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" 
+                                        Height="30"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+
+                                </Border>
+
+                            </ControlTemplate>
+                        </Button.Template>
                     </Button>
 
                 </Grid>
@@ -143,7 +157,13 @@
                     <TextBox
                         x:Name="txtNameProductPrice"
                         Style="{StaticResource CustomErrorControlOnErrorStyle}"
-                        Text="{Binding DataContext.ProductPrice, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding DataContext.ProductPrice,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
+                    <TextBlock Text="{Binding DataContext.PriceErrorMessage ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                               FontSize="11" 
+                                               FontStyle="Italic" 
+                                               Foreground="#D7596D"
+                                               />
 
 
 
@@ -208,7 +228,8 @@
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
-                        Foreground="White">
+                        Foreground="White"
+                        IsDefault="True">
                         <Button.Style>
 
                             <Style TargetType="Button">

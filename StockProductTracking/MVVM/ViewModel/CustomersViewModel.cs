@@ -4,7 +4,11 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
-
+using System.Windows;
+using System.Linq.Expressions;
+using System;
+using System.Windows.Markup;
+using MySql.Data.MySqlClient;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -27,6 +31,16 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
+        private string _message;
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public void UpdateCustomersList()
@@ -44,10 +58,17 @@ namespace StockProductTracking.MVVM.ViewModel
 
             DeleteCustomerCommand = new DelegateCommand<Customer>(o =>
             {
-                db.DeleteCustomer(o.Id.ToString());
-                _ = CustomersList.Remove(o);
+                try
+                {
+                    db.DeleteCustomer(o.Id.ToString());
+                    _ = CustomersList.Remove(o);
+                    Message = " ";
+                }
+                catch(Exception e)
+                {
+                    Message = "Onaylanmýþ sipariþi olan müþteri silinemez";
+                }
             });
-
 
             NavigateAddCustomerCommand = new RelayCommand(o =>
             {

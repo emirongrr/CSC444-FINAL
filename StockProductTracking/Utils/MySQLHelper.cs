@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -82,6 +83,77 @@ namespace StockProductTracking.Utils
             return _CategoryList;
         }
 
+        public ObservableCollection<Employee> GetEmployee()
+        {
+            ObservableCollection<Employee> _EmployeeList = new ObservableCollection<Employee>();
+
+            mySqlConnection.Open();
+            string query = "select * from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    Employee employee = new Employee
+                    {
+                        Id = (int)reader["employee_id"],
+                        FirstName = (string)reader["employee_name"],
+                        LastName  = (string)reader["employee_lastname"],
+                        Username = (string)reader["employee_username"],
+                        Email = (string)reader["employee_mail"],
+                        Password = (reader["employee_password"]).ToString(),
+                        IsAdmin = (bool)reader["is_admin"]
+                    };
+                    _EmployeeList.Add(employee);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeList;
+        }
+
+        public List<string> GetEmployeeUsername()
+        {
+            List<string> _EmployeeUsername = new List<string>();
+
+            mySqlConnection.Open();
+            string query = "select employee_username from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    string Username = (string)reader["employee_username"];
+                    _EmployeeUsername.Add(Username);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeUsername;
+        }
+        public List<string> GetEmployeeEmail()
+        {
+            List<string> _EmployeeEmail = new List<string>();
+
+            mySqlConnection.Open();
+            string query = "select employee_mail from employee";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    string mail = (string)reader["employee_mail"];
+                    _EmployeeEmail.Add(mail);
+                }
+                mySqlConnection.Close();
+            }
+            return _EmployeeEmail;
+        }
+
         public ObservableCollection<Order> GetAcceptedOrders()
         {
             ObservableCollection<Order> _OrderList = new ObservableCollection<Order>();
@@ -100,7 +172,7 @@ namespace StockProductTracking.Utils
                         OrderId = (int)reader["a_order_id"],
                         OrderProductTitle = (string)reader["a_order_product_title"],
                         CustomerId = (int)reader["a_order_customer_id"],
-                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderStatus = (bool)reader["a_order_status"]
                     };
@@ -126,7 +198,7 @@ namespace StockProductTracking.Utils
                 {
                     Order order = new Order
                     {
-                        OrderProductPrice = (int)reader["a_order_product_price"],
+                        OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderCategoryTitle = (string)reader["title"]
                     };
@@ -151,7 +223,6 @@ namespace StockProductTracking.Utils
                 {
 
                     _TotalPriceOrders = Convert.ToString((decimal)reader["sum"]);
-
 
                 }
                 mySqlConnection.Close();
@@ -200,7 +271,7 @@ namespace StockProductTracking.Utils
                         OrderId = (int)reader["order_id"],
                         OrderProductTitle = (string)reader["order_product_title"],
                         CustomerId = (int)reader["order_customer_id"],
-                        OrderProductPrice = (int)reader["order_product_price"],
+                        OrderProductPrice = (decimal)reader["order_product_price"],
                         OrderProductCount = (int)reader["order_product_count"],
                         OrderStatus = (bool)reader["order_status"]
                     };
@@ -229,8 +300,8 @@ namespace StockProductTracking.Utils
                         ProductId = (int)(long)reader["id"],
                         CategoryId = (int)(long)reader["category_id"],
                         ProductTitle = (string)reader["product_title"],
-                        ProductPrice = (int)reader["product_price"],
-                        ProductRealPrice = (int)reader["product_real_price"],
+                        ProductPrice = Convert.ToString(reader["product_price"]),
+                        ProductRealPrice = Convert.ToString(reader["product_real_price"]),
                         ProductStock = (int)reader["product_stock"],
                         ProductBrand = (string)reader["product_brand"]
                     };
@@ -243,21 +314,35 @@ namespace StockProductTracking.Utils
 
         public void DeleteCustomer(string id)
         {
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from customers where Id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
             {
                 command.ExecuteNonQuery();
             }
-
             mySqlConnection.Close();
+  
         }
 
 
         public void DeleteCategory(string id)
         {
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from category where category_id = " + id;
+            using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
+            {
+                 command.ExecuteNonQuery();
+            }
+            mySqlConnection.Close();
+           
+        }
+
+        public void DeleteEmployee(string id)
+        {
+            mySqlConnection.Open();
+            string query = "delete from employee where employee_id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
             {
                 command.ExecuteNonQuery();
@@ -281,6 +366,7 @@ namespace StockProductTracking.Utils
 
         public void DeleteOrder(string id)
         {
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = "delete from orders where order_id = " + id;
             using (MySqlCommand command = new MySqlCommand(query, mySqlConnection))
@@ -343,7 +429,7 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddProduct(int _category_id, string _product_title, int _product_stock, int _product_price, int _product_real_price, string _product_brand)
+        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
         {
             mySqlConnection.Open();
             string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand)";
@@ -358,6 +444,26 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@product_brand", _product_brand);
             mySqlCommand.Parameters.AddWithValue("@product_price", _product_price);
             mySqlCommand.Parameters.AddWithValue("@product_real_price", _product_real_price);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
+
+        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin)
+        {
+            mySqlConnection.Open();
+            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin)";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection)
+            {
+                CommandText = query
+            };
+            mySqlCommand.Parameters.AddWithValue("@employee_name", EmployeeFirstName);
+            mySqlCommand.Parameters.AddWithValue("@employee_lastname", EmployeeLastName);
+            mySqlCommand.Parameters.AddWithValue("@employee_username", EmployeeUsername);
+            mySqlCommand.Parameters.AddWithValue("@employee_mail", EmployeeEmail);
+            mySqlCommand.Parameters.AddWithValue("@employee_password", EmployeePassword);
+            mySqlCommand.Parameters.AddWithValue("@is_admin", EmployeeIsAdmin);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -379,7 +485,7 @@ namespace StockProductTracking.Utils
         public void UpdateCategory(int id, string _categorytitle)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE category SET name='{_categorytitle}' WHERE Id ={id}";
+            string query = $"UPDATE category SET title='{_categorytitle}' WHERE category_id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -389,10 +495,29 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, int _product_price, int _product_real_price, string _product_brand)
+        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE products SET category_id={_category_id}, product_title='{_product_title}' ,product_stock={_product_stock}, product_price={_product_price}, product_real_price={_product_real_price} ,product_brand='{_product_brand}'  WHERE Id ={id}";
+            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand  WHERE Id ={id}";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection)
+            {
+                CommandText = query
+            };
+            mySqlCommand.Parameters.AddWithValue("@category_id", _category_id);
+            mySqlCommand.Parameters.AddWithValue("@product_title", _product_title);
+            mySqlCommand.Parameters.AddWithValue("@product_stock", _product_stock);
+            mySqlCommand.Parameters.AddWithValue("@product_brand", _product_brand);
+            mySqlCommand.Parameters.AddWithValue("@product_price", _product_price);
+            mySqlCommand.Parameters.AddWithValue("@product_real_price", _product_real_price);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+        }
+
+        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)
+        {
+            mySqlConnection.Open();
+            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin}  WHERE employee_id ={EmployeeId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -405,33 +530,57 @@ namespace StockProductTracking.Utils
         public void SetStatusToAccepted(int orderId)
         {
 
+            mySqlConnection.Close();
             mySqlConnection.Open();
             string query = $"UPDATE orders SET order_status = true WHERE order_id = {orderId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
-                CommandText = query
+              CommandText = query
             };
             mySqlCommand.ExecuteNonQuery();
 
-
-
-            string query2 = $"DELETE FROM orders WHERE order_id = {orderId}";
-            mySqlCommand = new MySqlCommand(query, mySqlConnection)
-            {
-                CommandText = query2
-            };
-            mySqlCommand.ExecuteNonQuery();
-            mySqlConnection.Close();
-
+           string query2 = $"DELETE FROM orders WHERE order_id = {orderId}";
+           mySqlCommand = new MySqlCommand(query, mySqlConnection)
+           {
+              CommandText = query2
+           };
+           mySqlCommand.ExecuteNonQuery();
+           mySqlConnection.Close();
+                
         }
 
-        public Dictionary<string, double> GetPieChartKeyValueFromDatabase()
+        public Dictionary<string,decimal> GetPieChartKeyValueFromDatabaseWithCategory(string categoryTitle)
+        {
+            Dictionary<string, decimal> _PieChartKeyValue = new Dictionary<string, decimal>();
+            string query = "SELECT a_orders.a_order_product_title as productTitle, Sum(a_orders.a_order_product_count) as productSum " +
+                "FROM ((products CROSS join category ON products.category_id = category.category_id) " +
+                "CROSS JOIN a_orders ON product_title = a_orders.a_order_product_title) " +
+                "WHERE category.title = @title " +
+                "GROUP BY a_orders.a_order_product_title;";
+            
+            mySqlConnection.Open();
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.Parameters.AddWithValue("@title", categoryTitle);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    _PieChartKeyValue.Add((string)reader["productTitle"], Convert.ToDecimal(reader["productSum"]));
+
+                }
+                mySqlConnection.Close();
+            }
+            return _PieChartKeyValue;
+        }
+
+        public Dictionary<string, decimal> GetPieChartKeyValueFromDatabase()
         {
 
-            Dictionary<string, double> _PieChartKeyValue = new Dictionary<string, double>();
+            Dictionary<string, decimal> _PieChartKeyValue = new Dictionary<string, decimal>();
 
             string _UniqueCategoryNames;
-            double _TotalCount;
+            decimal _TotalCount;
 
             mySqlConnection.Open();
             string query = "SELECT DISTINCT(category.title) as 'unique_category_name', sum(a_orders.a_order_product_count) as 'sum_total_order_groupbycategory' FROM category INNER JOIN products ON products.category_id = category.category_id INNER JOIN a_orders ON a_orders.a_order_product_title = products.product_title GROUP BY category.title";
@@ -443,7 +592,7 @@ namespace StockProductTracking.Utils
                 while (reader.Read())
                 {
                     _UniqueCategoryNames = (string)reader["unique_category_name"];
-                    _TotalCount = Convert.ToDouble((decimal)reader["sum_total_order_groupbycategory"]);
+                    _TotalCount = (decimal)reader["sum_total_order_groupbycategory"];
                     _PieChartKeyValue.Add(_UniqueCategoryNames, _TotalCount);
 
                 }
@@ -455,7 +604,7 @@ namespace StockProductTracking.Utils
         public Employee LogIn(NetworkCredential credential)
         {
             mySqlConnection.Open();
-            string query = $"select * from employee where employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
+            string query = $"select * from employee where binary employee_username = \'{credential.UserName}\' and employee_password=\'{credential.Password}\'";
 
             Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);

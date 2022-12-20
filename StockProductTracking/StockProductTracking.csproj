@@ -144,8 +144,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MVVM\CustomControls\BindablePasswordBox.xaml.cs">
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\BindablePasswordBoxString.xaml.cs">
+      <DependentUpon>BindablePasswordBoxString.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Model\Category.cs" />
     <Compile Include="MVVM\Model\Customer.cs" />
@@ -155,18 +158,22 @@
     <Compile Include="MVVM\ViewModel\AcceptedOrderPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddCategoryPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddCustomerPageViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\AddEmployeePageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddOrderPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\AddProductPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CategoryViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\CustomersViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CustomerViewModelBase.cs" />
+    <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\EmployeeViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\OrdersViewModel.cs" />
     <Compile Include="MVVM\ViewModel\OrderViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\ProductViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\UpdateCategoryPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UpdateCustomerPageViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\UpdateEmployeePageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\UpdateProductPageViewModel.cs" />
     <Compile Include="MVVM\View\AcceptedOrderPage.xaml.cs">
       <DependentUpon>AcceptedOrderPage.xaml</DependentUpon>
@@ -176,6 +183,9 @@
     </Compile>
     <Compile Include="MVVM\View\AddCustomerPage.xaml.cs">
       <DependentUpon>AddCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\AddEmployeePage.xaml.cs">
+      <DependentUpon>AddEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\AddOrderPage.xaml.cs">
       <DependentUpon>AddOrderPage.xaml</DependentUpon>
@@ -189,8 +199,8 @@
     <Compile Include="MVVM\View\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\LastOrdersSection.xaml.cs">
-      <DependentUpon>LastOrdersSection.xaml</DependentUpon>
+    <Compile Include="MVVM\View\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -201,6 +211,9 @@
     <Compile Include="MVVM\View\UpdateCustomerPage.xaml.cs">
       <DependentUpon>UpdateCustomerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\View\UpdateEmployeePage.xaml.cs">
+      <DependentUpon>UpdateEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\UpdateProductPage.xaml.cs">
       <DependentUpon>UpdateProductPage.xaml</DependentUpon>
     </Compile>
@@ -210,6 +223,14 @@
     <Compile Include="Utils\DashboardGraphHandler.cs" />
     <Compile Include="Utils\MySQLHelper.cs" />
     <Compile Include="Utils\SHA256Helper.cs" />
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\BindablePasswordBoxString.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -224,10 +245,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\CustomControls\BindablePasswordBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\AcceptedOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -240,11 +257,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\AddEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\AddOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\AddProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\EmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,10 +289,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\LastOrdersSection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +302,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\UpdateCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\UpdateEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -313,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\MenuButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\PasswordBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -368,23 +397,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="obj\Debug\MVVM\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\check-lists.png" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\update.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\add-to-cart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\browser.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\out-of-stock.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup Condition="$(VisualStudioVersion) == '17.0'">

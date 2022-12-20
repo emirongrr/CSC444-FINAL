@@ -15,9 +15,39 @@ namespace StockProductTracking.MVVM.ViewModel
         public int CategoryID { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public int ProductPrice { get; set; }
-        public int ProductRealPrice { get; set; }
+        public string ProductPrice { get; set; }
+        public string ProductRealPrice { get; set; }
         public int ProductStock { get; set; }
+
+        private string _PriceErrorMessage;
+        public string PriceErrorMessage
+        {
+            get
+            {
+                return _PriceErrorMessage;
+            }
+
+            set
+            {
+                _PriceErrorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsEnable = false;
+        public bool IsEnable
+        {
+            get
+            {
+                return _IsEnable;
+            }
+
+            set
+            {
+                _IsEnable = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Error
         {
@@ -41,31 +71,48 @@ namespace StockProductTracking.MVVM.ViewModel
 
                 if (columnName == "ProductPrice")
                 {
-
-
-                    if (!(this.ProductPrice > this.ProductRealPrice))
-                        result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
-
-                    else if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
-
+                    if (string.IsNullOrEmpty(this.ProductPrice) || !Decimal.TryParse(this.ProductPrice, out _) || Regex.IsMatch(this.ProductPrice, @"^\d + (,?)(\d{ 1,2})?$"))
+                    {
+                        PriceErrorMessage = "Hatalı fiyat girişi";
+                        IsEnable = false;
+                    }
+                    else
+                    {
+                        if (Convert.ToDecimal(ProductPrice) < Convert.ToDecimal(ProductRealPrice))
+                        {
+                            PriceErrorMessage = "Satış fiyatı alış fiyatından düşük olamaz";
+                            IsEnable = false;
+                        }
+                        else
+                            PriceErrorMessage = " ";
+                        IsEnable = true;
+                    }
                 }
-
                 if (columnName == "ProductRealPrice")
                 {
-
-                    if (!(this.ProductPrice > this.ProductRealPrice))
-                        result = "Satış fiyatı alış fiyatından büyük olmalıdır.";
-
-                    else if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
-                        result = "Sadece rakam kabul edilir. [0-9]";
-
+                    if (string.IsNullOrEmpty(this.ProductRealPrice) || !Decimal.TryParse(this.ProductRealPrice, out _) || Regex.IsMatch(this.ProductRealPrice, @"^\d + (,?)(\d{ 1,2})?$"))
+                    {
+                        PriceErrorMessage = "Hatalı fiyat girişi";
+                        IsEnable = false;
+                    }
+                    else 
+                    {
+                        if (Convert.ToDecimal(ProductPrice) < Convert.ToDecimal(ProductRealPrice))
+                        {
+                            PriceErrorMessage = "Satış fiyatı alış fiyatından düşük olamaz";
+                            IsEnable = false;
+                        }
+                        else
+                            PriceErrorMessage = " ";
+                            IsEnable=true;
+                    }
                 }
+
 
                 if (columnName == "ProductStock")
                 {
 
-                    if (!Regex.IsMatch((Convert.ToString(this.ProductPrice)), @"^[0-9]+$"))
+                    if (!Regex.IsMatch((Convert.ToString(this.ProductStock)), @"^[0-9]+$"))
                         result = "Sadece rakam kabul edilir. [0-9]";
 
                 }

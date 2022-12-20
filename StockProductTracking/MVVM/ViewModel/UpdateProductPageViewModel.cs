@@ -1,6 +1,7 @@
 ﻿using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
 using StockProductTracking.Utils;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -29,10 +30,13 @@ namespace StockProductTracking.MVVM.ViewModel
             UpdateProductCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.UpdateProduct(ProductId, CategoryID, ProductTitle, ProductStock, ProductPrice, ProductRealPrice, ProductBrand);
+                db.UpdateProduct(ProductId, CategoryID, ProductTitle, ProductStock, Convert.ToDecimal(ProductPrice),Convert.ToDecimal(ProductRealPrice), ProductBrand);
                 mainViewModel.ProductsVM.UpdateProductList();
+                mainViewModel.CurrentView = mainViewModel.ProductsVM;
 
-            });
+
+            },
+            canExecute => CategoryID != 0 && IsEnable);
         }
     }
 }

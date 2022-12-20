@@ -15,6 +15,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 Connect db = new Connect();
                 db.UpdateCustomer(CustomerId, CustomerName, CustomerLastName, CustomerPhone, CustomerAddress);
                 mainViewModel.CustomersVM.UpdateCustomersList();
+                mainViewModel.CurrentView = mainViewModel.CustomersVM;
+
 
             });
         }

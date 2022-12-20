@@ -80,7 +80,6 @@
 
                     <Button x:Name="btnMinimize"
                             BorderThickness="0"
-                            Content="-"
                             Foreground="White"
                             FontSize="16"
                             FontFamily="Montserrat"
@@ -104,7 +103,7 @@
                                 <Border Width="18" 
                                         Height="18"
                                         CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
+                                        Background="Transparent">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
 
@@ -112,12 +111,19 @@
                                 
                             </ControlTemplate>
                         </Button.Template>
+
+                        <fa:IconImage Height="10" 
+                                  Foreground="White"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Icon="Minus"
+                                  
+                                  />
                     </Button>
 
                     <Button x:Name="btnClose"
                             Background="#FF28287D"
                             BorderThickness="0"
-                            Content="X"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"
@@ -140,15 +146,20 @@
                             <ControlTemplate TargetType="Button">
                                 <Border Width="18" 
                                         Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
+                                        Background="Transparent">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
 
                                 </Border>
 
                             </ControlTemplate>
+                            
                         </Button.Template>
+                        <fa:IconImage Height="10" 
+                                  Foreground="White"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Icon="X"/>
                     </Button>
 
                 </Grid>
@@ -178,7 +189,8 @@
                     <TextBox x:Name="txtUser"
                                FontSize="13"
                                FontWeight="Medium"
-                               Foreground="Black"
+                               Foreground="White"
+                               Background="Transparent"
                                CaretBrush="LightGray"
                                BorderBrush="DarkGray"
                                BorderThickness="0,0,0,1"
@@ -186,12 +198,7 @@
                                Margin="0,5,0,0"
                                Text="{Binding Username,UpdateSourceTrigger=PropertyChanged}"
                                Padding="5,0,0,0">
-                        <!--<TextBox.Background>
-                        <ImageBrush ImageSource="/Images/user-icon.png"
-                                           Stretch="None"
-                                           AlignmentX="Left"
-                                           />
-                        </TextBox.Background>-->
+                       
                     </TextBox>
 
                     <TextBlock Text="Şifre"

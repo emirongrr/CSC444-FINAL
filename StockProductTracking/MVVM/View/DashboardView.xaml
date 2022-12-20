@@ -86,6 +86,7 @@
                         <lc:PieChart Height="270"
                                      LegendLocation="Bottom"
                                      InnerRadius="70"
+                                     DataClickCommand="{Binding DrillDownCommand, UpdateSourceTrigger=PropertyChanged}"
                                      Series="{Binding PieChartSeries, UpdateSourceTrigger=PropertyChanged}" Width="238">
                             <lc:PieChart.DataTooltip>
                                 <lc:DefaultTooltip Background="#24336a" 
