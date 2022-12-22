@@ -6,10 +6,11 @@ using Prism.Commands;
 using System.Windows.Input;
 using System.Windows.Forms;
 using System;
+using System.Windows.Data;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class CategoryViewModel : ObservableObject
+    internal class CategoryViewModel : ObservableViewDataObject
     {
         public Category SelectedCategory { get; set; }
 
@@ -43,14 +44,22 @@ namespace StockProductTracking.MVVM.ViewModel
         {
             Connect db = new Connect();
             CategoryList = db.GetCategory();
+            CollectionView = CollectionViewSource.GetDefaultView(CategoryList);
 
         }
-
+        public override bool SearchFilter(object o)
+        {
+            Category category = o as Category;
+            if (category == null || SearchKey == null)
+                return false;
+            return SearchKey.Trim() == string.Empty || category.CategoryTitle.ToLower().Trim().Contains(SearchKey.ToLower().Trim());
+        }
         public CategoryViewModel(MainViewModel mainViewModel)
         {
             CategoryList = new ObservableCollection<Category>();
             Connect db = new Connect();
             CategoryList = db.GetCategory();
+            CollectionView = CollectionViewSource.GetDefaultView(CategoryList);
 
             DeleteCategoryCommand = new DelegateCommand<Category>(o =>
             {

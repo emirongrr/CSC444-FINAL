@@ -5,10 +5,12 @@ using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
 using System;
+using System.Windows.Data;
+using System.Diagnostics.Contracts;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class OrdersViewModel : ObservableObject
+    internal class OrdersViewModel : ObservableViewDataObject
     {
         public Order SelectedOrder { get; set; }
 
@@ -39,19 +41,30 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-
         public void UpdateOrderList()
         {
             Connect db = new Connect();
             OrdersList = db.GetOrders();
-
+            CollectionView = CollectionViewSource.GetDefaultView(OrdersList);
         }
-
+        public override bool SearchFilter(object o)
+        {
+            Order order = o as Order;
+            if (order == null || SearchKey == null)
+                return false;
+            if (Int32.TryParse(SearchKey, out _))
+            {
+                int key = Convert.ToInt32(SearchKey);
+                return key == order.CustomerId || key == order.OrderId;
+            }
+            return SearchKey.Trim() == string.Empty || order.OrderProductTitle.ToLower().Contains(SearchKey.ToLower().Trim());
+        }
         public OrdersViewModel(MainViewModel mainViewModel)
         {
             OrdersList = new ObservableCollection<Order>();
             Connect db = new Connect();
             OrdersList = db.GetOrders();
+            CollectionView = CollectionViewSource.GetDefaultView(OrdersList);
 
             DeleteOrderCommand = new DelegateCommand<Order>(o =>
             {               

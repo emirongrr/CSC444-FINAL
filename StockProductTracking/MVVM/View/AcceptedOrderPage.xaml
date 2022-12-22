@@ -43,45 +43,9 @@
                     FontSize="13"
                     FontWeight="Medium"
                     Foreground="White"
-                    Text="Search.." />
+                    Text="{Binding Path=SearchKey, UpdateSourceTrigger=PropertyChanged}" />
 
             </StackPanel>
-
-            <Button
-                Grid.Column="1"
-                VerticalAlignment="Top"
-                BorderThickness="0"
-                Content="Ara"
-                Cursor="Hand"
-                FontFamily="Montserrat"
-                FontSize="12"
-                Foreground="White"
-                IsDefault="True">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#FF4D4DC7" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border
-                                        Height="30"
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="15">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#836EFB" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
         </Grid>
 
         <Border
@@ -106,7 +70,7 @@
                 HeadersVisibility="Column"
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
-                ItemsSource="{Binding AcceptedOrdersList}" 
+                ItemsSource="{Binding CollectionView}" 
                 >
 
 
