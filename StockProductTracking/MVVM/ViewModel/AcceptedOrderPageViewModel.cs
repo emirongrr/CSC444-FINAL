@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
 using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
-using Prism.Commands;
-using System.Windows.Input;
 using System.Windows.Data;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -49,6 +43,5 @@ namespace StockProductTracking.MVVM.ViewModel
             AcceptedOrdersList = db.GetAcceptedOrders();
             CollectionView = CollectionViewSource.GetDefaultView(acceptedOrdersList);
         }
-
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
-using System.Windows.Forms;
 using System;
 using System.Windows.Data;
 
@@ -13,7 +12,6 @@ namespace StockProductTracking.MVVM.ViewModel
     internal class CategoryViewModel : ObservableViewDataObject
     {
         public Category SelectedCategory { get; set; }
-
         public ICommand NavigateAddCategoryCommand { get; }
         public ICommand NavigateUpdateCategoryCommand { get; }
         public ICommand DeleteCategoryCommand { get; }
@@ -75,13 +73,11 @@ namespace StockProductTracking.MVVM.ViewModel
                 }
             });
 
-
             NavigateAddCategoryCommand = new RelayCommand(o =>
             {
                 mainViewModel.CurrentView = new AddCategoryPageViewModel(mainViewModel);
 
             });
-
 
             NavigateUpdateCategoryCommand = new DelegateCommand<Category>(o =>
             {
@@ -91,11 +87,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     CategoryTitle = o.CategoryTitle,
 
                 };
-
                 mainViewModel.CurrentView = updateCategoryPageViewModel;
             });
-
-
         }
     }
 }

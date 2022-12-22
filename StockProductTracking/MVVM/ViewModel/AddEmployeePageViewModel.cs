@@ -1,13 +1,6 @@
 ﻿using StockProductTracking.Core;
-using StockProductTracking.MVVM.Model;
 using StockProductTracking.Utils;
-using System.Linq.Expressions;
-using System.Net;
-using System.Security.Principal;
-using System.Threading;
-using System.Windows;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace StockProductTracking.MVVM.ViewModel
 {

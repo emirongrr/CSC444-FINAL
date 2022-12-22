@@ -1,15 +1,13 @@
 using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
 using StockProductTracking.Utils;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Input;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
-    {
-       
+    {  
         public ICommand DashboardViewCommand { get; set; }
         public ICommand ProductViewCommand { get; set; }
         public ICommand CustomerViewCommand { get; set; }

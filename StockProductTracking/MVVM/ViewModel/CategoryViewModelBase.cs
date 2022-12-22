@@ -13,12 +13,10 @@ namespace StockProductTracking.MVVM.ViewModel
     {
         public int CategoryId { get; set; }
         public string CategoryTitle { get; set; }
-
         public string Error
         {
             get { return null; }
         }
-
         public string this[string columnName]
         {
             get
@@ -29,18 +27,15 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.CategoryTitle))
                         result = "Kategori ismi boş olamaz";
 
-                    else if (this.CategoryTitle.Length < 3)
-                        result = "Minimum 3 karakter boyutunda olmalıdır.";
+                    else if (this.CategoryTitle.Length < 2)
+                        result = "Minimum 2 karakter boyutunda olmalıdır.";
 
                     else if (!Regex.IsMatch(this.CategoryTitle, @"^[a-zA-Z]+$"))
                         result = "Sadece harf kabul edilir. [A-z,a-z]";
-
                 }
-
                 return result;
             }
         }
     }
-
 }
 

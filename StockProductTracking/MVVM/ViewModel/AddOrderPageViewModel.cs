@@ -23,7 +23,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> Products
         {
@@ -34,7 +33,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public AddOrderPageViewModel(MainViewModel mainViewModel)
         {
             Connect connect = new Connect();
@@ -50,9 +48,6 @@ namespace StockProductTracking.MVVM.ViewModel
                   mainViewModel.CurrentView = mainViewModel.OrderVM;
             },
             canExecute => (CustomerId != 0 && IsEnable));
-
         }
-
-
     }
 }

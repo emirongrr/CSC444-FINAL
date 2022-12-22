@@ -7,7 +7,6 @@ namespace StockProductTracking.MVVM.ViewModel
     internal class UpdateCustomerPageViewModel : CustomerViewModelBase
     {
         public ICommand UpdateCustomerCommand { get; }
-
         public UpdateCustomerPageViewModel(MainViewModel mainViewModel)
         {
             UpdateCustomerCommand = new RelayCommand(o =>
@@ -16,8 +15,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 db.UpdateCustomer(CustomerId, CustomerName, CustomerLastName, CustomerPhone, CustomerAddress);
                 mainViewModel.CustomersVM.UpdateCustomersList();
                 mainViewModel.CurrentView = mainViewModel.CustomersVM;
-
-
             });
         }
     }

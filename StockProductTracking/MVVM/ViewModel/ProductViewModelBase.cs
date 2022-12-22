@@ -1,11 +1,7 @@
 ﻿using StockProductTracking.Core;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -108,7 +104,6 @@ namespace StockProductTracking.MVVM.ViewModel
                     }
                 }
 
-
                 if (columnName == "ProductStock")
                 {
 
@@ -126,10 +121,8 @@ namespace StockProductTracking.MVVM.ViewModel
                         result = "Minimum 3 karakter boyutunda olmalıdır.";
 
                 }
-
                 return result;
             }
         }
-
     }
 }

@@ -2,7 +2,6 @@
 using StockProductTracking.Utils;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -26,7 +25,6 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 return _PassworderrorMessage;
             }
-
             set
             {
                 _PassworderrorMessage = value;
@@ -48,13 +46,10 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-
         public string Error
         {
             get { return null; }
         }
-
         public string this[string columnName]
         {
             get
@@ -78,8 +73,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.EmployeeLastName))
                         result = "Soyad boş olamaz";
 
-                    else if (this.EmployeeLastName.Length < 3)
-                        result = "Minimum 3 karakter boyutunda olmalıdır.";
+                    else if (this.EmployeeLastName.Length < 2)
+                        result = "Minimum 2 karakter boyutunda olmalıdır.";
 
                     else if (!Regex.IsMatch(this.EmployeeLastName, @"^[a-zA-Z]+$"))
                         result = "Sadece harf kabul edilir. [A-z,a-z]";
@@ -106,7 +101,6 @@ namespace StockProductTracking.MVVM.ViewModel
                         result = "Bu mail zaten var.";
                     else if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                         result = "Uygun mail giriniz. (example@mail.com)";
-
                 }
                 if (columnName == "EmployeePassword")
                 {                   
@@ -124,7 +118,6 @@ namespace StockProductTracking.MVVM.ViewModel
                         }
                         else IsEnable = false;
                     }
-
                 }
                 if (columnName == "EmployeePasswordAgain")
                 {
@@ -142,12 +135,9 @@ namespace StockProductTracking.MVVM.ViewModel
                         }
                         else IsEnable = false;
                     }
-
                 }
-
                 return result;
             }
         }
-
     }
 }

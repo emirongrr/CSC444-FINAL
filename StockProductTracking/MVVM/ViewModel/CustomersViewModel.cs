@@ -17,7 +17,6 @@ namespace StockProductTracking.MVVM.ViewModel
     internal class CustomersViewModel : ObservableViewDataObject
     {
         public Customer SelectedCustomer { get; set; }
-
         public ICommand NavigateAddCustomerCommand { get; }
         public ICommand NavigateUpdateCustomerCommand { get; }
         public ICommand DeleteCustomerCommand { get; }
@@ -32,7 +31,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private string _message;
         public string Message
         {
@@ -43,7 +41,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public void UpdateCustomersList()
         {
             CustomersList = new ObservableCollection<Customer>();
@@ -86,7 +83,6 @@ namespace StockProductTracking.MVVM.ViewModel
 
             });
 
-
             NavigateUpdateCustomerCommand = new DelegateCommand<Customer>(o =>
             {
                 UpdateCustomerPageViewModel updateCustomerPageViewModel = new UpdateCustomerPageViewModel(mainViewModel)
@@ -97,11 +93,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     CustomerPhone = o.Phone,
                     CustomerAddress = o.Address
                 };
-
                 mainViewModel.CurrentView = updateCustomerPageViewModel;
             });
-
-
         }
     }
 }

@@ -5,24 +5,20 @@ using System.Net;
 using System.Security;
 using System.Security.Principal;
 using System.Threading;
-using System.Windows.Controls;
 using System.Windows.Input;
 using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
-using StockProductTracking.MVVM.View;
 using StockProductTracking.Utils;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
     class LoginViewModel : ObservableObject
     {
-
         private string _username;
         public string Username
 
         {
             get { return _username; }
-
             set
             {
                 _username = value;
@@ -53,14 +49,12 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 return _isViewVisible;
             }
-
             set
             {
                 _isViewVisible = value;
                 OnPropertyChanged(nameof(IsViewVisible));
             }
         }
-
         private string _errorMessage;
         public string ErrorMessage
         {
@@ -68,21 +62,18 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 return _errorMessage;
             }
-
             set
             {
                 _errorMessage = value;
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
-
         public ICommand LogInCommand { get; }
 
         public LoginViewModel()
         {
             LogInCommand = new RelayCommand(ExecuteLoginComamnd,CanExecuteLoginCommand);
         }
-
         public void ExecuteLoginComamnd(object o)
         {
             Employee currentUser = new Connect().LogIn(new NetworkCredential(Username,SHA256Helper.ComputeSha256Hash(Password))); 
@@ -90,8 +81,7 @@ namespace StockProductTracking.MVVM.ViewModel
             if (currentUser == null)
             {
                 //invalid credentials
-                ErrorMessage = "Geçersiz kullanıcı adı ya da şifre";
-                
+                ErrorMessage = "Geçersiz kullanıcı adı ya da şifre";       
             }
             else
             {
@@ -99,7 +89,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 IsViewVisible = false;
             }
         }
-
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
@@ -110,6 +99,5 @@ namespace StockProductTracking.MVVM.ViewModel
                 validData = true;
             return validData;
         }
-
     }
 }

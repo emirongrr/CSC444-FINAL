@@ -118,12 +118,9 @@ namespace StockProductTracking.MVVM.ViewModel
                 PieChartSeries = dashboardGraphHandler.SetPieChartDataByProducts(CategoryTag);
             }
         }
-
         public DashboardViewModel(MainViewModel mainViewModel)
         {
             UpdateDashboard();
-
-
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {
                 Interval = new TimeSpan(0, 1, 0) //h,m,s

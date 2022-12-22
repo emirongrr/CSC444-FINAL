@@ -6,14 +6,12 @@ using Prism.Commands;
 using System.Windows.Input;
 using System;
 using System.Windows.Data;
-using System.Diagnostics.Contracts;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
     internal class OrdersViewModel : ObservableViewDataObject
     {
         public Order SelectedOrder { get; set; }
-
         public ICommand NavigateAddOrderCommand { get; }
         public ICommand SetOrderToAccepted { get; }
         public ICommand DeleteOrderCommand { get; }
@@ -72,7 +70,6 @@ namespace StockProductTracking.MVVM.ViewModel
                _ = OrdersList.Remove(o);      
             });
 
-
             NavigateAddOrderCommand = new RelayCommand(o =>
             {
                 mainViewModel.CurrentView = new AddOrderPageViewModel(mainViewModel);
@@ -99,7 +96,6 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 mainViewModel.CurrentView = mainViewModel.AcceptedOrderPageVM;
             });
-
         }
     }
 }

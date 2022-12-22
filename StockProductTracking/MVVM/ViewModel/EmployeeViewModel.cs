@@ -31,7 +31,6 @@ namespace StockProductTracking.MVVM.ViewModel
             Connect db = new Connect();
             EmployeeList = db.GetEmployee();
             CollectionView = CollectionViewSource.GetDefaultView(EmployeeList);
-
         }
         public override bool SearchFilter(object o)
         {
@@ -55,13 +54,11 @@ namespace StockProductTracking.MVVM.ViewModel
                 _ = EmployeeList.Remove(o);
             });
 
-
             NavigateAddEmployeeCommand = new RelayCommand(o =>
             {
                 mainViewModel.CurrentView = new AddEmployeePageViewModel(mainViewModel);
 
             });
-
 
             NavigateUpdateEmployeeCommand = new DelegateCommand<Employee>(o =>
             {
@@ -75,13 +72,9 @@ namespace StockProductTracking.MVVM.ViewModel
                     EmployeeEmail = o.Email,
                     EmployeeIsAdmin = o.IsAdmin
                 };
-
                 mainViewModel.CurrentView = updateEmployeePageViewModel;
             });
-
-
         }
     }
-
 }
 
