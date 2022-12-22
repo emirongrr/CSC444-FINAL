@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
 using System.Buffers.Text;
@@ -49,7 +50,9 @@ namespace StockProductTracking.Utils
                         Phone = (string)reader["Phone"],
                         LastName = (string)reader["LastName"],
                         Name = (string)reader["Name"],
-                        Id = (int)reader["Id"]
+                        Id = (int)reader["Id"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _CustomersList.Add(customer);
                 }
@@ -376,10 +379,10 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
         }
 
-        public void AddCustomer(string _customername, string _lastname, string _phone, string _address)
+        public void AddCustomer(string _customername, string _lastname, string _phone, string _address,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO customers(name,lastname,phone,address) VALUES(@name, @lastname,@phone,@address)";
+            string query = "INSERT INTO customers(name,lastname,phone,address,created_who) VALUES(@name, @lastname,@phone,@address,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
@@ -389,6 +392,7 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@lastname", _lastname);
             mySqlCommand.Parameters.AddWithValue("@phone", _phone);
             mySqlCommand.Parameters.AddWithValue("@address", _address);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -469,10 +473,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateCustomer(int id, string _customername, string _lastname, string _phone, string _address)
+        public void UpdateCustomer(int id, string _customername, string _lastname, string _phone, string _address, string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE customers SET name='{_customername}', lastname='{_lastname}',phone='{_phone}' , address='{_address}' WHERE Id ={id}";
+            string query = $"UPDATE customers SET name='{_customername}', lastname='{_lastname}',phone='{_phone}' , address='{_address}', created_at='{DateTime.Now.ToString("u")}', created_who='{_updated_who}' WHERE Id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query

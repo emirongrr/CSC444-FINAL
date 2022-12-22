@@ -13,7 +13,7 @@ namespace StockProductTracking.MVVM.ViewModel
             AddCustomerCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddCustomer(CustomerName, CustomerLastName, CustomerPhone, CustomerAddress);
+                db.AddCustomer(CustomerName, CustomerLastName, CustomerPhone, CustomerAddress,mainViewModel.CurrentUser.Username);
                 mainViewModel.CustomersVM.UpdateCustomersList();
                 mainViewModel.CurrentView = mainViewModel.CustomersVM;
             });
