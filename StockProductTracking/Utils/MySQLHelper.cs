@@ -107,7 +107,9 @@ namespace StockProductTracking.Utils
                         Username = (string)reader["employee_username"],
                         Email = (string)reader["employee_mail"],
                         Password = (reader["employee_password"]).ToString(),
-                        IsAdmin = (bool)reader["is_admin"]
+                        IsAdmin = (bool)reader["is_admin"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _EmployeeList.Add(employee);
                 }
@@ -453,10 +455,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin)
+        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin)";
+            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin,created_who) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
@@ -468,6 +470,7 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@employee_mail", EmployeeEmail);
             mySqlCommand.Parameters.AddWithValue("@employee_password", EmployeePassword);
             mySqlCommand.Parameters.AddWithValue("@is_admin", EmployeeIsAdmin);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -518,10 +521,10 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
         }
 
-        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)
+        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin , string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin}  WHERE employee_id ={EmployeeId}";
+            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin} ,created_who='{_updated_who}' , created_at='{DateTime.Now.ToString("u")}' WHERE employee_id ={EmployeeId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
