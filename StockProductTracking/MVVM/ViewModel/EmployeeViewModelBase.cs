@@ -16,7 +16,11 @@ namespace StockProductTracking.MVVM.ViewModel
         public string EmployeeEmail { get; set; }
         public bool EmployeeIsAdmin { get; set; }
 
+        public string CheckEMail;
+        public string CheckUsername { get; set; }
+
         Connect db = new Connect();
+        
 
         private string _PassworderrorMessage;
         public string PasswordErrorMessage
@@ -87,7 +91,8 @@ namespace StockProductTracking.MVVM.ViewModel
                         result = "Kullanıcı Adı boş olamaz";
 
                     else if (db.GetEmployeeUsername().Contains(this.EmployeeUsername))
-                        result = "Bu kullanıcı adı zaten var.";
+                        if (this.EmployeeUsername != CheckUsername)
+                            result = "Bu kullanıcı adı zaten var.";
 
                     else if (this.EmployeeUsername.Length < 3)
                         result = "Minimum 3 karakter boyutunda olmalıdır.";
@@ -98,7 +103,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.EmployeeEmail))
                         result = "Email boş olamaz";
                     else if (db.GetEmployeeEmail().Contains(this.EmployeeEmail))
-                        result = "Bu mail zaten var.";
+                        if (this.EmployeeEmail != CheckEMail)
+                            result = "Bu mail zaten var.";
                     else if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                         result = "Uygun mail giriniz. (example@mail.com)";
                 }

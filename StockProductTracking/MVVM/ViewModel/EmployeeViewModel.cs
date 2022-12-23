@@ -70,6 +70,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     EmployeeUsername = o.Username,
                     EmployeePassword = o.Password,
                     EmployeeEmail = o.Email,
+                    CheckUsername = o.Username,
+                    CheckEMail = o.Email,
                     EmployeeIsAdmin = o.IsAdmin
                 };
                 mainViewModel.CurrentView = updateEmployeePageViewModel;
