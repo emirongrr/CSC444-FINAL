@@ -85,6 +85,8 @@
 
                     <DataGridTextColumn Binding="{Binding Path=CategoryId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
                     <DataGridTextColumn Binding="{Binding Path=CategoryTitle, UpdateSourceTrigger=PropertyChanged}" Header="KATEGORİ" />
+                    <DataGridTextColumn Binding="{Binding Path=created_who, UpdateSourceTrigger=PropertyChanged}" Header="EKLEYEN" />
+                    <DataGridTextColumn Binding="{Binding Path=created_at, UpdateSourceTrigger=PropertyChanged}" Header="ZAMAN" />
                  
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">

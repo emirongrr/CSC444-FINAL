@@ -77,7 +77,9 @@ namespace StockProductTracking.Utils
                     Category category = new Category
                     {
                         CategoryTitle = (string)reader["title"],
-                        CategoryId = (int)(long)reader["category_id"]
+                        CategoryId = (int)(long)reader["category_id"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _CategoryList.Add(category);
                 }
@@ -419,17 +421,17 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddCategory(string _categorytitle)
+        public void AddCategory(string _categorytitle,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO category(title) VALUES(@title)";
+            string query = "INSERT INTO category(title,created_who) VALUES(@title,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
             };
             mySqlCommand.Parameters.AddWithValue("@title", _categorytitle);
-
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -489,10 +491,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateCategory(int id, string _categorytitle)
+        public void UpdateCategory(int id, string _categorytitle,string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE category SET title='{_categorytitle}' WHERE category_id ={id}";
+            string query = $"UPDATE category SET title='{_categorytitle}', created_at='{DateTime.Now.ToString("u")}', created_who='{_updated_who}' WHERE category_id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query

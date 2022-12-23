@@ -12,7 +12,7 @@ namespace StockProductTracking.MVVM.ViewModel
             AddCategoryCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddCategory(CategoryTitle);
+                db.AddCategory(CategoryTitle,mainViewModel.CurrentUser.Username);
                 mainViewModel.CategoryVM.UpdateCategoryList();
                 mainViewModel.CurrentView = mainViewModel.CategoryVM;
             });
