@@ -182,6 +182,7 @@ namespace StockProductTracking.Utils
                         OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderStatus = (bool)reader["a_order_status"]
+
                     };
                     _OrderList.Add(order);
                 }
@@ -310,7 +311,9 @@ namespace StockProductTracking.Utils
                         ProductPrice = Convert.ToString(reader["product_price"]),
                         ProductRealPrice = Convert.ToString(reader["product_real_price"]),
                         ProductStock = (int)reader["product_stock"],
-                        ProductBrand = (string)reader["product_brand"]
+                        ProductBrand = (string)reader["product_brand"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _ProductList.Add(products);
                 }
@@ -437,21 +440,23 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
+        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand)";
+            string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand,created_who) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
             };
+
             mySqlCommand.Parameters.AddWithValue("@category_id", _category_id);
             mySqlCommand.Parameters.AddWithValue("@product_title", _product_title);
             mySqlCommand.Parameters.AddWithValue("@product_stock", _product_stock);
             mySqlCommand.Parameters.AddWithValue("@product_brand", _product_brand);
             mySqlCommand.Parameters.AddWithValue("@product_price", _product_price);
             mySqlCommand.Parameters.AddWithValue("@product_real_price", _product_real_price);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -504,10 +509,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
+        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand,string _created_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand  WHERE Id ={id}";
+            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand ,created_at='{DateTime.Now.ToString("u")}',created_who='{_created_who}' WHERE Id ={id}";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {

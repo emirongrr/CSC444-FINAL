@@ -82,6 +82,8 @@
                     <DataGridTextColumn Binding="{Binding Path=ProductPrice, UpdateSourceTrigger=PropertyChanged}" Header="SATIŞ" />
                     <DataGridTextColumn Binding="{Binding Path=ProductStock, UpdateSourceTrigger=PropertyChanged}" Header="STOK" />
                     <DataGridTextColumn Binding="{Binding Path=ProductBrand, UpdateSourceTrigger=PropertyChanged}" Header="MARKA" />
+                    <DataGridTextColumn Binding="{Binding Path=created_who, UpdateSourceTrigger=PropertyChanged}" Header="EKLEYEN" />
+                    <DataGridTextColumn Binding="{Binding Path=created_at, UpdateSourceTrigger=PropertyChanged}" Header="ZAMAN" />
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>

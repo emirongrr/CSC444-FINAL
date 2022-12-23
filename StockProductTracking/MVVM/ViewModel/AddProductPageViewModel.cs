@@ -29,7 +29,7 @@ namespace StockProductTracking.MVVM.ViewModel
             AddProductCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.AddProduct(CategoryID, ProductTitle, ProductStock, Convert.ToDecimal(ProductPrice), Convert.ToDecimal(ProductRealPrice), ProductBrand);
+                db.AddProduct(CategoryID, ProductTitle, ProductStock, Convert.ToDecimal(ProductPrice), Convert.ToDecimal(ProductRealPrice), ProductBrand, mainViewModel.CurrentUser.Username);
                 mainViewModel.ProductsVM.UpdateProductList();
                 mainViewModel.CurrentView = mainViewModel.ProductsVM;
             },
