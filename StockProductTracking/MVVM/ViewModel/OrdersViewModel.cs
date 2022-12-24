@@ -24,7 +24,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 orders = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(OrdersList));
             }
         }
 
@@ -35,7 +35,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _message = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Message));
             }
         }
 
@@ -89,6 +89,8 @@ namespace StockProductTracking.MVVM.ViewModel
                 catch (Exception e)
                 {
                     Message = "Yeteri kadar stok yok";
+                    Console.WriteLine(e.Message);
+
                 }
             });
 

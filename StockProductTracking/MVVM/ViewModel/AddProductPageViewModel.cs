@@ -16,7 +16,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 categories = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Categories));
             }
         }
         public ICommand AddProductCommand { get; }

@@ -41,7 +41,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _IsVisibleRadioButton = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsVisibleRadioButton));
             }
         }
 
@@ -68,7 +68,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 currentUser = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentUser));
             }
         }
 
@@ -81,7 +81,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
 

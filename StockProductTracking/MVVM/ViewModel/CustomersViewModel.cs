@@ -74,6 +74,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 catch(Exception e)
                 {
                     Message = "Onaylanmýþ sipariþi olan müþteri silinemez";
+                    Console.WriteLine(e.Message);
                 }
             });
 

@@ -16,7 +16,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 acceptedOrdersList = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(AcceptedOrdersList));
             }
         }
         public override bool SearchFilter(object o)

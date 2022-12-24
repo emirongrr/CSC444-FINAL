@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Security;
 using System.Security.Principal;
+using System.Text;
 using System.Threading;
 using System.Windows.Input;
 using StockProductTracking.Core;
@@ -14,31 +15,17 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     class LoginViewModel : ObservableObject
     {
-        private string _username;
-        public string Username
+        public LoginPageViewModel LoginPageVM { get; set; }
+        public ICommand NavigateLoginPageViewCommand { get; set; }
 
+        private object currentView;
+        public object CurrentView
         {
-            get { return _username; }
+            get => currentView;
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
-            }
-
-        }
-
-        private SecureString _password;
-        public SecureString Password
-        {
-            get
-            {
-                return _password;
-            }
-
-            set
-            {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
+                currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
 
@@ -55,49 +42,19 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsViewVisible));
             }
         }
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-            }
-        }
-        public ICommand LogInCommand { get; }
 
         public LoginViewModel()
         {
-            LogInCommand = new RelayCommand(ExecuteLoginComamnd,CanExecuteLoginCommand);
+            ResetLoginPage();
         }
-        public void ExecuteLoginComamnd(object o)
+        public void ResetLoginPage()
         {
-            Employee currentUser = new Connect().LogIn(new NetworkCredential(Username,SHA256Helper.ComputeSha256Hash(Password))); 
-            
-            if (currentUser == null)
-            {
-                //invalid credentials
-                ErrorMessage = "Geçersiz kullanıcı adı ya da şifre";       
-            }
-            else
-            {
-                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(Username), null);
-                IsViewVisible = false;
-            }
+            CurrentView = new LoginPageViewModel(this);
         }
-        private bool CanExecuteLoginCommand(object obj)
+        public void SetViewToForgotPassword()
         {
-            bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
-                Password == null || Password.Length < 3)
-                validData = false;
-            else
-                validData = true;
-            return validData;
+            CurrentView = new ForgotPasswordEmailViewModel(this);
         }
+
     }
 }

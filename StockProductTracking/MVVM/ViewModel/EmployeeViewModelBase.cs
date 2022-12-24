@@ -32,7 +32,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _PassworderrorMessage = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PasswordErrorMessage));
             }
         }
 
@@ -47,7 +47,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _IsEnable = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsEnable));
             }
         }
         public string Error

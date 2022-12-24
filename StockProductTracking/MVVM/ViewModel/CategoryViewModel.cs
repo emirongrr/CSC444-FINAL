@@ -70,6 +70,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 catch (Exception e)
                 {
                     Message = "Ürünlerde ekli olan kategori silinemez";
+                    Console.WriteLine(e.Message);
                 }
             });
 

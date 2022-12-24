@@ -20,7 +20,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 customers = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Customers));
             }
         }
         private ObservableCollection<Product> products;
@@ -30,7 +30,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 products = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Products));
             }
         }
         public AddOrderPageViewModel(MainViewModel mainViewModel)

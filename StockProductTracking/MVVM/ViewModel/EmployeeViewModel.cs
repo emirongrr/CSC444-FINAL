@@ -22,7 +22,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 employees = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(EmployeeList));
             }
         }
 

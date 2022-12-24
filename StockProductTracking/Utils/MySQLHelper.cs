@@ -640,14 +640,26 @@ namespace StockProductTracking.Utils
             }
             return employee;
         }
+        public void ChangePasswordFromEmail(string _pass ,string _email)
+        {
+            mySqlConnection.Open();
+            string query = $"UPDATE employee SET employee_password=@password WHERE employee_mail =@email";
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.Parameters.AddWithValue("@email", _email);
+            mySqlCommand.Parameters.AddWithValue("@password", _pass);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
 
         public Employee GetByUsername(string username)
         {
             mySqlConnection.Open();
-            string query = $"select * from employee where employee_username = \'{username}\' ";
+            string query = $"select * from employee where employee_username = @username";
 
             Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.Parameters.AddWithValue("@username", username);
             using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
             {
                 while (reader.Read())

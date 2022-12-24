@@ -1,6 +1,7 @@
 ﻿using StockProductTracking.Core;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace StockProductTracking.MVVM.ViewModel
@@ -11,8 +12,24 @@ namespace StockProductTracking.MVVM.ViewModel
         public int CategoryID { get; set; }
         public string ProductTitle { get; set; }
         public string ProductBrand { get; set; }
-        public string ProductPrice { get; set; }
-        public string ProductRealPrice { get; set; }
+        private string _productPrice;
+        public string ProductPrice
+        {
+            get => this._productPrice;
+            set
+            {
+                this._productPrice = value.Replace('.', ',');
+            }
+        }
+        private string _productRealPrice;
+        public string ProductRealPrice
+        {
+            get => this._productRealPrice;
+            set
+            {
+                this._productRealPrice = value.Replace('.', ',');
+            }
+        }
         public int ProductStock { get; set; }
 
         private string _PriceErrorMessage;
@@ -26,7 +43,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _PriceErrorMessage = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PriceErrorMessage));
             }
         }
 
@@ -41,7 +58,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _IsEnable = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsEnable));
             }
         }
 
