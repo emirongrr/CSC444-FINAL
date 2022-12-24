@@ -2,7 +2,6 @@
 using StockProductTracking.MVVM.Model;
 using System.ComponentModel;
 
-
 namespace StockProductTracking.MVVM.ViewModel
 {
     internal abstract class OrderViewModelBase : ObservableObject, IDataErrorInfo

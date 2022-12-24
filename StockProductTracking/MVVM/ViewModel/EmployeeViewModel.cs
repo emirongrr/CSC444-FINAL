@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using StockProductTracking.Utils;
 using Prism.Commands;
 using System.Windows.Input;
+using System.Windows.Data;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class EmployeeViewModel : ObservableObject
+    internal class EmployeeViewModel : ObservableViewDataObject
     {
         public Employee SelectedEmployee { get; set; }
         public ICommand NavigateAddEmployeeCommand { get; }
@@ -21,7 +22,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 employees = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(EmployeeList));
             }
         }
 
@@ -29,14 +30,23 @@ namespace StockProductTracking.MVVM.ViewModel
         {
             Connect db = new Connect();
             EmployeeList = db.GetEmployee();
-
+            CollectionView = CollectionViewSource.GetDefaultView(EmployeeList);
         }
-
+        public override bool SearchFilter(object o)
+        {
+            Employee employee = o as Employee;
+            if (employee == null || SearchKey == null)
+                return false;
+            if(SearchKey.ToLower() == "admin" && employee.IsAdmin)
+                return true;
+            return SearchKey.Trim() == string.Empty || employee.Username.ToLower().Contains(SearchKey.Trim().ToLower()) || employee.Email.ToLower().Contains(SearchKey.Trim().ToLower()) || employee.FirstName.ToLower().Contains(SearchKey.Trim().ToLower()) || employee.LastName.ToLower().Contains(SearchKey.Trim().ToLower());
+        }
         public EmployeeViewModel(MainViewModel mainViewModel)
         {
             EmployeeList = new ObservableCollection<Employee>();
             Connect db = new Connect();
             EmployeeList = db.GetEmployee();
+            CollectionView = CollectionViewSource.GetDefaultView(EmployeeList);
 
             DeleteEmployeeCommand = new DelegateCommand<Employee>(o =>
             {
@@ -44,13 +54,11 @@ namespace StockProductTracking.MVVM.ViewModel
                 _ = EmployeeList.Remove(o);
             });
 
-
             NavigateAddEmployeeCommand = new RelayCommand(o =>
             {
                 mainViewModel.CurrentView = new AddEmployeePageViewModel(mainViewModel);
 
             });
-
 
             NavigateUpdateEmployeeCommand = new DelegateCommand<Employee>(o =>
             {
@@ -62,15 +70,13 @@ namespace StockProductTracking.MVVM.ViewModel
                     EmployeeUsername = o.Username,
                     EmployeePassword = o.Password,
                     EmployeeEmail = o.Email,
+                    CheckUsername = o.Username,
+                    CheckEMail = o.Email,
                     EmployeeIsAdmin = o.IsAdmin
                 };
-
                 mainViewModel.CurrentView = updateEmployeePageViewModel;
             });
-
-
         }
     }
-
 }
 

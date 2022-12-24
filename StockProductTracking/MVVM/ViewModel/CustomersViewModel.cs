@@ -9,13 +9,14 @@ using System.Linq.Expressions;
 using System;
 using System.Windows.Markup;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
-    internal class CustomersViewModel : ObservableObject
+    internal class CustomersViewModel : ObservableViewDataObject
     {
         public Customer SelectedCustomer { get; set; }
-
         public ICommand NavigateAddCustomerCommand { get; }
         public ICommand NavigateUpdateCustomerCommand { get; }
         public ICommand DeleteCustomerCommand { get; }
@@ -30,7 +31,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         private string _message;
         public string Message
         {
@@ -41,20 +41,27 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-
         public void UpdateCustomersList()
         {
+            CustomersList = new ObservableCollection<Customer>();
             Connect db = new Connect();
             CustomersList = db.GetCustomers();
+            CollectionView = CollectionViewSource.GetDefaultView(CustomersList);
 
         }
-
+        public override bool SearchFilter(object o)
+        {
+            Customer customer = o as Customer;
+            if (customer == null || SearchKey == null)
+                return false;
+            return SearchKey.Trim() == String.Empty || customer.GetFullName.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Address.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Address.ToLower().Contains(SearchKey.Trim().ToLower()) || customer.Phone.ToLower().Contains(SearchKey.Trim().ToLower());
+        }
         public CustomersViewModel(MainViewModel mainViewModel)
         {
             CustomersList = new ObservableCollection<Customer>();
             Connect db = new Connect();
             CustomersList = db.GetCustomers();
+            CollectionView = CollectionViewSource.GetDefaultView(CustomersList);
 
             DeleteCustomerCommand = new DelegateCommand<Customer>(o =>
             {
@@ -67,6 +74,7 @@ namespace StockProductTracking.MVVM.ViewModel
                 catch(Exception e)
                 {
                     Message = "Onaylanmýþ sipariþi olan müþteri silinemez";
+                    Console.WriteLine(e.Message);
                 }
             });
 
@@ -75,7 +83,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 mainViewModel.CurrentView = new AddCustomerPageViewModel(mainViewModel);
 
             });
-
 
             NavigateUpdateCustomerCommand = new DelegateCommand<Customer>(o =>
             {
@@ -87,11 +94,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     CustomerPhone = o.Phone,
                     CustomerAddress = o.Address
                 };
-
                 mainViewModel.CurrentView = updateCustomerPageViewModel;
             });
-
-
         }
     }
 }

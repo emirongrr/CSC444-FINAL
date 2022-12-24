@@ -26,7 +26,7 @@
             <if:InfoCards
                          Grid.Column="0" 
                          Title="Görüntülenme" 
-                         Icon="Eye" Number="602,234" 
+                         Icon="Eye" Number="{Binding ViewCount}" 
                          Background1="#827BFF" 
                          Background2="#D9B5FF"
                          EllipseBackground1="#B298FD"

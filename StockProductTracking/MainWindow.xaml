@@ -229,9 +229,8 @@
                 Grid.Column="1"
                 Margin="10 0 0 0"
                 Padding="5"
+                Content="{Binding CurrentView}"/>
                 
-                Content="{Binding CurrentView}"
-                />
             </Grid>
 
 

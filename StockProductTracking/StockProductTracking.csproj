@@ -144,6 +144,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\ObservableViewDataObject.cs" />
     <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
@@ -167,6 +168,9 @@
     <Compile Include="MVVM\ViewModel\CustomerViewModelBase.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeViewModelBase.cs" />
+    <Compile Include="MVVM\ViewModel\ForgotPasswordEmailViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\GetNewPasswordViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LoginPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\OrdersViewModel.cs" />
     <Compile Include="MVVM\ViewModel\OrderViewModelBase.cs" />
@@ -201,6 +205,15 @@
     </Compile>
     <Compile Include="MVVM\View\EmployeeView.xaml.cs">
       <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ForgotPasswordEmailView.xaml.cs">
+      <DependentUpon>ForgotPasswordEmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\GetNewPasswordView.xaml.cs">
+      <DependentUpon>GetNewPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\LoginPageView.xaml.cs">
+      <DependentUpon>LoginPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -270,6 +283,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\EmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ForgotPasswordEmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\GetNewPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\LoginPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -397,7 +422,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\update.png" />
   </ItemGroup>

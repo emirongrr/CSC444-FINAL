@@ -7,17 +7,14 @@ namespace StockProductTracking.MVVM.ViewModel
     internal class UpdateCategoryPageViewModel : CategoryViewModelBase
     {
         public ICommand UpdateCategoryCommand { get; }
-
         public UpdateCategoryPageViewModel(MainViewModel mainViewModel)
         {
             UpdateCategoryCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.UpdateCategory(CategoryId, CategoryTitle);
+                db.UpdateCategory(CategoryId, CategoryTitle,mainViewModel.CurrentUser.Username);
                 mainViewModel.CategoryVM.UpdateCategoryList();
                 mainViewModel.CurrentView = mainViewModel.CategoryVM;
-
-
             });
         }
     }

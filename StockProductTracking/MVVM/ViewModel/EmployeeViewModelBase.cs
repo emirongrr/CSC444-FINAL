@@ -2,7 +2,6 @@
 using StockProductTracking.Utils;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -17,7 +16,11 @@ namespace StockProductTracking.MVVM.ViewModel
         public string EmployeeEmail { get; set; }
         public bool EmployeeIsAdmin { get; set; }
 
+        public string CheckEMail;
+        public string CheckUsername { get; set; }
+
         Connect db = new Connect();
+        
 
         private string _PassworderrorMessage;
         public string PasswordErrorMessage
@@ -26,11 +29,10 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 return _PassworderrorMessage;
             }
-
             set
             {
                 _PassworderrorMessage = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PasswordErrorMessage));
             }
         }
 
@@ -45,16 +47,13 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _IsEnable = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(IsEnable));
             }
         }
-
-
         public string Error
         {
             get { return null; }
         }
-
         public string this[string columnName]
         {
             get
@@ -78,8 +77,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.EmployeeLastName))
                         result = "Soyad boş olamaz";
 
-                    else if (this.EmployeeLastName.Length < 3)
-                        result = "Minimum 3 karakter boyutunda olmalıdır.";
+                    else if (this.EmployeeLastName.Length < 2)
+                        result = "Minimum 2 karakter boyutunda olmalıdır.";
 
                     else if (!Regex.IsMatch(this.EmployeeLastName, @"^[a-zA-Z]+$"))
                         result = "Sadece harf kabul edilir. [A-z,a-z]";
@@ -92,7 +91,8 @@ namespace StockProductTracking.MVVM.ViewModel
                         result = "Kullanıcı Adı boş olamaz";
 
                     else if (db.GetEmployeeUsername().Contains(this.EmployeeUsername))
-                        result = "Bu kullanıcı adı zaten var.";
+                        if (this.EmployeeUsername != CheckUsername)
+                            result = "Bu kullanıcı adı zaten var.";
 
                     else if (this.EmployeeUsername.Length < 3)
                         result = "Minimum 3 karakter boyutunda olmalıdır.";
@@ -103,10 +103,10 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.EmployeeEmail))
                         result = "Email boş olamaz";
                     else if (db.GetEmployeeEmail().Contains(this.EmployeeEmail))
-                        result = "Bu mail zaten var.";
+                        if (this.EmployeeEmail != CheckEMail)
+                            result = "Bu mail zaten var.";
                     else if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                         result = "Uygun mail giriniz. (example@mail.com)";
-
                 }
                 if (columnName == "EmployeePassword")
                 {                   
@@ -124,7 +124,6 @@ namespace StockProductTracking.MVVM.ViewModel
                         }
                         else IsEnable = false;
                     }
-
                 }
                 if (columnName == "EmployeePasswordAgain")
                 {
@@ -142,12 +141,9 @@ namespace StockProductTracking.MVVM.ViewModel
                         }
                         else IsEnable = false;
                     }
-
                 }
-
                 return result;
             }
         }
-
     }
 }

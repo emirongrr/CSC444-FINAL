@@ -39,8 +39,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     if (string.IsNullOrEmpty(this.CustomerLastName))
                         result = "Soyad boþ olamaz";
 
-                    else if (this.CustomerLastName.Length < 3)
-                        result = "Minimum 3 karakter boyutunda olmalýdýr";
+                    else if (this.CustomerLastName.Length < 2)
+                        result = "Minimum 2 karakter boyutunda olmalýdýr";
 
                     else if (!Regex.IsMatch(this.CustomerLastName, @"^[a-zA-Zöü]+$"))
                         result = "Sadece harf kabul edilir. [A-z,a-z]";

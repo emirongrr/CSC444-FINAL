@@ -16,12 +16,10 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 categories = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Categories));
             }
         }
-
         public ICommand UpdateProductCommand { get; }
-
         public UpdateProductPageViewModel(MainViewModel mainViewModel)
         {
             Connect connect = new Connect();
@@ -30,11 +28,9 @@ namespace StockProductTracking.MVVM.ViewModel
             UpdateProductCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.UpdateProduct(ProductId, CategoryID, ProductTitle, ProductStock, Convert.ToDecimal(ProductPrice),Convert.ToDecimal(ProductRealPrice), ProductBrand);
+                db.UpdateProduct(ProductId, CategoryID, ProductTitle, ProductStock, Convert.ToDecimal(ProductPrice),Convert.ToDecimal(ProductRealPrice), ProductBrand, mainViewModel.CurrentUser.Username);
                 mainViewModel.ProductsVM.UpdateProductList();
                 mainViewModel.CurrentView = mainViewModel.ProductsVM;
-
-
             },
             canExecute => CategoryID != 0 && IsEnable);
         }

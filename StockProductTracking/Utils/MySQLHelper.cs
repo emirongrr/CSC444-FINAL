@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data.MySqlClient;
 using StockProductTracking.MVVM.Model;
 using System;
 using System.Buffers.Text;
@@ -49,7 +50,9 @@ namespace StockProductTracking.Utils
                         Phone = (string)reader["Phone"],
                         LastName = (string)reader["LastName"],
                         Name = (string)reader["Name"],
-                        Id = (int)reader["Id"]
+                        Id = (int)reader["Id"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _CustomersList.Add(customer);
                 }
@@ -74,7 +77,9 @@ namespace StockProductTracking.Utils
                     Category category = new Category
                     {
                         CategoryTitle = (string)reader["title"],
-                        CategoryId = (int)(long)reader["category_id"]
+                        CategoryId = (int)(long)reader["category_id"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _CategoryList.Add(category);
                 }
@@ -104,7 +109,9 @@ namespace StockProductTracking.Utils
                         Username = (string)reader["employee_username"],
                         Email = (string)reader["employee_mail"],
                         Password = (reader["employee_password"]).ToString(),
-                        IsAdmin = (bool)reader["is_admin"]
+                        IsAdmin = (bool)reader["is_admin"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _EmployeeList.Add(employee);
                 }
@@ -175,6 +182,7 @@ namespace StockProductTracking.Utils
                         OrderProductPrice = (decimal)reader["a_order_product_price"],
                         OrderProductCount = (int)reader["a_order_product_count"],
                         OrderStatus = (bool)reader["a_order_status"]
+
                     };
                     _OrderList.Add(order);
                 }
@@ -303,7 +311,9 @@ namespace StockProductTracking.Utils
                         ProductPrice = Convert.ToString(reader["product_price"]),
                         ProductRealPrice = Convert.ToString(reader["product_real_price"]),
                         ProductStock = (int)reader["product_stock"],
-                        ProductBrand = (string)reader["product_brand"]
+                        ProductBrand = (string)reader["product_brand"],
+                        created_who = (string)reader["created_who"],
+                        created_at = (DateTime)reader["created_at"]
                     };
                     _ProductList.Add(products);
                 }
@@ -376,10 +386,10 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
         }
 
-        public void AddCustomer(string _customername, string _lastname, string _phone, string _address)
+        public void AddCustomer(string _customername, string _lastname, string _phone, string _address,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO customers(name,lastname,phone,address) VALUES(@name, @lastname,@phone,@address)";
+            string query = "INSERT INTO customers(name,lastname,phone,address,created_who) VALUES(@name, @lastname,@phone,@address,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
@@ -389,6 +399,7 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@lastname", _lastname);
             mySqlCommand.Parameters.AddWithValue("@phone", _phone);
             mySqlCommand.Parameters.AddWithValue("@address", _address);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
@@ -413,46 +424,48 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void AddCategory(string _categorytitle)
+        public void AddCategory(string _categorytitle,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO category(title) VALUES(@title)";
+            string query = "INSERT INTO category(title,created_who) VALUES(@title,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
             };
             mySqlCommand.Parameters.AddWithValue("@title", _categorytitle);
-
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
         }
 
-        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
+        public void AddProduct(int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand)";
+            string query = "INSERT INTO products(category_id,product_title,product_stock,product_price,product_real_price,product_brand,created_who) VALUES(@category_id,@product_title,@product_stock,@product_price,@product_real_price,@product_brand,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
             };
+
             mySqlCommand.Parameters.AddWithValue("@category_id", _category_id);
             mySqlCommand.Parameters.AddWithValue("@product_title", _product_title);
             mySqlCommand.Parameters.AddWithValue("@product_stock", _product_stock);
             mySqlCommand.Parameters.AddWithValue("@product_brand", _product_brand);
             mySqlCommand.Parameters.AddWithValue("@product_price", _product_price);
             mySqlCommand.Parameters.AddWithValue("@product_real_price", _product_real_price);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
         }
 
-        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin)
+        public void AddEmployee(string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail,bool EmployeeIsAdmin,string _created_who)
         {
             mySqlConnection.Open();
-            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin)";
+            string query = "INSERT INTO employee(employee_name,employee_lastname,employee_username,employee_mail,employee_password,is_admin,created_who) VALUES(@employee_name,@employee_lastname,@employee_username,@employee_mail,@employee_password,@is_admin,@created_who)";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
@@ -464,15 +477,16 @@ namespace StockProductTracking.Utils
             mySqlCommand.Parameters.AddWithValue("@employee_mail", EmployeeEmail);
             mySqlCommand.Parameters.AddWithValue("@employee_password", EmployeePassword);
             mySqlCommand.Parameters.AddWithValue("@is_admin", EmployeeIsAdmin);
+            mySqlCommand.Parameters.AddWithValue("@created_who", _created_who);
             mySqlCommand.ExecuteNonQuery();
             mySqlConnection.Close();
 
         }
 
-        public void UpdateCustomer(int id, string _customername, string _lastname, string _phone, string _address)
+        public void UpdateCustomer(int id, string _customername, string _lastname, string _phone, string _address, string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE customers SET name='{_customername}', lastname='{_lastname}',phone='{_phone}' , address='{_address}' WHERE Id ={id}";
+            string query = $"UPDATE customers SET name='{_customername}', lastname='{_lastname}',phone='{_phone}' , address='{_address}', created_at='{DateTime.Now.ToString("u")}', created_who='{_updated_who}' WHERE Id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -482,10 +496,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateCategory(int id, string _categorytitle)
+        public void UpdateCategory(int id, string _categorytitle,string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE category SET title='{_categorytitle}' WHERE category_id ={id}";
+            string query = $"UPDATE category SET title='{_categorytitle}', created_at='{DateTime.Now.ToString("u")}', created_who='{_updated_who}' WHERE category_id ={id}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -495,10 +509,10 @@ namespace StockProductTracking.Utils
 
         }
 
-        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand)
+        public void UpdateProduct(int id, int _category_id, string _product_title, int _product_stock, decimal _product_price, decimal _product_real_price, string _product_brand,string _created_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand  WHERE Id ={id}";
+            string query = $"UPDATE products SET category_id=@category_id, product_title=@product_title ,product_stock=@product_stock, product_price=@product_price, product_real_price=@product_real_price ,product_brand=@product_brand ,created_at='{DateTime.Now.ToString("u")}',created_who='{_created_who}' WHERE Id ={id}";
 
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
@@ -514,10 +528,10 @@ namespace StockProductTracking.Utils
             mySqlConnection.Close();
         }
 
-        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin)
+        public void UpdateEmployee(int EmployeeId ,string EmployeeFirstName, string EmployeeLastName, string EmployeeUsername, string EmployeePassword, string EmployeeEmail, bool EmployeeIsAdmin , string _updated_who)
         {
             mySqlConnection.Open();
-            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin}  WHERE employee_id ={EmployeeId}";
+            string query = $"UPDATE employee SET employee_name='{EmployeeFirstName}', employee_lastname='{EmployeeLastName}' ,employee_username='{EmployeeUsername}', employee_password='{EmployeePassword}', employee_mail='{EmployeeEmail}' ,is_admin={EmployeeIsAdmin} ,created_who='{_updated_who}' , created_at='{DateTime.Now.ToString("u")}' WHERE employee_id ={EmployeeId}";
             mySqlCommand = new MySqlCommand(query, mySqlConnection)
             {
                 CommandText = query
@@ -626,14 +640,26 @@ namespace StockProductTracking.Utils
             }
             return employee;
         }
+        public void ChangePasswordFromEmail(string _pass ,string _email)
+        {
+            mySqlConnection.Open();
+            string query = $"UPDATE employee SET employee_password=@password WHERE employee_mail =@email";
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.Parameters.AddWithValue("@email", _email);
+            mySqlCommand.Parameters.AddWithValue("@password", _pass);
+            mySqlCommand.ExecuteNonQuery();
+            mySqlConnection.Close();
+
+        }
 
         public Employee GetByUsername(string username)
         {
             mySqlConnection.Open();
-            string query = $"select * from employee where employee_username = \'{username}\' ";
+            string query = $"select * from employee where employee_username = @username";
 
             Employee employee = null;
             mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            mySqlCommand.Parameters.AddWithValue("@username", username);
             using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
             {
                 while (reader.Read())

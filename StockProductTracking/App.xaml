@@ -27,6 +27,10 @@
             <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
                 <view:LoginView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:LoginPageViewModel}">
+                <view:LoginPageView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                 <view:DashboardView/>
@@ -90,6 +94,14 @@
 
             <DataTemplate DataType="{x:Type viewModel:AcceptedOrderPageViewModel}">
                 <view:AcceptedOrderPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ForgotPasswordEmailViewModel}">
+                <view:ForgotPasswordView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:GetNewPasswordViewModel}">
+                <view:GetNewPasswordView/>
             </DataTemplate>
 
         </ResourceDictionary>

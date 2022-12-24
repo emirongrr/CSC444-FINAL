@@ -23,7 +23,19 @@ namespace StockProductTracking.MVVM.ViewModel
     {
         private DashboardGraphHandler dashboardGraphHandler = new DashboardGraphHandler();
         private readonly Connect connect = new Connect();
-
+        private int _viewCount;
+        public int ViewCount
+        {
+            get
+            {
+                return _viewCount;
+            }
+            set
+            {
+                _viewCount = value;
+                OnPropertyChanged(nameof(ViewCount));
+            }
+        }
         private string _sumtotalprice;
         public string SumTotalPrice
         {
@@ -31,7 +43,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _sumtotalprice = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SumTotalPrice));
             }
         }
 
@@ -42,7 +54,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 _counttotalprice = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CountTotalOrder));
             }
         }
         public GraphAxis YAxis
@@ -51,7 +63,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 dashboardGraphHandler.YAxis = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(YAxis));
             }
         }
         public GraphAxis XAxis
@@ -60,7 +72,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 dashboardGraphHandler.XAxis = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(XAxis));
             }
         }
         public ChartValues<Decimal> ChartValues
@@ -69,7 +81,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set 
             {
                 dashboardGraphHandler.ChartValues = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(ChartValues));
             } 
         }
         private string CategoryTag { get; set; }
@@ -80,7 +92,7 @@ namespace StockProductTracking.MVVM.ViewModel
             set
             {
                 pieChartSeries = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(PieChartSeries));
             }
         }
         public ICommand DrillDownCommand
@@ -108,8 +120,9 @@ namespace StockProductTracking.MVVM.ViewModel
             SumTotalPrice = connect.GetTotalPriceOrders() + "₺";
             CountTotalOrder = connect.GetTotalOrderCount() + "Adet";
             dashboardGraphHandler.SetLineChartDataToProfit();
-
-            if(CategoryTag == null)
+            int randomnum = new Random().Next(5000);
+            ViewCount += randomnum;
+            if (CategoryTag == null)
             {
                 PieChartSeries = dashboardGraphHandler.SetPieChartDataByCategories();
             }
@@ -118,15 +131,13 @@ namespace StockProductTracking.MVVM.ViewModel
                 PieChartSeries = dashboardGraphHandler.SetPieChartDataByProducts(CategoryTag);
             }
         }
-
         public DashboardViewModel(MainViewModel mainViewModel)
         {
+            ViewCount = new Random().Next(25000, 75000);
             UpdateDashboard();
-
-
             DispatcherTimer dispatcherTimer = new DispatcherTimer()
             {
-                Interval = new TimeSpan(0, 1, 0) //h,m,s
+                Interval = new TimeSpan(0, 0, 10) //h,m,s
             };
             dispatcherTimer.Tick += new EventHandler((object sender, EventArgs e) =>
             {

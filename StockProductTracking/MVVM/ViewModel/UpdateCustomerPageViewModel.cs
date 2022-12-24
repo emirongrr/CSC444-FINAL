@@ -7,17 +7,14 @@ namespace StockProductTracking.MVVM.ViewModel
     internal class UpdateCustomerPageViewModel : CustomerViewModelBase
     {
         public ICommand UpdateCustomerCommand { get; }
-
         public UpdateCustomerPageViewModel(MainViewModel mainViewModel)
         {
             UpdateCustomerCommand = new RelayCommand(o =>
             {
                 Connect db = new Connect();
-                db.UpdateCustomer(CustomerId, CustomerName, CustomerLastName, CustomerPhone, CustomerAddress);
+                db.UpdateCustomer(CustomerId, CustomerName, CustomerLastName, CustomerPhone, CustomerAddress,mainViewModel.CurrentUser.Username);
                 mainViewModel.CustomersVM.UpdateCustomersList();
                 mainViewModel.CurrentView = mainViewModel.CustomersVM;
-
-
             });
         }
     }
