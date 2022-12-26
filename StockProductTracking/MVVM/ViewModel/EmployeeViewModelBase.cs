@@ -105,7 +105,7 @@ namespace StockProductTracking.MVVM.ViewModel
                     else if (db.GetEmployeeEmail().Contains(this.EmployeeEmail))
                         if (this.EmployeeEmail != CheckEMail)
                             result = "Bu mail zaten var.";
-                    if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+                    else if(!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
                         result = "Uygun mail giriniz. (example@mail.com)";
                 }
                 if (columnName == "EmployeePassword")
