@@ -102,11 +102,11 @@ namespace StockProductTracking.MVVM.ViewModel
                 {
                     if (string.IsNullOrEmpty(this.EmployeeEmail))
                         result = "Email boş olamaz";
+                    else if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
+                        result = "Uygun mail giriniz. (example@mail.com)";
                     else if (db.GetEmployeeEmail().Contains(this.EmployeeEmail))
                         if (this.EmployeeEmail != CheckEMail)
-                            result = "Bu mail zaten var.";
-                    if (!Regex.IsMatch(this.EmployeeEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
-                        result = "Uygun mail giriniz. (example@mail.com)";
+                            result = "Bu mail zaten var.";            
                 }
                 if (columnName == "EmployeePassword")
                 {                   

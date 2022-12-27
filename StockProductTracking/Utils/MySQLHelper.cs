@@ -161,6 +161,27 @@ namespace StockProductTracking.Utils
             return _EmployeeEmail;
         }
 
+        public List<string> GetCustomerPhone()
+        {
+            List<string> _CustomerPhone = new List<string>();
+
+            mySqlConnection.Open();
+            string query = "select Phone from customers";
+
+            mySqlCommand = new MySqlCommand(query, mySqlConnection);
+            using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+            {
+
+                while (reader.Read())
+                {
+                    string phone = (string)reader["Phone"];
+                    _CustomerPhone.Add(phone);
+                }
+                mySqlConnection.Close();
+            }
+            return _CustomerPhone;
+        }
+
         public ObservableCollection<Order> GetAcceptedOrders()
         {
             ObservableCollection<Order> _OrderList = new ObservableCollection<Order>();

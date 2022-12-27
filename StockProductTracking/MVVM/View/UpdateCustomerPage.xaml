@@ -15,7 +15,9 @@
         <Border
             BorderThickness="1"
             CornerRadius="10"
-            Opacity="0.95">
+            Opacity="0.95"
+            >
+            
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -26,7 +28,7 @@
                 <Grid>
 
                     <Button
-                        Width="Auto"
+                        Width="100"
                         HorizontalAlignment="Left"
                         Background="#2c386c"
                         BorderThickness="0"
@@ -37,16 +39,24 @@
 
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="150" 
+                                <Border Name="border"
+                                    Width="150" 
                                         Height="30"
                                         CornerRadius="20"
                                         Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Left"/>
+                                    
 
                                 </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter  TargetName="border" Property="Background" Value="#41518f" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
 
                             </ControlTemplate>
+                            
                         </Button.Template>
                     </Button>
 

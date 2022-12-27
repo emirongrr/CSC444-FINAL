@@ -48,7 +48,7 @@
                             HorizontalAlignment="Left"
                             Margin="30 35 0 0">
                     <Border>
-                        <Image Source="/Images/update.png"
+                        <Image Source="/Images/logo2.png"
                                Width="40"
                                Height="40">
 
@@ -126,13 +126,42 @@
                         </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        
-                            <Button Background="Transparent"
+
+                            <Button
+                                    Background="Transparent"
                                     VerticalAlignment="Bottom"
+                                Width="80"
                                     BorderThickness="0"
                                     Command="{Binding LogOffCommand}">
-                                <fa:IconImage  Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                   <StackPanel Orientation="Horizontal">
+                                    <fa:IconImage  Icon="PowerOff" Style="{StaticResource menuButtonIcon}"/>
+                                </StackPanel>
+
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Name="border"
+                                    Width="150" 
+                                        Height="30"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"/>
+
+
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter  TargetName="border" Property="Background" Value="#41518f" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+
+                                    </ControlTemplate>
+
+                                </Button.Template>
                             </Button>
+
+
+                       
 
                             <TextBlock Text="{Binding CurrentUser.Username}"
                                Style="{StaticResource menuButtonText}"

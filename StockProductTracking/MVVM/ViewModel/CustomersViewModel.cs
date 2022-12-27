@@ -92,7 +92,8 @@ namespace StockProductTracking.MVVM.ViewModel
                     CustomerName = o.Name,
                     CustomerLastName = o.LastName,
                     CustomerPhone = o.Phone,
-                    CustomerAddress = o.Address
+                    CustomerAddress = o.Address,
+                    CheckPhone = o.Phone
                 };
                 mainViewModel.CurrentView = updateCustomerPageViewModel;
             });

@@ -18,8 +18,10 @@
                             Orientation="Vertical"
                             Margin="0,35,0,0"
                             >
-            <Image Width="100"
-                           Height="100"/>
+            <Image    
+                
+                Width="100"
+                Height="100"/>
 
             <TextBlock Text="Stok Sipariş Takip"
                                Foreground="White"

@@ -1,4 +1,5 @@
 using StockProductTracking.Core;
+using StockProductTracking.Utils;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 
@@ -11,6 +12,10 @@ namespace StockProductTracking.MVVM.ViewModel
         public string CustomerLastName { get; set; }
         public string CustomerAddress { get; set; }
         public string CustomerPhone { get; set; }
+
+        Connect db = new Connect();
+
+        public string CheckPhone;
 
         public string Error
         {
@@ -56,7 +61,11 @@ namespace StockProductTracking.MVVM.ViewModel
                     else if (this.CustomerPhone.Length != 11)
                         result = "11 karakter uzunluðunda olmalýdýr (0XXXXXXXXXX)";
 
-                    else if (!Regex.IsMatch(this.CustomerPhone, @"^[0-9]+$"))
+                    else if (db.GetCustomerPhone().Contains(this.CustomerPhone))
+                        if (this.CustomerPhone != CheckPhone)
+                            result = "Bu telefon zaten var.";
+
+                        else if (!Regex.IsMatch(this.CustomerPhone, @"^[0-9]+$"))
                         result = "Sadece rakam kabul edilir.";
 
                 }
