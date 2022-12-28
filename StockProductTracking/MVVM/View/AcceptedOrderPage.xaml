@@ -70,10 +70,16 @@
                 HeadersVisibility="Column"
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
-                ItemsSource="{Binding CollectionView}" 
+                ItemsSource="{Binding CollectionView}"
+                SelectedItem="{Binding SelectedItem}"
                 >
 
-
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding ShowDetails}"
+                                  CommandParameter="{Binding SelectedItem}"/>
+                </DataGrid.InputBindings>
+                
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Path=CustomerId, UpdateSourceTrigger=PropertyChanged}" Header="MÜŞTERİ NO" />

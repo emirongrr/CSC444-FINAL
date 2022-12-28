@@ -78,9 +78,14 @@
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
                 ItemsSource="{Binding CollectionView}"
-                SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedItem}">
 
-
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding ShowDetails}"
+                                  CommandParameter="{Binding SelectedItem}"/>
+                </DataGrid.InputBindings>
+                
                 <DataGrid.Columns>
 
                     <DataGridTextColumn Binding="{Binding Path=CategoryId, UpdateSourceTrigger=PropertyChanged}" Header="ID" />

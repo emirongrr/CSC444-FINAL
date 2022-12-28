@@ -104,6 +104,10 @@
                 <view:GetNewPasswordView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:DetailsWindowViewModel}">
+                <view:DetailsWindow/>
+            </DataTemplate>
+
         </ResourceDictionary>
         
     </Application.Resources>

@@ -11,7 +11,6 @@ namespace StockProductTracking.MVVM.ViewModel
 {
     internal class CategoryViewModel : ObservableViewDataObject
     {
-        public Category SelectedCategory { get; set; }
         public ICommand NavigateAddCategoryCommand { get; }
         public ICommand NavigateUpdateCategoryCommand { get; }
         public ICommand DeleteCategoryCommand { get; }

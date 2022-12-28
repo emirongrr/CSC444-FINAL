@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using StockProductTracking.MVVM.View;
 
 namespace StockProductTracking.MVVM.ViewModel
 {
@@ -84,7 +85,9 @@ namespace StockProductTracking.MVVM.ViewModel
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(Username), null);
                 ErrorMessage = " ";
-                loginViewModel.IsViewVisible = false; 
+                WindowService windowService = new WindowService();
+                windowService.ShowWindow<MainWindow>();
+                windowService.CloseWindow<LoginView>();
             }
         }
         private bool CanExecuteLoginCommand(object obj)

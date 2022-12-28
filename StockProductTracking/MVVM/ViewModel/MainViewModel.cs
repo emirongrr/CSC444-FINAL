@@ -1,5 +1,6 @@
 using StockProductTracking.Core;
 using StockProductTracking.MVVM.Model;
+using StockProductTracking.MVVM.View;
 using StockProductTracking.Utils;
 using System.Threading;
 using System.Windows.Input;
@@ -44,22 +45,6 @@ namespace StockProductTracking.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsVisibleRadioButton));
             }
         }
-
-        private bool _isViewVisible = true;
-        public bool IsViewVisible
-        {
-            get
-            {
-                return _isViewVisible;
-            }
-
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-
 
         private Employee currentUser;
         public Employee CurrentUser
@@ -150,7 +135,9 @@ namespace StockProductTracking.MVVM.ViewModel
             });
             LogOffCommand = new RelayCommand(o =>
             {
-                IsViewVisible = false;
+                WindowService windowService = new WindowService();
+                windowService.ShowWindow<LoginView>();
+                windowService.CloseWindow<MainWindow>();
             });
         }
 
