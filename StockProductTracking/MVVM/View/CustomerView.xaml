@@ -11,8 +11,8 @@
     d:DesignWidth="900"
     mc:Ignorable="d">
 
-  
-    <Grid Margin="10">
+
+<Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="450" />
@@ -78,11 +78,14 @@
                 HorizontalGridLinesBrush="#FFF"
                 IsReadOnly="True"
                 ItemsSource="{Binding CollectionView}"
-                SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
+                SelectedItem="{Binding SelectedItem}">
 
-
+                <DataGrid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick"
+                                  Command="{Binding ShowDetails}"
+                                  CommandParameter="{Binding SelectedItem}"/>
+                </DataGrid.InputBindings>
                 <DataGrid.Columns>
-
                     <DataGridTextColumn Binding="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" Header="ID" />
                     <DataGridTextColumn Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Header="AD" />
                     <DataGridTextColumn Binding="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Header="SOYAD" />
@@ -90,7 +93,6 @@
                     <DataGridTextColumn Binding="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Header="ADRES" />
                     <DataGridTextColumn Binding="{Binding Path=created_who, UpdateSourceTrigger=PropertyChanged}" Header="EKLEYEN" />
                     <DataGridTextColumn Binding="{Binding Path=created_at, UpdateSourceTrigger=PropertyChanged}" Header="ZAMAN" />
-
 
                     <DataGridTemplateColumn Width="Auto" Header=" ">
                         <DataGridTemplateColumn.CellTemplate>

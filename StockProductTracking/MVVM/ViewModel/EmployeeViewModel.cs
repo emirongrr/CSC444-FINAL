@@ -9,8 +9,7 @@ using System.Windows.Data;
 namespace StockProductTracking.MVVM.ViewModel
 {
     internal class EmployeeViewModel : ObservableViewDataObject
-    {
-        public Employee SelectedEmployee { get; set; }
+    { 
         public ICommand NavigateAddEmployeeCommand { get; }
         public ICommand NavigateUpdateEmployeeCommand { get; }
         public ICommand DeleteEmployeeCommand { get; }

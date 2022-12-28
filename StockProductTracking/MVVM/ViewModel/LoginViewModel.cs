@@ -29,20 +29,6 @@ namespace StockProductTracking.MVVM.ViewModel
             }
         }
 
-        private bool _isViewVisible = true;
-        public bool IsViewVisible
-        {
-            get
-            {
-                return _isViewVisible;
-            }
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-
         public LoginViewModel()
         {
             ResetLoginPage();

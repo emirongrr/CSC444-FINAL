@@ -1,4 +1,5 @@
-﻿using StockProductTracking.MVVM.View;
+﻿using StockProductTracking.Core;
+using StockProductTracking.MVVM.View;
 using StockProductTracking.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -16,41 +17,9 @@ namespace StockProductTracking
     /// </summary>
     public partial class App : Application
     {
-        LoginView loginView;
-        MainWindow mainWindow;
-        private void LogOff(object o, DependencyPropertyChangedEventArgs args)
-        {
-            if(mainWindow.IsVisible == false && mainWindow.IsLoaded)
-            {
-                InitLogIn();
-                try
-                {
-                mainWindow.Close();
-                }
-                catch { /*oof*/}
-            }
-
-        }
-
-        private void InitLogIn()
-        {
-            loginView = new LoginView();
-            loginView.Show();
-            loginView.IsVisibleChanged += (o, args) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    mainWindow = new MainWindow();
-                    mainWindow.IsVisibleChanged += new DependencyPropertyChangedEventHandler(LogOff);
-                    mainWindow.Show();
-                    loginView.Close();
-
-                }
-            };
-        }
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
-            InitLogIn();
+            new WindowService().ShowWindow<LoginView>();
         }
     }
 }

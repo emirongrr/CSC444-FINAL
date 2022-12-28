@@ -1,4 +1,5 @@
-﻿using StockProductTracking.MVVM.ViewModel;
+﻿using StockProductTracking.Core;
+using StockProductTracking.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace StockProductTracking
 
         private void BtnClose_Click2(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            new WindowService().CloseWindowByReference(this);
 
         }
 
